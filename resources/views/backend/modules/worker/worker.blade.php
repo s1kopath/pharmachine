@@ -11,8 +11,9 @@
 
 
     {{-- Table --}}
-    <div class="container mt-3 form-control">
-        <table class="table table-secondary table-bordered">
+    <div class="container mt-3 form-control bg-dark rounded">
+        <h1 class="text-warning text-center">List of all warkers</h1>
+        <table class="table table-warning table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">ID</th>

@@ -40,7 +40,9 @@ Route::get('/stock', [StockController::class, 'sto']) -> name('sto.dashboard');
 
 Route::get('/', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
 
+//workstation
 Route::get('/workstation', [WorkstationController::class, 'ws']) -> name('ws.dashboard');
+Route::post('/workstation', [WorkstationController::class, 'createMachine']) -> name('ws.createMachine');
 
 //product
 Route::get('/product', [ProductController::class, 'product']) -> name('product.list');

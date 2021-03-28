@@ -23,6 +23,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link  text-white" href="{{ route('rep.dashboard') }}">
+                    <span data-feather="bar-chart-2"></span>
+                   Production Reports
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link  text-white" href="{{ route('product.list') }}">
                     <span data-feather="square"></span>
                     Product
@@ -53,19 +60,14 @@
             <li class="nav-item">
                 <a class="nav-link  text-white" aria-current="page" href="{{ route('sto.dashboard') }}">
                     <span data-feather="database"></span>
-                    Stock
+                    Warehouse Stock
                 </a>
             </li>
 
 
 
 
-            <li class="nav-item">
-                <a class="nav-link  text-white" href="{{ route('rep.dashboard') }}">
-                    <span data-feather="bar-chart-2"></span>
-                    Reports
-                </a>
-            </li>
+
         </ul>
     </div>
 </nav>

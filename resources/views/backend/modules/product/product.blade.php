@@ -10,14 +10,15 @@
 
 
     {{-- Table --}}
-    <div class="container mt-3 form-control">
-        <table class="table table-secondary table-bordered">
+    <div class="container mt-3 bg-info form-control rounded">
+        <h1 class="text-success text-center">List of all products</h1>
+        <table class="table table-primary table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Product Type</th>
-                    <th scope="col">Description</th>
+                    <th scope="col" style="width: 30%">Description</th>
                     <th scope="col">Image</th>
                     <th scope="col">Actions</th>
 
