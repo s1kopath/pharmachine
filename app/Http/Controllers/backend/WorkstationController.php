@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class WorkstationController extends Controller
 {
     public function ws(){
-        return view('backend.modules.workstation');
+        return view('backend.modules.workstation.workstation');
     }
 }

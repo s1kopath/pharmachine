@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    min-width: 650px;
+    margin: 0 auto;
+}
+
+.chart {
+    display: grid;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-row {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    background-color: #DCDCDC;
+}
+
+.chart-row:nth-child(odd) {
+    background-color: #C0C0C0;
+}
+
+.chart-period {
+    color: #fff;
+    background-color: #0080ff !important;
+    border-bottom: 2px solid #000;
+    grid-template-columns: 50px repeat(7, 1fr);
+}
+
+.chart-lines {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    grid-template-columns: 50px repeat(7, 1fr);
+}
+
+.chart-period>span {
+    text-align: center;
+    font-size: 13px;
+    align-self: center;
+    font-weight: bold;
+    padding: 15px 0;
+}
+
+.chart-lines>span {
+    display: block;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.chart-row-item {
+    background-color: #6f00ff;
+    color: white;
+    border: 1px solid #000;
+    border-top: 0;
+    border-left: 0;
+    padding: 20px 0;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.chart-row-bars {
+    list-style: none;
+    display: grid;
+    padding: 15px 0;
+    margin: 0;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px 0;
+    border-bottom: 1px solid #000;
+}
+
+.li {
+    font-weight: 450;
+    text-align: left;
+    font-size: 15px;
+    min-height: 15px;
+    background-color: #708090;
+    padding: 5px 15px;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.chart-li-one {
+    grid-column: 1/2;
+    background-color: #00940c;
+}
+
+.chart-li-two-a {
+    grid-column: 2/2;
+    background-color: #00ff37;
+}
+
+.chart-li-two-b {
+    grid-column: 2/4;
+    background-color: #ff002b;
+}
+
+.chart-li-three {
+    grid-column: 3/5;
+    background-color: #ae00ff;
+}
+
+.chart-li-four {
+    grid-column: 3/6;
+    background-color: #dac401;
+}
+
+.chart-li-five {
+    grid-column: 4/5;
+    background-color: #00d9ff;
+}
+
+.chart-li-six {
+    grid-column: 5/7;
+    background-color: #fb73c2;
+}
+
+.chart-li-seven {
+    grid-column: 6/8;
+    background-color: #00ff00;
+}

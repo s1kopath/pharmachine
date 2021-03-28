@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class ProductionDemandController extends Controller
 {
     public function pd(){
-        return view('backend.modules.productionDemand');
+        return view('backend.modules.productionDemand.productionDemand');
     }
 }

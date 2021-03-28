@@ -1,68 +1,62 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-info  sidebar collapse">
-    <div class="position-sticky pt-3">
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block   sidebar collapse">
+    <div class="position-sticky pt-3 ">
         <ul class="nav flex-column ">
             <li class="nav-item ">
-                <a class="nav-link active text-white" aria-current="page" href="{{ '/' }}">
+                <a class="nav-link text-white" aria-current="page" href="{{ '/' }}">
                     <span data-feather="home"></span>
                     Dashboard
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-link text-white" href="{{ route('emp.dashboard') }}">
-                    <span data-feather="home"></span>
-                    Employee
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('ws.dashboard') }}">
-                    <span data-feather="home"></span>
-                    Workstation
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link  text-white" href="{{ route('pl.dashboard') }}">
-                    <span data-feather="home"></span>
-                    Product Listing
-                </a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link text-white" aria-current="page" href="{{ route('pd.dashboard') }}">
-                    <span data-feather="home"></span>
+                    <span data-feather="alert-triangle"></span>
                     Production Demand
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  text-white" aria-current="page" href="{{ route('mpp.dashboard') }}">
-                    <span data-feather="home"></span>
-                    My Production Plan
-                </a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link text-white" aria-current="page" href="{{ route('pp.dashboard') }}">
-                    <span data-feather="home"></span>
+                    <span data-feather="edit"></span>
                     Production Planning
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  text-white" aria-current="page" href="{{ route('sto.dashboard') }}">
-                    <span data-feather="home"></span>
-                    Stock
+                <a class="nav-link  text-white" href="{{ route('product.list') }}">
+                    <span data-feather="square"></span>
+                    Product
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link text-white" href="{{ route('worker.list') }}">
+                    <span data-feather="users"></span>
+                    Worker
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('pro.dashboard') }}">
-                    <span data-feather="file"></span>
-                    Procurement
+                <a class="nav-link text-white" href="{{ route('ws.dashboard') }}">
+                    <span data-feather="tool"></span>
+                    Workstation
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('raw.dashboard') }}">
+                    <span data-feather="truck"></span>
+                    Raw Materials
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link  text-white" aria-current="page" href="{{ route('sto.dashboard') }}">
+                    <span data-feather="database"></span>
+                    Stock
+                </a>
+            </li>
+
 
 
 

@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class ReportsController extends Controller
 {
     public function rep(){
-        return view('backend.modules.reports');
+        return view('backend.modules.reports.reports');
     }
 }

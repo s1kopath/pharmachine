@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class StockController extends Controller
 {
     public function sto(){
-        return view('backend.modules.stock');
+        return view('backend.modules.stock.stock');
     }
 }
