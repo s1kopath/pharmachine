@@ -30,8 +30,6 @@
 
 
     <div class="">
-        <h2 class="text-danger text-center">Production Demand</h2>
-        <br>
 
         <div class="row">
             <div class="col box">Recieved Demand <br> Orders: 01</div>
@@ -76,7 +74,7 @@
                     <h6>Quantity: 20 Boxes</h6>
                     <p>Delevary date: 05.03.21</p>
                 </div>
-                <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to delevary ></a>
+                <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to delivery ></a>
             </div> {{-- 6 of 30 --}}
         </div>
         <div class="row">

@@ -19,7 +19,6 @@
 
     {{-- Table --}}
     <div class="container mt-3 form-control bg-warning rounded">
-        <h3 class="text-center text-primary p-2 bg-dark">Raw Materials</h3>
         <table class="table table-secondary table-bordered">
             <thead>
                 <tr>

@@ -10,7 +10,6 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\RawMaterialsController;
 use App\Http\Controllers\backend\WorkerController;
 use App\Http\Controllers\backend\WorkstationController;
-use App\Http\Controllers\backend\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +24,10 @@ use App\Http\Controllers\backend\DashboardController;
 
 
 //dashboard
-Route::get('/',[DashboardController::class, 'home']) -> name('home');
 
 
+//home page
+Route::get('/', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
 
 
 Route::get('/productionDemand', [ProductionDemandController::class, 'pd']) -> name('pd.dashboard');
@@ -38,7 +38,7 @@ Route::get('/reports', [ReportsController::class, 'rep']) -> name('rep.dashboard
 
 Route::get('/stock', [StockController::class, 'sto']) -> name('sto.dashboard');
 
-Route::get('/', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
+
 
 //workstation
 Route::get('/workstation', [WorkstationController::class, 'ws']) -> name('ws.dashboard');
@@ -47,10 +47,14 @@ Route::post('/workstation', [WorkstationController::class, 'createMachine']) -> 
 //product
 Route::get('/product', [ProductController::class, 'product']) -> name('product.list');
 Route::post('/product', [ProductController::class, 'create']) -> name('product.create');
+Route::get('/product/delete/{id}', [ProductController::class, 'delete']) -> name('product.delete');
+Route::get('/product/update/{id}', [ProductController::class, 'update']) -> name('product.update');
+Route::put('/product/saveUpdate/{id}', [ProductController::class, 'saveUpdate']) -> name('product.saveUpdate');
 
 //worker
 Route::get('/worker', [WorkerController::class, 'list']) -> name('worker.list');
 Route::post('/worker', [WorkerController::class, 'create']) -> name('worker.create');
+Route::get('/worker/update/{id}', [WorkerController::class, 'update']) -> name('worker.update');
 
 //raw materials
 Route::get('/rawMaterials', [RawMaterialsController::class, 'raw']) -> name('raw.dashboard');

@@ -9,9 +9,19 @@ use Illuminate\Http\Request;
 class WorkerController extends Controller
 {
     public function list(){
+        $title = 'List of all Workers';
         $workers = Worker::all();
-        return view('backend.modules.worker.worker',compact('workers'));
+        return view('backend.modules.worker.worker',compact('workers','title'));
     }
+
+
+    public function update($id){
+        $workers = Worker::find($id);
+        $title = 'Update '.$workers['name'];
+        return view('backend.modules.worker.updateWorker',['products'=>$workers], compact('title'));
+    }
+
+
     public function create(Request $request){
         Worker::create([
             'name' => $request -> name,

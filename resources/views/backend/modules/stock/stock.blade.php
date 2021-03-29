@@ -3,7 +3,6 @@
 
 
 <div class="container-fluid p-3 bg-primary rounded">
-    <h1 class="text-center text-light">Warehouse Stock</h1>
     <table class="table table-striped table-danger rounded">
         <thead>
           <tr>
@@ -53,7 +52,7 @@
             <td>Ws 0016</td>
             <td>Licorice root</td>
             <td>50 Boxes</td>
-            <td>Delevered</td>
+            <td>Delivered</td>
             <td>16.02.21</td>
 
             <td>

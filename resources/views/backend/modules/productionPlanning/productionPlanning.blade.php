@@ -2,9 +2,7 @@
 @section('content')
 
 
-<div class="text-center">
-
-    <h1 >Production planing</h1>
+<div class="text-center mt-2">
     <a href="" class="btn btn-info"> Create Manufractring Order </a>
 </div>
 <div class="container-fluid p-3">
@@ -19,7 +17,7 @@
             <th scope="col">Materials Status</th>
             <th scope="col">Start</th>
             <th scope="col">Finish</th>
-            <th scope="col">Delevery</th>
+            <th scope="col">Delivery</th>
             <th scope="col">Warehouse Lot</th>
             <th scope="col">Handle</th>
           </tr>

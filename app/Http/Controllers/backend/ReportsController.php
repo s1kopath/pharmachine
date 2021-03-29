@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ReportsController extends Controller
 {
     public function rep(){
-        return view('backend.modules.reports.reports');
+        $title = 'Reports';
+        return view('backend.modules.reports.reports', compact('title'));
     }
 }

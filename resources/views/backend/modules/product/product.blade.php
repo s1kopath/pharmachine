@@ -11,7 +11,6 @@
 
     {{-- Table --}}
     <div class="container mt-3 bg-info form-control rounded">
-        <h1 class="text-success text-center">List of all products</h1>
         <table class="table table-primary table-striped table-bordered">
             <thead>
                 <tr>
@@ -34,8 +33,8 @@
                         <td><img src="{{ $data->image }}" alt=""></td>
                         <td>
                             <a class="btn btn-success" href="">View</a> ||
-                            <a class="btn btn-warning" href="">Update</a> ||
-                            <a class="btn btn-danger" href="">Delete</a>
+                            <a class="btn btn-warning" href="{{ route('product.update', $data['id']) }}">Update</a> ||
+                            <a class="btn btn-danger" href="{{ route('product.delete', $data['id']) }}">Delete</a>
                         </td>
                     </tr>
 
@@ -96,5 +95,7 @@
 
                 </div>
             </div>
+        </div>
     </form>
+
 @endsection

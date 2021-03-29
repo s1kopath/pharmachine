@@ -67,10 +67,8 @@
             @include('backend.components.sidebar')
 
             <main class="col-md-9 ms-sm-auto col-lg-10 pt-3 px-md-4 ">
-                <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2  border-bottom">
-
-                    <h1 class="text-center text-danger"></h1>
-
+                <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center  border-bottom">
+                    <h1 class="text-center text-danger">{{ $title }}</h1>
                 </div>
 
                 @yield('content')

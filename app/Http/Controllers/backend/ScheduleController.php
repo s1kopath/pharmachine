@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ScheduleController extends Controller
 {
     public function sch(){
-        return view('backend.components.schedule');
+        $title = 'Dashboard';
+        return view('backend.components.schedule', compact('title'));
     }
 }

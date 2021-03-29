@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class StockController extends Controller
 {
     public function sto(){
-        return view('backend.modules.stock.stock');
+        $title = 'Warehouse Stock';
+        return view('backend.modules.stock.stock', compact('title'));
     }
 }

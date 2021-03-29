@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ProductionPlanningController extends Controller
 {
     public function pp(){
-        return view('backend.modules.productionPlanning.productionPlanning');
+        $title = 'Production Planning';
+        return view('backend.modules.productionPlanning.productionPlanning', compact('title'));
     }
 }

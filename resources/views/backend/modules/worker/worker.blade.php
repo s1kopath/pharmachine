@@ -12,7 +12,6 @@
 
     {{-- Table --}}
     <div class="container mt-3 form-control bg-dark rounded">
-        <h1 class="text-warning text-center">List of all warkers</h1>
         <table class="table table-warning table-striped table-bordered">
             <thead>
                 <tr>
@@ -44,7 +43,7 @@
                         <td>{{ $data->labour_per_hour }}Tk</td>
                         <td>
                             <a class="btn btn-success" href="">View</a> ||
-                            <a class="btn btn-warning" href="">Update</a> ||
+                            <a class="btn btn-warning" href="{{ route('worker.update', $data['id']) }}">Update</a> ||
                             <a class="btn btn-danger" href="">Delete</a>
                         </td>
                     </tr>

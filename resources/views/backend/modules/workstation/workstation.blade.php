@@ -19,7 +19,6 @@
 
 {{-- Table --}}
 <div class="container mt-3 form-control bg-dark">
-    <h3 class="text-center text-light">Available Workstation</h3>
     <table class="table table-info table-striped table-bordered">
         <thead>
             <tr>

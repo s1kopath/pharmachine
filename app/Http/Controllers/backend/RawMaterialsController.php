@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 class RawMaterialsController extends Controller
 {
     public function raw(){
+        $title = 'Raw Materials';
         $vendors = Vendor::all();
-        return view('backend.modules.rawMaterials.rawMaterials', compact('vendors'));
+        return view('backend.modules.rawMaterials.rawMaterials', compact('vendors','title'));
     }
     public function createVendor(Request $request){
         Vendor::create([
