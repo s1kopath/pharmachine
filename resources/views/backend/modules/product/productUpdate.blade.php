@@ -1,7 +1,7 @@
 @extends('backend.dashboard')
 @section('content')
 
-    <!-- Modal -->
+
     <form method="post" action="{{ route('product.saveUpdate', $products['id']) }}">
         @csrf
         @method('put')
@@ -15,7 +15,8 @@
             <br>
             <div class="form-group">
                 <label>Select Product Type:</label>
-                <select class="form-control" name="product_type" value="{{ $products['product_type'] }}" id="">
+                <select class="form-control" name="product_type" id="">
+                    <option value="{{ $products['product_type'] }}">{{ $products['product_type'] }}</option>
                     <option value="none">(none)</option>
                     <option value="Tablet">Tablet</option>
                     <option value="Syrup">Syrup</option>

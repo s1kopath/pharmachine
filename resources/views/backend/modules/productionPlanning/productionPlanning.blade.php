@@ -3,7 +3,7 @@
 
 
 <div class="text-center mt-2">
-    <a href="" class="btn btn-info"> Create Manufractring Order </a>
+    <a href="{{ route('manufacturing.order') }}" class="btn btn-info"> Create Manufractring Order </a>
 </div>
 <div class="container-fluid p-3">
     <table class="table table-striped table-info">

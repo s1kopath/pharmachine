@@ -37,12 +37,13 @@ class ProductController extends Controller
     public function update($id){
         $products = Product::find($id);
         $title = 'Update '.$products['name'];
-        return view('backend.modules.product.productUpdate',['products'=>$products], compact('title'));
+        return view('backend.modules.product.productUpdate', compact('products','title'));
     }
 
 
     public function saveUpdate(Request $request){
         $products = Product::find($request -> id);
+
         $products -> name = $request->name;
         $products -> product_type = $request->product_type;
         $products -> description = $request->description;

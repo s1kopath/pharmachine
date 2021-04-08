@@ -29,9 +29,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($workers as $data)
+                @foreach ($workers as $key=>$data)
                     <tr>
-                        <th>{{ $data->id }}</th>
+                        <th scope="row">{{ $key+1 }}</th>
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->address }}</td>
                         <td>{{ $data->contact }}</td>
@@ -44,7 +44,7 @@
                         <td>
                             <a class="btn btn-success" href="">View</a> ||
                             <a class="btn btn-warning" href="{{ route('worker.update', $data['id']) }}">Update</a> ||
-                            <a class="btn btn-danger" href="">Delete</a>
+                            <a class="btn btn-danger" href="{{ route('worker.delete', $data['id']) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach
@@ -62,13 +62,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add New Worker</h5>
-                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
                 </div>
-                <div class="modal-body">
-                    <form method="post" action="{{ route('worker.create') }}">
-                        @csrf
+                <form method="post" action="{{ route('worker.create') }}">
+                    @csrf
+                    <div class="modal-body">
                         <div class="form-group">
                             <label>Enter Name:</label>
                             <input type="name" name="name" class="form-control" placeholder="Name" id="">
@@ -110,24 +107,29 @@
                         <br>
                         <div class="form-group">
                             <label>Enter Salary (Monthly):</label>
-                            <input type="number" name="salary" class="form-control" placeholder="Monthly Salary" id="">
+                            <input type="string" name="salary" class="form-control" placeholder="Monthly Salary" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Labour per hour:</label>
-                            <input type="number" name="labour_per_hour" class="form-control" placeholder="Labour per hour"
+                            <input type="string" name="labour_per_hour" class="form-control" placeholder="Labour per hour"
                                 id="">
                         </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Confirm</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
 @endsection

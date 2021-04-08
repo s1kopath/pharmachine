@@ -29,7 +29,7 @@
     </style>
 
 
-    <div class="">
+    <div class="" >
 
         <div class="row">
             <div class="col box">Recieved Demand <br> Orders: 01</div>

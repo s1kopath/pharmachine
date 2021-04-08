@@ -63,7 +63,7 @@
 
                         <div class="form-group">
                             <label>Enter Product Name:</label>
-                            <input type="text" name="name" class="form-control" id="" placeholder="Name">
+                            <input type="text"  name="name" class="form-control" id="" placeholder="Name">
                         </div>
                         <br>
                         <div class="form-group">

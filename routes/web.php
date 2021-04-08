@@ -23,26 +23,27 @@ use App\Http\Controllers\backend\WorkstationController;
 */
 
 
-//dashboard
+
 
 
 //home page
 Route::get('/', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
 
-
 Route::get('/productionDemand', [ProductionDemandController::class, 'pd']) -> name('pd.dashboard');
-
-Route::get('/productPlanning', [ProductionPlanningController::class, 'pp']) -> name('pp.dashboard');
 
 Route::get('/reports', [ReportsController::class, 'rep']) -> name('rep.dashboard');
 
 Route::get('/stock', [StockController::class, 'sto']) -> name('sto.dashboard');
 
 
+//production planing
+Route::get('/productPlanning', [ProductionPlanningController::class, 'pp']) -> name('pp.dashboard');
+Route::get('/manufacturingOrder', [ProductionPlanningController::class, 'createForm']) -> name('manufacturing.order');
+
 
 //workstation
 Route::get('/workstation', [WorkstationController::class, 'ws']) -> name('ws.dashboard');
-Route::post('/workstation', [WorkstationController::class, 'createMachine']) -> name('ws.createMachine');
+Route::post('/workstation/create', [WorkstationController::class, 'createWorkstation']) -> name('ws.createWorkstation');
 
 //product
 Route::get('/product', [ProductController::class, 'product']) -> name('product.list');
@@ -55,10 +56,16 @@ Route::put('/product/saveUpdate/{id}', [ProductController::class, 'saveUpdate'])
 Route::get('/worker', [WorkerController::class, 'list']) -> name('worker.list');
 Route::post('/worker', [WorkerController::class, 'create']) -> name('worker.create');
 Route::get('/worker/update/{id}', [WorkerController::class, 'update']) -> name('worker.update');
+Route::put('/worker/saveUpdate/{id}', [WorkerController::class, 'saveUpdate']) -> name('worker.saveUpdate');
+Route::get('/worker/delete/{id}', [WorkerController::class, 'delete']) -> name('worker.delete');
 
 //raw materials
 Route::get('/rawMaterials', [RawMaterialsController::class, 'raw']) -> name('raw.dashboard');
-Route::post('/rawMaterials', [RawMaterialsController::class, 'createVendor']) -> name('raw.createVendor');
+Route::post('/rawMaterials/vendor', [RawMaterialsController::class, 'createVendor']) -> name('raw.createVendor');
+Route::post('/rawMaterials', [RawMaterialsController::class, 'createOrder']) -> name('raw.createOrder');
+Route::get('/rawMaterials/update/{id}', [RawMaterialsController::class, 'updateOrder']) -> name('raw.updateOrder');
+Route::put('/rawMaterials/sendOrder/{id}', [RawMaterialsController::class, 'sendOrder']) -> name('raw.sendOrder');
+
 
 
 
