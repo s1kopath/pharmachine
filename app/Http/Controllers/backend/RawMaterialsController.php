@@ -63,7 +63,6 @@ class RawMaterialsController extends Controller
         $placeMaterialOrders -> order_quantity = $request->order_quantity;
         $placeMaterialOrders -> order_date = $request->order_date;
         $placeMaterialOrders -> save();
-        // return redirect()->route('raw.dashboard');
-        return view('backend.modules.rawMaterials.rawMaterials');
+        return redirect()->route('raw.dashboard');
     }
 }

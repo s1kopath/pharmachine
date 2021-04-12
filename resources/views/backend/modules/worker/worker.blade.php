@@ -94,10 +94,10 @@
                             <input type="date" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="">
                         </div>
                         <br>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label>Enter Age:</label>
                             <input type="number" name="age" class="form-control" placeholder="Age" id="">
-                        </div>
+                        </div> --}}
                         <br>
                         <div class="form-group">
                             <label>Enter Joining Date:</label>
@@ -109,12 +109,12 @@
                             <label>Enter Salary (Monthly):</label>
                             <input type="string" name="salary" class="form-control" placeholder="Monthly Salary" id="">
                         </div>
-                        <br>
+                        {{-- <br>
                         <div class="form-group">
                             <label>Labour per hour:</label>
                             <input type="string" name="labour_per_hour" class="form-control" placeholder="Labour per hour"
                                 id="">
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

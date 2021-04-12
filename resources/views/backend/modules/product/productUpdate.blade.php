@@ -31,7 +31,7 @@
             <br>
             <div class="form-group">
                 <label>Image</label>
-                <input name="image" type="file" class="form-control" value="{{ $products['image'] }}" src="" id="">
+                <input name="product_image" type="file" class="form-control" value="{{ $products['product_image'] }}" src="" id="">
             </div>
 
 

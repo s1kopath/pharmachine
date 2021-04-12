@@ -24,21 +24,22 @@ use App\Http\Controllers\backend\WorkstationController;
 
 
 
-
-
 //home page
 Route::get('/', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
-
-Route::get('/productionDemand', [ProductionDemandController::class, 'pd']) -> name('pd.dashboard');
 
 Route::get('/reports', [ReportsController::class, 'rep']) -> name('rep.dashboard');
 
 Route::get('/stock', [StockController::class, 'sto']) -> name('sto.dashboard');
 
+//production  demand
+Route::get('/productionDemand', [ProductionDemandController::class, 'pd']) -> name('pd.dashboard');
+Route::get('/demoDemand', [ProductionDemandController::class, 'demoPd']) -> name('demo.dashboard');
+Route::post('/demoDemandCreator', [ProductionDemandController::class, 'createDemand']) -> name('demand.create');
 
 //production planing
 Route::get('/productPlanning', [ProductionPlanningController::class, 'pp']) -> name('pp.dashboard');
 Route::get('/manufacturingOrder', [ProductionPlanningController::class, 'createForm']) -> name('manufacturing.order');
+Route::post('/manufacturingOrder/create', [ProductionPlanningController::class, 'createManufacturingOrder']) -> name('manufacturingOrder.create');
 
 
 //workstation
@@ -47,6 +48,8 @@ Route::post('/workstation/create', [WorkstationController::class, 'createWorksta
 
 //product
 Route::get('/product', [ProductController::class, 'product']) -> name('product.list');
+Route::get('/product/listView', [ProductController::class, 'listView']) -> name('product.listView');
+Route::get('/product/gridView', [ProductController::class, 'gridView']) -> name('product.gridView');
 Route::post('/product', [ProductController::class, 'create']) -> name('product.create');
 Route::get('/product/delete/{id}', [ProductController::class, 'delete']) -> name('product.delete');
 Route::get('/product/update/{id}', [ProductController::class, 'update']) -> name('product.update');

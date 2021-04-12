@@ -63,12 +63,12 @@
             <input type="number" name="salary" class="form-control" value="{{ $workers['salary'] }}" id="">
         </div>
         <br>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label>Labour per hour:</label>
             <input type="number" name="labour_per_hour" class="form-control" value="{{ $workers['labour_per_hour'] }}"
                 id="">
         </div>
-        <br>
+        <br> --}}
 
         <div class="text-end">
             <a href="{{ route('worker.list') }}" class="btn btn-warning">Cancel</a>

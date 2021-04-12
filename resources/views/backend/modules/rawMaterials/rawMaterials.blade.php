@@ -26,6 +26,7 @@
                     <th scope="col">Name</th>
                     <th scope="col" style="width: 20%;">Description</th>
                     <th scope="col">Vendor Name</th>
+                    <th scope="col">Vendor Description</th>
                     <th scope="col">Total Qty</th>
                     <th scope="col">Available Qty</th>
                     <th scope="col">Order Status</th>
@@ -42,6 +43,7 @@
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->description }}</td>
                     <td>{{ $data->materialVendor->name }}</td>
+                    <td>{{ $data->materialVendor->description }}</td>
                     <td>{{ $data->total_quantity }}</td>
                     <td>{{ $data->available_quantity }}</td>
                     <td>{{ $data->status }}</td>
@@ -181,7 +183,7 @@
                         <br>
                         <div class="form-group">
                             <label for="">Vendor</label>
-                            <select name="vendor_id" id="" class="form-control">
+                            <select name="vendor_id" id="" class="form-control" >
                                 <option value="null" >Select A Vendor</option>
                                 @foreach ($vendors as $data)
                                     <option value="{{ $data->id }}" >{{ $data->name }}</option>

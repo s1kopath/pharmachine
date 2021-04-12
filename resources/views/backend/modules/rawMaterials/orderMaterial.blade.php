@@ -2,7 +2,7 @@
 @section('content')
 
 
-    <form method="post" action="{{ route('raw.createOrder'), $placeMaterialOrders['id'] }}">
+    <form method="post" action="{{ route('raw.sendOrder', $placeMaterialOrders['id']) }}">
         @csrf
         @method('put')
 
@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <label for="">Available Quantity: </label>
-                    <input type="number" readonly value="{{ $placeMaterialOrders['available_quantity'] }}" name="order_quantity" class="form-control" id="">
+                    <input type="number" readonly value="{{ $placeMaterialOrders['available_quantity'] }}" name="order_quantity" class="form-control-plaintext " id="">
                 </div>
                 <br>
 
