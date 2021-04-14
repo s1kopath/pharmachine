@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\StockController;
 use App\Http\Controllers\backend\ScheduleController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\RawMaterialsController;
+use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\WorkerController;
 use App\Http\Controllers\backend\WorkstationController;
 
@@ -25,11 +26,22 @@ use App\Http\Controllers\backend\WorkstationController;
 
 
 //home page
-Route::get('/', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
+Route::get('/dashboard', [ScheduleController::class, 'sch']) -> name('sch.dashboard');
 
 Route::get('/reports', [ReportsController::class, 'rep']) -> name('rep.dashboard');
 
 Route::get('/stock', [StockController::class, 'sto']) -> name('sto.dashboard');
+
+//login and registration
+Route::get('/',[UserController::class,'showLoginForm'])->name('login.form');
+Route::get('/registration',[UserController::class,'showRegistrationForm'])->name('registration.form');
+Route::post('/registration/create',[UserController::class,'registration'])->name('registration');
+Route::post('/login',[UserController::class,'login'])->name('login');
+Route::get('/logout',[UserController::class,'logout'])->name('logout');
+
+
+
+
 
 //production  demand
 Route::get('/productionDemand', [ProductionDemandController::class, 'pd']) -> name('pd.dashboard');

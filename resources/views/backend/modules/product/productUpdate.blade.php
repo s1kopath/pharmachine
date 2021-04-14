@@ -36,7 +36,7 @@
 
 
             <div class="modal-footer">
-                <a class="btn btn-secondary" href="{{ route('product.list') }}">Cancel</a>
+                <a class="btn btn-secondary" href="{{ route('product.listView') }}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>

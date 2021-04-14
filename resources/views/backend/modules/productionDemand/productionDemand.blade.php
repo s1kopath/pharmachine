@@ -24,7 +24,7 @@
         }
 
         .act {
-            color: rgb(255, 0, 0);
+            color: rgb(228, 228, 228);
         }
 
     </style>
@@ -55,10 +55,12 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to confirm ></a>
+                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;"
+                        onclick=""
+                        >Proceed to confirm ></a>
                     </div>
                 @else
-                    <div class="col card act">.</div>
+                    <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
 
                 @if ($data->status == 'processing')
@@ -70,7 +72,7 @@
                         </div>
                         <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Confirm ></a></div>
                 @else
-                    <div class="col card act">.</div>
+                    <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
 
                 @if ($data->status == 'confirm')
@@ -82,7 +84,7 @@
                         </div>
                         <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to production ></a></div>
                 @else
-                    <div class="col card act">.</div>
+                    <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
 
                 @if ($data->status == 'producing')
@@ -94,7 +96,7 @@
                         </div>
                         <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Finish production ></a></div>
                 @else
-                    <div class="col card act">.</div>
+                    <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
 
                 @if ($data->status == 'produced')
@@ -106,7 +108,7 @@
                         </div>
                         <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to shipment ></a></div>
                 @else
-                    <div class="col card act">.</div>
+                    <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
 
                 @if ($data->status == 'deliver')
@@ -118,7 +120,7 @@
                         </div>
                         <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to delivery ></a></div>
                 @else
-                    <div class="col card act">.</div>
+                    <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
             </div>
         @endforeach

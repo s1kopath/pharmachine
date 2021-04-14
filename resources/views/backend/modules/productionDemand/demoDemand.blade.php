@@ -23,7 +23,7 @@
         }
 
         .act {
-            color: rgb(255, 0, 0);
+            color: rgba(255, 0, 0, 0);
         }
 
     </style>

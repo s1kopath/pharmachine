@@ -7,7 +7,7 @@
     <table class="table table-primary table-striped table-bordered">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col">Sl</th>
                 <th scope="col">Name</th>
                 <th scope="col">Product Type</th>
                 <th scope="col" style="width: 30%">Description</th>
@@ -17,9 +17,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($products as $data)
+            @foreach ($products as $key=>$data)
                 <tr>
-                    <th>{{ $data->id }}</th>
+                    <th>{{ $key+1 }}</th>
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->product_type }}</td>
                     <td>{{ $data->description }}</td>

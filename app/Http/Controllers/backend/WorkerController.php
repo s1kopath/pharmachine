@@ -64,8 +64,8 @@ class WorkerController extends Controller
 
     public function delete($id)
     {
-        $products = Worker::find($id);
-        $products->delete();
+        $workers = Worker::find($id);
+        $workers->delete();
         return redirect()->back();
     }
 }

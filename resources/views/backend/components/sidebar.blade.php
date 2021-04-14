@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3 ">
         <ul class="nav flex-column ">
             <li class="nav-item ">
-                <a class="nav-link text-white" aria-current="page" href="/">
+                <a class="nav-link text-white" aria-current="page" href="/dashboard">
                     <span data-feather="home"></span>
                     Dashboard
                 </a>
@@ -36,7 +36,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  text-white" href="{{ route('product.list') }}">
+                <a class="nav-link  text-white" href="{{ route('product.listView') }}">
                     <span data-feather="square"></span>
                     Product
                 </a>

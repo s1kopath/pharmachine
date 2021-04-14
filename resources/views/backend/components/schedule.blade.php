@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h5><span data-feather="alert-octagon"></span>
                         <small> Pending Production Demand</small></h5>
-                    <h1>3 </h1>
+                    <h1>{{ $countDemand }} Requests</h1>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <h5><span data-feather="package"></span>
                         <small>Total Product In Stack</small> </h5>
-                    <h1>75 Units</h1>
+                    <h1>{{ $countProduct }} Units</h1>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 <div class="card-body">
                     <h5><span data-feather="settings"></span>
                         <small>Total Warkstations</small> </h5>
-                    <h1>45</h1>
+                    <h1>{{ $countWorkstation }}</h1>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h5><span data-feather="activity"></span>
                         <small>Orders in Production</small></h5>
-                    <h1>72 Units</h1>
+                    <h1>{{ $countOrder }} Units</h1>
                 </div>
             </div>
         </div>
@@ -47,8 +47,8 @@
             <div class="card text-white shadow" style="background-color:rgb(252, 127, 10);width: 20rm; height:10rem">
                 <div class="card-body">
                     <h5><span data-feather="user-x"></span>
-                        <small>Total Number of Warkers </small> </h5>
-                    <h1>3600</h1>
+                        <small>Total Number of Workers </small> </h5>
+                    <h1>{{ $countWorker }}</h1>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <h5><span data-feather="git-merge"></span>
                         <small>Active Workstations</small> </h5>
-                    <h1>37</h1>
+                    <h1>0</h1>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <h5><span data-feather="truck"></span>
                         <small>Product Ready for Shipment</small></h5>
-                    <h1>50 Unit</h1>
+                    <h1>0 Unit</h1>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 <div class="card-body">
                     <h5><span data-feather="users"></span>
                         <small>Number of Active Warkers in production </small> </h5>
-                    <h1>1200</h1>
+                    <h1>0</h1>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
                 <div class="card-body">
                     <h5><span data-feather="alert-triangle"></span>
                         <small>Material Shortage</small> </h5>
-                    <h1>3 Units</h1>
+                    <h1>0 Units</h1>
                 </div>
             </div>
         </div>
