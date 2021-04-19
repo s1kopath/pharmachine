@@ -1,10 +1,11 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 @section('content')
 
 
     <div class="container form-control text-light"
-    style="background-image: url('images/form5.jpg  '); background-repeat: no-repeat;
+    style="background-image:     url('{{asset('images/form5.jpg')}}'); background-repeat: no-repeat;
     background-size: 100% 100%">
+
         <form class=" mt-5" method="post" action="{{ route('manufacturingOrder.create') }}">
             @csrf
             {{-- 1st row --}}

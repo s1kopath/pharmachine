@@ -27,9 +27,9 @@
                         <img style="width: 100px;" src="{{url('/files/product/'.$data->image)}}" alt="">
                     </td>
                     <td>
-                        <a class="btn btn-success" href="">View</a> ||
-                        <a class="btn btn-warning" href="{{ route('product.update', $data['id']) }}">Update</a> ||
-                        <a class="btn btn-danger" href="{{ route('product.delete', $data['id']) }}">Delete</a>
+                        <a class="btn" href=""><span data-feather="eye">View</span></a> ||
+                        <a class="btn" href="{{ route('product.update', $data['id']) }}"><span data-feather="edit">Update</span></a> ||
+                        <a class="btn" href="{{ route('product.delete', $data['id']) }}"><span data-feather="trash-2">Delete</span></a>
                     </td>
                 </tr>
 
@@ -37,6 +37,13 @@
 
         </tbody>
     </table>
+    <span>{{$products->links()}}</span>
+    <style>
+        .w-5{
+            display: none;
+        }
+    </style>
+
 </div>
 
 @endsection

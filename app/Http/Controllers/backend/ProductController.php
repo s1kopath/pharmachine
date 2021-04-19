@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 
 
@@ -16,7 +17,7 @@ class ProductController extends Controller
     }
     public function listView(){
         $title = 'List of all Products';
-        $products = Product::all();
+        $products = Product::paginate(5);
         return view('backend.modules.product.productListView', compact('products','title'));
     }
     public function gridView(){

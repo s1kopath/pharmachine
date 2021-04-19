@@ -1,4 +1,4 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 @section('content')
 
 <link href="/css/schedule.css" rel="stylesheet">

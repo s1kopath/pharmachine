@@ -1,4 +1,4 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 
 @section('content')
 
@@ -88,8 +88,8 @@
                 <td>{{ $data->output }}</td>
                 <td>{{ $data->status }}</td>
                 <td>
-                    <a class="btn btn-success" href="">View</a> ||
-                    <a class="btn btn-danger" href="">Delete</a>
+                    <a class="btn" href=""><span data-feather="eye">View</span></a> ||
+                    <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
                 </td>
                 @endforeach
             </tr>

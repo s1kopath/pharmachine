@@ -1,13 +1,24 @@
 .nav-link:hover {
-    padding: 5px;
-    background: #e2817b;
+    padding: 10px;
+    background: #e2807b;
     text-align: center;
+}
+.worker-link:hover{
 
+    padding: 10px;
+    background: #099158a9;
+    text-align: center;
 
 }
 
-.sidebar{
+.admin-sidebar{
     background: url("../images/sidebar2.jpg") ;
+
+}
+.worker-sidebar{
+    background: url("../images/form4.jpg");
+    background-repeat: no-repeat;
+    background-size: 70em 70em;
 
 }
 

@@ -43,9 +43,15 @@ class UserController extends Controller
 
         //authenticate
         $credentials = $request->only('email', 'password');
+        // dd($credentials);
         if(Auth::attempt($credentials)){
             $request -> session() -> regenerate();
-            return redirect()->route('sch.dashboard');
+            if(auth()->user()->role == 'admin'){
+                return redirect()->route('sch.dashboard');
+            }
+            elseif(auth()->user()->role == 'worker'){
+                return redirect()->route('show.dashboard');
+            }
         }
         return back()->withErrors([
             'email' => 'Invalid Credentials.',

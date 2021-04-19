@@ -1,4 +1,4 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 @section('content')
 
 
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Fescription: </label>
+                    <label for="">Description: </label>
                     <input type="text" readonly value="{{ $placeMaterialOrders['description'] }}" name="description" class=" form-control-plaintext" id="">
                 </div>
 
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Available Quantity: </label>
+                    <label for="">Available Quantity(Kg): </label>
                     <input type="number" readonly value="{{ $placeMaterialOrders['available_quantity'] }}" name="order_quantity" class="form-control-plaintext " id="">
                 </div>
                 <br>
@@ -41,7 +41,7 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <label for="">Order Quantity</label>
+                    <label for="">Order Quantity(Kg)</label>
                     <input type="number" name="order_quantity" class="form-control" id="">
                 </div>
                 <br>

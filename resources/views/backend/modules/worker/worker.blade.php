@@ -1,4 +1,4 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 
 @section('content')
 
@@ -17,6 +17,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
                     <th scope="col">Gender</th>
@@ -32,7 +33,8 @@
                 @foreach ($workers as $key=>$data)
                     <tr>
                         <th scope="row">{{ $key+1 }}</th>
-                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->workerUser->name }}</td>
+                        <td>{{ $data->workerUser->email }}</td>
                         <td>{{ $data->address }}</td>
                         <td>{{ $data->contact }}</td>
                         <td>{{ $data->gender }}</td>
@@ -42,9 +44,9 @@
                         <td>{{ $data->salary }} Tk</td>
                         <td>{{ $data->labour_per_hour }}Tk</td>
                         <td>
-                            <a class="btn btn-success" href="">View</a> ||
-                            <a class="btn btn-warning" href="{{ route('worker.update', $data['id']) }}">Update</a> ||
-                            <a class="btn btn-danger" href="{{ route('worker.delete', $data['id']) }}">Delete</a>
+                            <a class="btn" href=""><span data-feather="eye">View</span></a>||
+                            <a class="btn" href="{{ route('worker.update', $data['id']) }}"><span data-feather="edit">Update</span></a>||
+                            <a class="btn" href="{{ route('worker.delete', $data['id']) }}"><span data-feather="trash-2">Delete</span></a>
                         </td>
                     </tr>
                 @endforeach
@@ -69,10 +71,16 @@
                         <div class="form-group">
                             <label>Enter Name:</label>
                             <input type="name" name="name" class="form-control" placeholder="Name" id="">
-                        </div><br>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Enter Email Address:</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email" id="">
+                        </div>
+                        <br>
                         <div class="form-group">
                             <label>Enter Address:</label>
-                            <input type="address" name="address" class="form-control" placeholder="Address" id="">
+                            <input type="text" name="address" class="form-control" placeholder="Address" id="">
                         </div>
                         <br>
                         <div class="form-group">
@@ -94,14 +102,9 @@
                             <input type="date" name="date_of_birth" class="form-control" placeholder="Date of Birth" id="">
                         </div>
                         <br>
-                        {{-- <div class="form-group">
-                            <label>Enter Age:</label>
-                            <input type="number" name="age" class="form-control" placeholder="Age" id="">
-                        </div> --}}
-                        <br>
                         <div class="form-group">
                             <label>Enter Joining Date:</label>
-                            <input type="datetime-local" name="joining_date" class="form-control" placeholder="Joining Date"
+                            <input type="date" name="joining_date" class="form-control" placeholder="Joining Date"
                                 id="">
                         </div>
                         <br>

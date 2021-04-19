@@ -4,8 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WorkerController extends Controller
 {
@@ -18,38 +20,58 @@ class WorkerController extends Controller
 
     public function create(Request $request)
     {
-        $dateOfBirth = $request->date_of_birth;
-        $years = Carbon::parse($dateOfBirth)->age;
+        // DB::beginTransaction();
+        // try {
+            $dateOfBirth = $request->date_of_birth;
+            $years = Carbon::parse($dateOfBirth)->age;
 
-        // dd($years);
+            $request->validate([
+                'name' => 'required',
+                'email' => 'email|required|unique:users'
+            ]);
 
+            $users = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt('123456')
+            ]);
 
-        Worker::create([
-
-            'name' => $request->name,
-            'address' => $request->address,
-            'contact' => $request->contact,
-            'gender' => $request->gender,
-            'date_of_birth' => $request->date_of_birth,
-            'age' => $years,
-            'joining_date' => $request->joining_date,
-            'salary' => $request->salary,
-            'labour_per_hour' => $request->salary / 720
-        ]);
-        return redirect()->back();
+            Worker::create([
+                'user_id' => $users->id,
+                'address' => $request->address,
+                'contact' => $request->contact,
+                'gender' => $request->gender,
+                'date_of_birth' => $request->date_of_birth,
+                'age' => $years,
+                'joining_date' => $request->joining_date,
+                'salary' => $request->salary,
+                'labour_per_hour' => $request->salary / 720
+            ]);
+            return redirect()->back();
+        //     DB::commit();
+        // } catch (\Throwable $exception) {
+        //     DB::rollback();
+        //     return redirect();
+        // }
     }
 
     public function update($id)
     {
         $workers = Worker::find($id);
+        $users = User::find($workers->user_id);
         $title = 'Update ' . $workers['name'];
-        return view('backend.modules.worker.updateWorker', compact('workers', 'title'));
+        return view('backend.modules.worker.updateWorker', compact('workers', 'title', 'users'));
     }
 
     public function saveUpdate(Request $request)
     {
         $workers = Worker::find($request->id);
-        $workers->name = $request->name;
+        $users = User::find($workers->user_id);
+
+
+        $users->name = $request->name;
+        $users->email = $request->email;
+
         $workers->address = $request->address;
         $workers->contact = $request->contact;
         $workers->gender = $request->gender;
@@ -65,7 +87,9 @@ class WorkerController extends Controller
     public function delete($id)
     {
         $workers = Worker::find($id);
+        $user = User::find($workers->user_id);
         $workers->delete();
+        $user->delete();
         return redirect()->back();
     }
 }

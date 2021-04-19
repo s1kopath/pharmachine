@@ -1,4 +1,4 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 @section('content')
 
 
@@ -25,9 +25,9 @@
             <td>02.12.21</td>
 
             <td>
-                <a class="btn btn-warning" href="">Deliver</a> ||
-                <a class="btn btn-success" href="">View Recipt</a> ||
-                <a class="btn btn-danger" href="">Delete Record</a>
+                <a class="btn" href=""><span data-feather="truck">Deliver</span></a> ||
+                <a class="btn" href=""><span data-feather="eye">View</span></a> ||
+                <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
             </td>
           </tr>
 
@@ -40,9 +40,9 @@
             <td>06.09.21</td>
 
             <td>
-                <a class="btn btn-warning" href="">Deliver</a> ||
-                <a class="btn btn-success" href="">View Recipt</a> ||
-                <a class="btn btn-danger" href="">Delete Record</a>
+                <a class="btn" href=""><span data-feather="truck">Deliver</span></a> ||
+                <a class="btn" href=""><span data-feather="eye">View</span></a> ||
+                <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
             </td>
           </tr>
 
@@ -56,9 +56,9 @@
             <td>16.02.21</td>
 
             <td>
-                <a class="btn btn-warning" href="">Deliver</a> ||
-                <a class="btn btn-success" href="">View Recipt</a> ||
-                <a class="btn btn-danger" href="">Delete Record</a>
+                <a class="btn" href=""><span data-feather="truck">Deliver</span></a> ||
+                <a class="btn" href=""><span data-feather="eye">View</span></a> ||
+                <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
             </td>
           </tr>
         </tbody>

@@ -35,8 +35,9 @@
             -moz-user-select: none;
             user-select: none;
         }
-        .login-bg{
-            background: url("images/form4.jpg") ;
+
+        .login-bg {
+            background: url("images/form4.jpg");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -60,29 +61,36 @@
 
     <main class="form-signin rounded" style="background: url('images/login-bg2.jpg');">
         @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success') }}
-                </div>
-            @endif
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">{{ $error }}</div>
-                @endforeach
-            @endif
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger">{{ $error }}</div>
+            @endforeach
+        @endif
 
 
 
-        <form action="{{route('login')}}" method="post">
+        <form action="{{ route('login') }}" method="post">
             @csrf
             <img class="mb-4 bg-light" src="{{ url('images/logo2.png') }}" alt="" width="" height="57">
 
             <div class="form-floating">
-                <input required name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input required name="email" type="email" class="form-control" id="floatingInput"
+                    placeholder="name@example.com">
                 <label for="floatingInput">Email</label>
             </div>
             <div class="form-floating">
-                <input required name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input required name="password" type="password" class="form-control" id="floatingPassword"
+                    placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
             <button class="w-100 btn btn-lg btn-danger" type="submit">Login</button>

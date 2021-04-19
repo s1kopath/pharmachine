@@ -15,14 +15,14 @@ class CreateWorkersTable extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->integer('user_id');
             $table->text('address')->nullable();
             $table->string('contact', 20);
             $table->string('gender')->default('unknown');
             $table->date('date_of_birth');
             $table->integer('age')->nullable();
-            $table->string('joining_date');
-            $table->double('salary', 10, 2);
+            $table->string('joining_date')->nullable();
+            $table->double('salary', 10, 2)->default('5000');
             $table->double('labour_per_hour', 10, 2);
             $table->timestamps();
         });

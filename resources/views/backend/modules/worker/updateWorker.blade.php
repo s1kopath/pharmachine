@@ -1,4 +1,4 @@
-@extends('backend.dashboard')
+@extends('backend.adminHome')
 
 @section('content')
 
@@ -19,7 +19,12 @@
 
         <div class="form-group">
             <label>Enter Name:</label>
-            <input type="name" name="name" class="form-control" value="{{ $workers['name'] }}" id="">
+            <input type="name" name="name" class="form-control" value="{{ $users['name'] }}" id="">
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" class="form-control" value="{{ $users['email'] }}" id="">
         </div>
         <br>
         <div class="form-group">
@@ -54,7 +59,7 @@
         <br>
         <div class="form-group">
             <label>Enter Joining Date:</label>
-            <input type="datetime-local" name="joining_date" class="form-control" value="{{ $workers['joining_date'] }}"
+            <input type="date" name="joining_date" class="form-control" value="{{ $workers['joining_date'] }}"
                 id="">
         </div>
         <br>
