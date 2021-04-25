@@ -63,6 +63,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/demoDemand', [ProductionDemandController::class, 'demoPd'])->name('demo.dashboard');
         Route::post('/demoDemandCreator', [ProductionDemandController::class, 'createDemand'])->name('demand.create');
 
+        Route::get('/productionDemand/{id}/{status}', [ProductionDemandController::class, 'changeStatus'])->name('changeStatus');
+        Route::get('/productionDemand/{id}', [ProductionDemandController::class, 'deleteStatus'])->name('deleteStatus');
+
+
+
         //production planing
         Route::get('/productPlanning', [ProductionPlanningController::class, 'pp'])->name('pp.dashboard');
         Route::get('/manufacturingOrder', [ProductionPlanningController::class, 'createForm'])->name('manufacturing.order');
@@ -72,6 +77,8 @@ Route::group(['prefix' => 'admin'], function () {
         //workstation
         Route::get('/workstation', [WorkstationController::class, 'ws'])->name('ws.dashboard');
         Route::post('/workstation/create', [WorkstationController::class, 'createWorkstation'])->name('ws.createWorkstation');
+
+        Route::get('/workstation/{id}/{status}', [WorkstationController::class, 'completedUpdate'])->name('completedUpdate');
 
         //product
         Route::get('/product', [ProductController::class, 'product'])->name('product.list');

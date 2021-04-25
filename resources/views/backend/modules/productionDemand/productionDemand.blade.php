@@ -55,8 +55,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;"
-                        onclick=""
+                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'processing']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;"
                         >Proceed to confirm ></a>
                     </div>
                 @else
@@ -70,7 +69,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Confirm ></a></div>
+                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'confirm']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Confirm ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
@@ -82,7 +81,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to production ></a></div>
+                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'producing']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to production ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
@@ -94,7 +93,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Finish production ></a></div>
+                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'produced']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Finish production ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
@@ -106,7 +105,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to shipment ></a></div>
+                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'deliver']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to shipment ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
@@ -118,7 +117,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="#" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to delivery ></a></div>
+                        <a href="{{ route('deleteStatus', $data['id']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to delivery ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif

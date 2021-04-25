@@ -30,5 +30,21 @@ class ProductionDemandController extends Controller
         ]);
         return redirect() -> back();
     }
-    
+
+    public function changeStatus($id, $status)
+    {
+        $demands= Demand::find($id);
+        $demands->update(['status'=>$status]);
+
+        return redirect()->back();
+    }
+
+    public function deleteStatus($id)
+    {
+        $demands = Demand::find($id);
+
+        $demands->delete();
+        return redirect()->back();
+    }
+
 }
