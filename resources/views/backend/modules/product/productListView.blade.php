@@ -37,12 +37,9 @@
 
         </tbody>
     </table>
-    <span>{{$products->links()}}</span>
-    <style>
-        .w-5{
-            display: none;
-        }
-    </style>
+    <div class="d-flex justify-content-center">
+        <span>{{$products->links()}}</span>
+    </div>
 
 </div>
 

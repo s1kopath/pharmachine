@@ -68,6 +68,9 @@ class WorkerController extends Controller
         $workers = Worker::find($request->id);
         $users = User::find($workers->user_id);
 
+        $dateOfBirth = $request->date_of_birth;
+        $years = Carbon::parse($dateOfBirth)->age;
+
 
         $users->name = $request->name;
         $users->email = $request->email;
@@ -76,11 +79,13 @@ class WorkerController extends Controller
         $workers->contact = $request->contact;
         $workers->gender = $request->gender;
         $workers->date_of_birth = $request->date_of_birth;
-        $workers->age = $request->age;
+        $workers->age = $years;
         $workers->joining_date = $request->joining_date;
         $workers->salary = $request->salary;
-        // $workers -> labour_per_hour = $request->labour_per_hour;
+        $workers -> labour_per_hour = $request->salary / 720;
+
         $workers->save();
+        $users->save();
         return redirect()->route('worker.list');
     }
 
@@ -92,4 +97,6 @@ class WorkerController extends Controller
         $user->delete();
         return redirect()->back();
     }
+
+
 }

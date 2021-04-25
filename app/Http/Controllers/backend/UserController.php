@@ -46,6 +46,7 @@ class UserController extends Controller
         // dd($credentials);
         if(Auth::attempt($credentials)){
             $request -> session() -> regenerate();
+
             if(auth()->user()->role == 'admin'){
                 return redirect()->route('sch.dashboard');
             }

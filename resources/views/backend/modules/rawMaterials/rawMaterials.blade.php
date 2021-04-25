@@ -40,7 +40,6 @@
                 <tr @if ($data->available_quantity < 10)
                     class="text-danger"
                 @endif>
-
                     <th scope="row">{{ $key+1 }}</th>
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->description }}</td>

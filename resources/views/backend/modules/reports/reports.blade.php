@@ -90,4 +90,5 @@
             style="display: block; width: 1076px; height: 454px;"></canvas>
     </div>
 
+
 @endsection

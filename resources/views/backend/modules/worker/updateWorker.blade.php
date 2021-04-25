@@ -53,11 +53,6 @@
         </div>
         <br>
         <div class="form-group">
-            <label>Enter Age:</label>
-            <input type="number" name="age" class="form-control" value="{{ $workers['age'] }}" id="">
-        </div>
-        <br>
-        <div class="form-group">
             <label>Enter Joining Date:</label>
             <input type="date" name="joining_date" class="form-control" value="{{ $workers['joining_date'] }}"
                 id="">

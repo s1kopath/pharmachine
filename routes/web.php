@@ -7,10 +7,12 @@ use App\Http\Controllers\backend\ReportsController;
 use App\Http\Controllers\backend\StockController;
 use App\Http\Controllers\backend\ScheduleController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\RawMaterialsController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\Backend\Worker\DashboardController;
 use App\Http\Controllers\backend\worker\ProductController as WorkerProductController;
+use App\Http\Controllers\backend\worker\ProfileController as WorkerProfileController;
 use App\Http\Controllers\backend\worker\RawMaterialsController as WorkerRawMaterialsController;
 use App\Http\Controllers\backend\worker\ReportingController;
 use App\Http\Controllers\backend\worker\StockController as WorkerStockController;
@@ -52,6 +54,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/stock', [StockController::class, 'sto'])->name('sto.dashboard');
 
+        //profile
+        Route::get('/profile', [ProfileController::class, 'showAdminProfile'])-> name('display.adminProfile');
 
 
         //production  demand
@@ -95,10 +99,15 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-// -----admin routes-----
+// -----worker routes-----
 Route::group(['prefix' => 'worker'], function () {
 
     Route::group(['middleware' => 'worker-auth'], function () {
+        //profile
+        Route::get('/profile', [WorkerProfileController::class, 'showUserProfile'])-> name('display.UserProfile');
+        // Route::get('/profile/change_password/{id}', [WorkerProfileController::class, 'getPassword'])-> name('get.password');
+        // Route::post('/profile/change_password/{id}', [WorkerProfileController::class, 'updatePassword'])-> name('update.password');
+
         //home page
         Route::get('/dashboard', [DashboardController::class, 'show'])->name('show.dashboard');
 
