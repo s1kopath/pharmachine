@@ -3,7 +3,7 @@
 
 
 <div class="text-center mt-2">
-    <a href="{{ route('manufacturing.order') }}" class="btn btn-info"> Create Manufractring Order </a>
+    {{-- <a href="{{ route('manufacturing.order') }}" class="btn btn-info"> Create Manufractring Order </a> --}}
 </div>
 <div class="container-fluid p-3">
     <table class="table table-striped table-info">
@@ -34,7 +34,8 @@
             <td>{{ $data->quantity }}</td>
             <td>{{ $data->manufacturingMaterial->name }}</td>
             <td>{{ $data->status }}</td>
-            <td>{{ $data->manufacturingWorker->name }}</td>
+            @dd($data);
+            {{-- <td>{{ $data->manufacturingWorker->workerUser->name }}</td> --}}
             <td>{{ $data->manufacturingWorkstation->name }}</td>
             <td>{{ $data->start_date }}</td>
             <td>{{ $data->finishing_date }}</td>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\ProductionDemandController;
 use App\Http\Controllers\backend\ProductionPlanningController;
@@ -32,6 +33,13 @@ use App\Http\Controllers\backend\WorkstationController;
 */
 
 
+
+// fetch api controller
+Route::get('/get-calculation-quantity/{id}',[ApiController::class,'calculate']);
+Route::get('/get-calculation-total-cost/{id}',[ApiController::class,'calculateCost']);
+
+
+
 //login and registration
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login.form');
 Route::get('/registration', [UserController::class, 'showRegistrationForm'])->name('registration.form');
@@ -60,18 +68,21 @@ Route::group(['prefix' => 'admin'], function () {
 
         //production  demand
         Route::get('/productionDemand', [ProductionDemandController::class, 'pd'])->name('pd.dashboard');
-        Route::get('/demoDemand', [ProductionDemandController::class, 'demoPd'])->name('demo.dashboard');
         Route::post('/demoDemandCreator', [ProductionDemandController::class, 'createDemand'])->name('demand.create');
 
         Route::get('/productionDemand/{id}/{status}', [ProductionDemandController::class, 'changeStatus'])->name('changeStatus');
         Route::get('/productionDemand/{id}', [ProductionDemandController::class, 'deleteStatus'])->name('deleteStatus');
 
+        Route::get('/waitForConfirm/{id}', [ProductionDemandController::class, 'waitForConfirm'])->name('demand.waitForConfirm');
+
+
 
 
         //production planing
         Route::get('/productPlanning', [ProductionPlanningController::class, 'pp'])->name('pp.dashboard');
-        Route::get('/manufacturingOrder', [ProductionPlanningController::class, 'createForm'])->name('manufacturing.order');
         Route::post('/manufacturingOrder/create', [ProductionPlanningController::class, 'createManufacturingOrder'])->name('manufacturingOrder.create');
+        Route::get('/manufacturingOrder/{id}', [ProductionPlanningController::class, 'createForm'])->name('manufacturing.order');
+
 
 
         //workstation
@@ -116,7 +127,8 @@ Route::group(['prefix' => 'worker'], function () {
         // Route::post('/profile/change_password/{id}', [WorkerProfileController::class, 'updatePassword'])-> name('update.password');
 
         //home page
-        Route::get('/dashboard', [DashboardController::class, 'show'])->name('show.dashboard');
+        Route::get('/', [DashboardController::class, 'show'])->name('show.dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'home'])->name('show.home');
 
         //production report
         Route::get('/production-reporting', [ReportingController::class, 'showReporting'])->name('show.reporting');
@@ -133,5 +145,9 @@ Route::group(['prefix' => 'worker'], function () {
 
         //raw materials
         Route::get('/raw-materials', [WorkerRawMaterialsController::class, 'showMaterials'])->name('show.materials');
+        Route::get('/raw-materials/{id}', [WorkerRawMaterialsController::class, 'receiveOrder'])->name('materials.receiveOrder');
     });
 });
+
+
+

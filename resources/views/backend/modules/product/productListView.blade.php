@@ -11,6 +11,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Product Type</th>
                 <th scope="col" style="width: 30%">Description</th>
+                <th scope="col">Raw Material</th>
                 <th scope="col">Image</th>
                 <th scope="col">Actions</th>
 
@@ -23,6 +24,7 @@
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->product_type }}</td>
                     <td>{{ $data->description }}</td>
+                    <td>{{ $data->productMaterial->name }}</td>
                     <td>
                         <img style="width: 100px;" src="{{url('/files/product/'.$data->image)}}" alt="">
                     </td>

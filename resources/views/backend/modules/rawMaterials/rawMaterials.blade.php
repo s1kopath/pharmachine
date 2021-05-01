@@ -26,6 +26,7 @@
                     <th scope="col">Name</th>
                     <th scope="col" style="width: 20%;">Description</th>
                     <th scope="col">Vendor Name</th>
+                    <th scope="col">Product Per Kg</th>
                     <th scope="col">Total Qty(Kg)</th>
                     <th scope="col">Available Qty(Kg)</th>
                     <th scope="col">Order Status</th>
@@ -37,13 +38,14 @@
             </thead>
             <tbody>
                 @foreach ($materials as $key=>$data)
-                <tr @if ($data->available_quantity < 10)
+                <tr @if ($data->available_quantity <= 10)
                     class="text-danger"
                 @endif>
                     <th scope="row">{{ $key+1 }}</th>
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->description }}</td>
                     <td>{{ $data->materialVendor->name }}</td>
+                    <td>{{ $data->product_per_kg}} Piece</td>
                     <td>{{ $data->total_quantity }}</td>
                     <td>{{ $data->available_quantity }}</td>
                     <td>{{ $data->status }}</td>
@@ -188,6 +190,24 @@
                                 @foreach ($vendors as $data)
                                     <option value="{{ $data->id }}" >{{ $data->name }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="">Product Per Kg</label>
+                            <select name="product_per_kg" id="" class="form-control" >
+                                <option value="null" >Select amount</option>
+                                    <option value="20" >20 Piece</option>
+                                    <option value="30" >30 Piece</option>
+                                    <option value="40" >40 Piece</option>
+                                    <option value="50" >50 Piece</option>
+                                    <option value="60" >60 Piece</option>
+                                    <option value="70" >70 Piece</option>
+                                    <option value="80" >80 Piece</option>
+                                    <option value="90" >90 Piece</option>
+                                    <option value="100" >100 Piece</option>
+                                    <option value="150" >150 Piece</option>
+                                    <option value="200" >200 Piece</option>
                             </select>
                         </div>
                         <br>

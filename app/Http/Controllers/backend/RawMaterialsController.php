@@ -12,7 +12,7 @@ class RawMaterialsController extends Controller
     public function raw(){
         $title = 'Raw Materials';
         $vendors = Vendor::all();
-        $materials = Material::all();
+        $materials = Material::orderBy('available_quantity')->get();
         return view('backend.modules.rawMaterials.rawMaterials', compact('vendors','title','materials'));
     }
 
@@ -35,6 +35,7 @@ class RawMaterialsController extends Controller
             'name' => $request -> name,
             'description' => $request -> description,
             'vendor_id' => $request -> vendor_id,
+            'product_per_kg' => $request -> product_per_kg,
             'total_quantity' => $request -> order_quantity,
             'available_quantity' => $request -> order_quantity,
             'order_quantity' => $request -> order_quantity,
@@ -53,16 +54,30 @@ class RawMaterialsController extends Controller
 
     }
     //send order
-    public function sendOrder(Request $request){
-        $placeMaterialOrders = Material::find($request -> id);
+    public function sendOrder(Request $request, $id){
 
-        $placeMaterialOrders -> name = $request->name;
-        $placeMaterialOrders -> description = $request->description;
-        $placeMaterialOrders -> order_date = $request->order_date;
-        $placeMaterialOrders -> vendor_id = $request->vendor_id;
-        $placeMaterialOrders -> order_quantity = $request->order_quantity;
-        $placeMaterialOrders -> order_date = $request->order_date;
-        $placeMaterialOrders -> save();
+        Material::find($id)->update([
+            // 'name' => $request -> name,
+            // 'description' => $request -> description,
+            'vendor_id' => $request -> vendor_id,
+            // 'total_quantity' => $request -> order_quantity,
+            // 'available_quantity' => $request -> order_quantity,
+            'order_quantity' => $request -> order_quantity,
+            'order_date' => $request -> order_date,
+            'status'=>'Ordered'
+        ]);
+
+        // $placeMaterialOrders -> name = $request->name;
+        // $placeMaterialOrders -> description = $request->description;
+        // $placeMaterialOrders -> order_date = $request->order_date;
+        // $placeMaterialOrders -> vendor_id = $request->vendor_id;
+        // $placeMaterialOrders -> order_quantity = $request->order_quantity;
+        // $placeMaterialOrders -> order_date = $request->order_date;
+        // $placeMaterialOrders -> save();
+
+
+
+
         return redirect()->route('raw.dashboard');
     }
 }

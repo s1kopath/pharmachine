@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 100);
             $table->string('product_type')->default('none');
             $table->text('description')->nullable();
+            $table->integer('material_id')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

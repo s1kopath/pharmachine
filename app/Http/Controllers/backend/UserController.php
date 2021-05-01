@@ -51,7 +51,7 @@ class UserController extends Controller
                 return redirect()->route('sch.dashboard');
             }
             elseif(auth()->user()->role == 'worker'){
-                return redirect()->route('show.dashboard');
+                return redirect()->route('show.home');
             }
         }
         return back()->withErrors([

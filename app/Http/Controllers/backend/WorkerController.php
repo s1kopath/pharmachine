@@ -63,29 +63,49 @@ class WorkerController extends Controller
         return view('backend.modules.worker.updateWorker', compact('workers', 'title', 'users'));
     }
 
-    public function saveUpdate(Request $request)
+    public function saveUpdate(Request $request, $id)
     {
-        $workers = Worker::find($request->id);
-        $users = User::find($workers->user_id);
+        // $workers = Worker::find($request->id);
+        // $users = User::find($workers->user_id);
+
+        // $dateOfBirth = $request->date_of_birth;
+        // $years = Carbon::parse($dateOfBirth)->age;
+
+
+        // $users->name = $request->name;
+        // $users->email = $request->email;
+
+        // $workers->address = $request->address;
+        // $workers->contact = $request->contact;
+        // $workers->gender = $request->gender;
+        // $workers->date_of_birth = $request->date_of_birth;
+        // $workers->age = $years;
+        // $workers->joining_date = $request->joining_date;
+        // $workers->salary = $request->salary;
+        // $workers -> labour_per_hour = $request->salary / 720;
+
+        // $workers->save();
+        // $users->save();
 
         $dateOfBirth = $request->date_of_birth;
         $years = Carbon::parse($dateOfBirth)->age;
+        $workers = Worker::find($id);
 
+        $workers->update([
+            'address'=> $request->address,
+            'contact'=>$request->contact,
+            'gender'=>$request->gender,
+            'date_of_birth'=> $request->date_of_birth,
+            'age' => $years,
+            'joining_date'=>$request->joining_date,
+            'salary'=> $request->salary,
+            'labour_per_hour' => $request->salary / 720
+        ]);
+        User::find($workers->user_id)->update([
+            'name' => $request->name,
+            'email' => $request->email
+        ]);
 
-        $users->name = $request->name;
-        $users->email = $request->email;
-
-        $workers->address = $request->address;
-        $workers->contact = $request->contact;
-        $workers->gender = $request->gender;
-        $workers->date_of_birth = $request->date_of_birth;
-        $workers->age = $years;
-        $workers->joining_date = $request->joining_date;
-        $workers->salary = $request->salary;
-        $workers -> labour_per_hour = $request->salary / 720;
-
-        $workers->save();
-        $users->save();
         return redirect()->route('worker.list');
     }
 

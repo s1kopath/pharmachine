@@ -12,4 +12,9 @@ class DashboardController extends Controller
         $title='Dashboard';
         return view('backend.workerModules.workerDashboard',compact('title'));
     }
+    public function home()
+    {
+        $title='Dashboard';
+        return view('backend.workerComponents.dashHome',compact('title'));
+    }
 }

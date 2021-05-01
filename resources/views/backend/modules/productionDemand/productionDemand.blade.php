@@ -29,6 +29,16 @@
 
     </style>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
 
 
     <div class="">
@@ -69,7 +79,10 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'confirm']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Confirm ></a></div>
+                        {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'confirm']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">
+                            Confirm ></a></div> --}}
+                            <a href="{{ route('demand.waitForConfirm', $data -> id) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">
+                                Confirm ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
@@ -81,7 +94,10 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'producing']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to production ></a></div>
+                        {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'producing']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">
+                            Proceed to production ></a></div> --}}
+                            <a href="{{ route('manufacturing.order',$data->id) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">
+                                Proceed to production ></a></div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
                 @endif
@@ -180,4 +196,5 @@
                 </div>
             </div>
         </div>
+
     @endsection

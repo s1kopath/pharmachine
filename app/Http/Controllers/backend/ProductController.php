@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
@@ -13,17 +14,20 @@ class ProductController extends Controller
     public function product(){
         $title = 'List of all Products';
         $products = Product::all();
-        return view('backend.modules.product.product', compact('products','title'));
+        $materials=Material::all();
+        return view('backend.modules.product.product', compact('products','title','materials'));
     }
     public function listView(){
         $title = 'List of all Products';
+        $materials=Material::all();
         $products = Product::paginate(5);
-        return view('backend.modules.product.productListView', compact('products','title'));
+        return view('backend.modules.product.productListView', compact('products','title','materials'));
     }
     public function gridView(){
         $title = 'List of all Products';
+        $materials=Material::all();
         $products = Product::all();
-        return view('backend.modules.product.productGridView', compact('products','title'));
+        return view('backend.modules.product.productGridView', compact('products','title','materials'));
     }
 
 
@@ -46,6 +50,7 @@ class ProductController extends Controller
             'name' => $request -> name,
             'product_type' => $request -> product_type,
             'description' => $request -> description,
+            'material_id' => $request -> material_id,
             'image' => $file_name
         ]);
         return redirect() -> back();

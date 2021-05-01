@@ -56,9 +56,20 @@
                         </div>
                         <br>
                         <div class="form-group">
+                            <label>Select Raw Material:</label>
+                            <select class="form-control" name="material_id" id="">
+                                <option value="none">Select</option>
+                                @foreach ($materials as $data)
+                                <option value="{{ $data-> id }}">{{ $data-> name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
                             <label>Enter Description:</label>
                             <input name="description" type="text" class="form-control" id="" placeholder="Description">
                         </div>
+
                         <br>
                         <div class="form-group">
                             <label>Select Image</label>

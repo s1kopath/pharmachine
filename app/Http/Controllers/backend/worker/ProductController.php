@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\worker;
 
 use App\Http\Controllers\Controller;
+use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Http\Request;
 

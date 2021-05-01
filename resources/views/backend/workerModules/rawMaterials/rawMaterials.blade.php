@@ -5,7 +5,7 @@
     <div class="container mt-3 form-control bg-warning rounded">
         <table class="table table-secondary table-bordered">
             <thead>
-                <tr>
+                <tr >
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col" style="width: 20%;">Description</th>
@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 @foreach ($materials as $key=>$data)
-                <tr @if ($data->available_quantity < 10)
+                <tr @if ($data->available_quantity <= 10)
                     class="text-danger"
                 @endif>
 
@@ -35,9 +35,11 @@
                     <td>{{ $data->order_quantity }}</td>
                     <td>{{ $data->order_date }}</td>
                     <td>
-                        <a href=""><span data-feather="mouse-pointer">Order</span></a> ||
-                        <a href=""><span data-feather="eye">View</span></a> ||
-                        <a href=""><span data-feather="trash-2">Delete</span></a>
+                        @if ($data->status == 'Ordered')
+                            <a href="{{ route('materials.receiveOrder', $data->id) }}" class="btn btn-success">Recive Order</a>
+                        @else
+                            <a href="" class="btn btn-secondary">View</a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

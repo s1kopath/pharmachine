@@ -11,7 +11,6 @@
                 <th scope="col" style="width: 30%">Description</th>
                 <th scope="col">Manufacturer</th>
                 <th scope="col">Status</th>
-                <th scope="col">Handle</th>
             </tr>
         </thead>
         <tbody>
@@ -22,11 +21,8 @@
                 <td>{{ $data->description }}</td>
                 <td>{{ $data->manufacturer }}</td>
                 <td>{{ $data->status }}</td>
-                <td>
-                    <a class="btn" href=""><span data-feather="eye">View</span></a>
-                </td>
-                @endforeach
             </tr>
+            @endforeach
 
         </tbody>
     </table>

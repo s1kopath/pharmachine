@@ -14,12 +14,6 @@
                     Production Demand
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="{{ route('demo.dashboard') }}">
-                    <span data-feather="alert-triangle"></span>
-                    DEMO Demand
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link text-white" aria-current="page" href="{{ route('pp.dashboard') }}">
