@@ -1,6 +1,24 @@
 @extends('backend.adminHome')
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="alert alert-info">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
+
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createNewOrder">
         Create New Order
@@ -17,6 +35,7 @@
 
 
 
+
     {{-- Table --}}
     <div class="container mt-3 form-control bg-warning rounded">
         <table class="table table-secondary table-bordered">
@@ -26,8 +45,8 @@
                     <th scope="col">Name</th>
                     <th scope="col" style="width: 20%;">Description</th>
                     <th scope="col">Vendor Name</th>
-                    <th scope="col">Product Per Kg</th>
-                    <th scope="col">Total Qty(Kg)</th>
+                    <th scope="col">Product/Kg Material</th>
+                    <th scope="col">Material Price/Kg</th>
                     <th scope="col">Available Qty(Kg)</th>
                     <th scope="col">Order Status</th>
                     <th scope="col">Ordered Qty(Kg)</th>
@@ -37,27 +56,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($materials as $key=>$data)
-                <tr @if ($data->available_quantity <= 10)
-                    class="text-danger"
-                @endif>
-                    <th scope="row">{{ $key+1 }}</th>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->description }}</td>
-                    <td>{{ $data->materialVendor->name }}</td>
-                    <td>{{ $data->product_per_kg}} Piece</td>
-                    <td>{{ $data->total_quantity }}</td>
-                    <td>{{ $data->available_quantity }}</td>
-                    <td>{{ $data->status }}</td>
-                    <td>{{ $data->order_quantity }}</td>
-                    <td>{{ $data->order_date }}</td>
-                    <td>
-                        <a href="{{ route('raw.updateOrder', $data['id']) }}">
-                            <span data-feather="mouse-pointer">Order</span></a> ||
-                        <a href=""><span data-feather="eye">View</span></a> ||
-                        <a href=""><span data-feather="trash-2">Delete</span></a>
-                    </td>
-                </tr>
+                @foreach ($materials as $key => $data)
+                    <tr @if ($data->available_quantity <= 10) class="text-danger" @endif>
+                        <th scope="row">{{ $key + 1 }}</th>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->description }}</td>
+                        <td>{{ $data->materialVendor->name }}</td>
+                        <td>{{ $data->product_per_kg }} Piece</td>
+                        <td>{{ $data->product_price_per_kg }} Tk</td>
+                        <td>{{ $data->available_quantity }}</td>
+                        <td>{{ $data->status }}</td>
+                        <td>{{ $data->order_quantity }}</td>
+                        <td>{{ $data->order_date }}</td>
+                        <td>
+                            <a href="{{ route('raw.updateOrder', $data['id']) }}">
+                                <span data-feather="mouse-pointer">Order</span></a> ||
+                            <a href=""><span data-feather="eye">View</span></a> ||
+                            <a href=""><span data-feather="trash-2">Delete</span></a>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -75,11 +92,9 @@
                 <form method="post" action="{{ route('raw.createVendor') }}">
                     @csrf
                     <div class="modal-body">
-
                         <div class="form-group">
                             <label>Name:</label>
                             <input type="text" name="name" class="form-control" id="" placeholder="Enter Vendor Name">
-
                         </div>
                         <br>
                         <div class="form-group">
@@ -98,8 +113,6 @@
                             <input type="email" name="email" class="form-control" id="" placeholder="abc@xyz.com">
                         </div>
                         <br>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -185,30 +198,35 @@
                         <br>
                         <div class="form-group">
                             <label for="">Vendor</label>
-                            <select name="vendor_id" id="" class="form-control" >
-                                <option value="null" >Select A Vendor</option>
+                            <select name="vendor_id" id="" class="form-control">
+                                <option value="null">Select A Vendor</option>
                                 @foreach ($vendors as $data)
-                                    <option value="{{ $data->id }}" >{{ $data->name }}</option>
+                                    <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="">Product Per Kg</label>
-                            <select name="product_per_kg" id="" class="form-control" >
-                                <option value="null" >Select amount</option>
-                                    <option value="20" >20 Piece</option>
-                                    <option value="30" >30 Piece</option>
-                                    <option value="40" >40 Piece</option>
-                                    <option value="50" >50 Piece</option>
-                                    <option value="60" >60 Piece</option>
-                                    <option value="70" >70 Piece</option>
-                                    <option value="80" >80 Piece</option>
-                                    <option value="90" >90 Piece</option>
-                                    <option value="100" >100 Piece</option>
-                                    <option value="150" >150 Piece</option>
-                                    <option value="200" >200 Piece</option>
+                            <select name="product_per_kg" id="" class="form-control">
+                                <option value="null">Select amount</option>
+                                <option value="20">20 Piece</option>
+                                <option value="30">30 Piece</option>
+                                <option value="40">40 Piece</option>
+                                <option value="50">50 Piece</option>
+                                <option value="60">60 Piece</option>
+                                <option value="70">70 Piece</option>
+                                <option value="80">80 Piece</option>
+                                <option value="90">90 Piece</option>
+                                <option value="100">100 Piece</option>
+                                <option value="150">150 Piece</option>
+                                <option value="200">200 Piece</option>
                             </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="">Product Price Per Kg</label>
+                            <input type="string" step=0.01 name="product_price_per_kg" class="form-control" id="">
                         </div>
                         <br>
                         <div class="form-group">

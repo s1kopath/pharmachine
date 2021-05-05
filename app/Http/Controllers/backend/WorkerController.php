@@ -20,6 +20,17 @@ class WorkerController extends Controller
 
     public function create(Request $request)
     {
+        $file_name = '';
+        if($request -> hasFile('worker_image')){
+            $file = $request -> file('worker_image');
+            if ($file -> isValid()) {
+                $file_name = date('Ymdhms').'.'.$file -> getClientOriginalExtension();
+                $file-> storeAs('worker',$file_name);
+            }
+        }
+
+
+
         // DB::beginTransaction();
         // try {
             $dateOfBirth = $request->date_of_birth;
@@ -45,9 +56,10 @@ class WorkerController extends Controller
                 'age' => $years,
                 'joining_date' => $request->joining_date,
                 'salary' => $request->salary,
-                'labour_per_hour' => $request->salary / 720
+                'labour_per_hour' => $request->salary / 720,
+                'image' => $file_name
             ]);
-            return redirect()->back();
+            return redirect()->back()->with('success',$request->name.' is hired successfully.');
         //     DB::commit();
         // } catch (\Throwable $exception) {
         //     DB::rollback();
@@ -106,7 +118,7 @@ class WorkerController extends Controller
             'email' => $request->email
         ]);
 
-        return redirect()->route('worker.list');
+        return redirect()->route('worker.list')->with('success','Worker info updated successfully.');
     }
 
     public function delete($id)
@@ -115,7 +127,7 @@ class WorkerController extends Controller
         $user = User::find($workers->user_id);
         $workers->delete();
         $user->delete();
-        return redirect()->back();
+        return redirect()->back()->with('error','Worker successfully fired.');
     }
 
 

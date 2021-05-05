@@ -31,6 +31,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    protected $notNullable = ['name'];
+
 
     /**
      * The attributes that should be cast to native types.
@@ -45,4 +47,5 @@ class User extends Authenticatable
     {
         return $this->hasOne(Worker::class,'user_id','id');
     }
+
 }

@@ -2,11 +2,26 @@
 
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="alert alert-info">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-        Add Worker
+        Hire New Worker
     </button>
 
 
@@ -16,6 +31,7 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Photo</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
@@ -30,9 +46,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($workers as $key=>$data)
+                @foreach ($workers as $key => $data)
                     <tr>
-                        <th scope="row">{{ $key+1 }}</th>
+                        <th scope="row">{{ $key + 1 }}</th>
+                        <td>
+                            <img style="width: 100px;" @if (!$data->image) src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                @else
+                                            src="{{ url('/files/worker/' . $data->image) }}" @endif>
+                        </td>
                         <td>{{ $data->workerUser->name }}</td>
                         <td>{{ $data->workerUser->email }}</td>
                         <td>{{ $data->address }}</td>
@@ -45,8 +66,10 @@
                         <td>{{ $data->labour_per_hour }}Tk</td>
                         <td>
                             <a class="btn" href=""><span data-feather="eye">View</span></a>||
-                            <a class="btn" href="{{ route('worker.update', $data['id']) }}"><span data-feather="edit">Update</span></a>||
-                            <a class="btn" href="{{ route('worker.delete', $data['id']) }}"><span data-feather="trash-2">Delete</span></a>
+                            <a class="btn" href="{{ route('worker.update', $data['id']) }}"><span
+                                    data-feather="edit">Update</span></a>||
+                            <a class="btn" href="{{ route('worker.delete', $data['id']) }}"><span
+                                    data-feather="trash-2">Delete</span></a>
                         </td>
                     </tr>
                 @endforeach
@@ -65,7 +88,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add New Worker</h5>
                 </div>
-                <form method="post" action="{{ route('worker.create') }}">
+                <form method="post" action="{{ route('worker.create') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -104,14 +127,19 @@
                         <br>
                         <div class="form-group">
                             <label>Enter Joining Date:</label>
-                            <input type="date" name="joining_date" class="form-control" placeholder="Joining Date"
-                                id="">
+                            <input type="date" name="joining_date" class="form-control" placeholder="Joining Date" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Enter Salary (Monthly):</label>
                             <input type="string" name="salary" class="form-control" placeholder="Monthly Salary" id="">
                         </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Select Image</label>
+                            <input name="worker_image" type="file" class="form-control" src="" id="">
+                        </div>
+
                         {{-- <br>
                         <div class="form-group">
                             <label>Labour per hour:</label>

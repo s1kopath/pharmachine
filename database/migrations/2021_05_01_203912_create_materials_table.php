@@ -19,7 +19,7 @@ class CreateMaterialsTable extends Migration
             $table->text('description');
             $table->integer('vendor_id');
             $table->integer('product_per_kg');
-            $table->double('total_quantity',10 ,2)->default('0.0');
+            $table->double('product_price_per_kg');
             $table->double('available_quantity',10 ,2)->default('0.0');
             $table->string('status')->default('Available');
             $table->double('order_quantity', 10, 2);

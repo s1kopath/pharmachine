@@ -17,6 +17,7 @@ class CreateManufacturingsTable extends Migration
             $table->id();
             $table->string('manufacturing_number');
             $table->string('warehouse_number');
+            $table->integer('demand_id');
             $table->integer('product_id');
             $table->double('quantity');
             $table->integer('material_id');
@@ -27,7 +28,7 @@ class CreateManufacturingsTable extends Migration
             $table->date('finishing_date');
             $table->date('delivery_date');
             $table->double('total_cost');
-            $table->string('status')->default('Producing');
+            $table->string('status')->default('Waiting for production');
             $table->timestamps();
         });
     }

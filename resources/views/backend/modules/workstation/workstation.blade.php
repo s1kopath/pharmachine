@@ -2,6 +2,23 @@
 
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="alert alert-info">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
+
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#createworkstation">
@@ -98,9 +115,13 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li>
                                         @if ($data->status == 'available')
-                                            <a class="btn" href="{{ route('completedUpdate', ['id' => $data->id, 'status' => 'occupied']) }}">Make Occupied</a>
+                                            <a class="btn"
+                                                href="{{ route('completedUpdate', ['id' => $data->id, 'status' => 'occupied']) }}">Make
+                                                Occupied</a>
                                         @elseif ( $data->status == 'occupied')
-                                            <a class="btn" href="{{ route('completedUpdate', ['id' => $data->id, 'status' => 'available']) }}">Make Available</a>
+                                            <a class="btn"
+                                                href="{{ route('completedUpdate', ['id' => $data->id, 'status' => 'available']) }}">Make
+                                                Available</a>
                                         @else
                                             <a class="btn" href="">None</a>
                                         @endif
@@ -115,7 +136,7 @@
                             </div>
 
                         </td>
-                </tr>
+                    </tr>
                 @endforeach
 
 

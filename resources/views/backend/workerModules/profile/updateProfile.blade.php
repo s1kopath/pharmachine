@@ -5,7 +5,7 @@
         body {
             color: #1a202c;
             text-align: left;
-            background-color: #e2e8f0;
+            background-color: #d1eede;
         }
 
     </style>
@@ -22,10 +22,16 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                <img
+                                    @if (!$workers->image)
+                                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    @else
+                                        src="{{url('/files/worker/'.$workers->image)}}"
+                                    @endif
+                                alt="Admin"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
-                                    <h4>{{ $users->name }}</h4>
+                                    <h4>{{ $profile->name }}</h4>
                                     <p class="text-secondary mb-1">Production Worker</p>
                                     <button class="btn btn-success">{{ $workers->gender }}</button>
                                     <button class="btn btn-outline-success">Age: {{ $workers->age }}</button>
@@ -34,13 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-light mt-3 p-3 d-flex justify-content-center">
 
-                        <a class="btn btn-info m-1" href="#">Update Profile</a>
-
-                        <button class="btn btn-warning m-1" href="{{ route('get.password') }}" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Change Password</button>
-                    </div>
 
                     {{-- visiblity--->> hidden div --}}
 
@@ -106,74 +106,71 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $users->name }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $users->email }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $workers->contact }}
-                                </div>
-                            </div>
+                        <form method="post" action="{{ route('update.profile', $profile['id']) }}">
+                            @csrf
+                            @method('put')
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" name="name" value="{{ $profile->name }}"
+                                            id="">
 
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
+                                    </div>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $workers->address }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Date of birth</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $workers->date_of_birth }}
-                                </div>
-                            </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" name="email" value="{{ $profile->email }}"
+                                            id="">
 
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Joining Date</h6>
+                                    </div>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $workers->joining_date }}
-                                </div>
-                            </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" name="contact"
+                                            value="{{ $workers->contact }}" id="">
 
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Monthly salary</h6>
+                                    </div>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $workers->salary }}
-                                </div>
-                            </div>
 
-                        </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Address</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" name="address" value="{{ $workers->address }}"
+                                            id="">
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Date of birth</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="date" class="form-control" name="date_of_birth"
+                                            value="{{ $workers->date_of_birth }}" id="">
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <a class="btn btn-danger w-25" href="{{ route('display.UserProfile') }}">Cancel</a>
+                                <button class="btn btn-info w-25" type="submit">Update</button>
+                            </div>
+                        </form>
+
                     </div>
 
 
@@ -253,26 +250,7 @@
 
 
 
-    <!-- Change password Modal -->
-    <form method="post" action="{{ route('update.password',$workers['id']) }}">
-        @csrf
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog  bg-danger">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Enter New Password:</label>
-                            <input type="password" required name="password" class="form-control" placeholder="*********" id="">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+
 
 
 @endsection

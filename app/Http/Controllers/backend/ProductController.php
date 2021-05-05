@@ -53,14 +53,14 @@ class ProductController extends Controller
             'material_id' => $request -> material_id,
             'image' => $file_name
         ]);
-        return redirect() -> back();
+        return redirect() -> back()-> with('success','Product added successfully.');
     }
 
 
     public function delete($id){
         $products=Product::find($id);
         $products->delete();
-        return redirect()->back();
+        return redirect()->back()->with('error','Product deleted successfully.');
     }
 
 
@@ -72,13 +72,11 @@ class ProductController extends Controller
 
 
     public function saveUpdate(Request $request){
-        $products = Product::find($request -> id);
-
-        $products -> name = $request->name;
-        $products -> product_type = $request->product_type;
-        $products -> description = $request->description;
-        $products -> product_image = $request->product_image;
-        $products -> save();
-        return redirect()->route('product.list');
+        Product::find($request -> id)->update([
+            'name' => $request->name,
+            'product_type' => $request->product_type,
+            'description'=> $request->description
+        ]);
+        return redirect()->route('product.listView')->with('success','Product updated successfully.');
     }
 }

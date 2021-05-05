@@ -37,6 +37,8 @@ use App\Http\Controllers\backend\WorkstationController;
 // fetch api controller
 Route::get('/get-calculation-quantity/{id}',[ApiController::class,'calculate']);
 Route::get('/get-calculation-total-cost/{id}',[ApiController::class,'calculateCost']);
+Route::get('/get-calculation-time/{id}',[ApiController::class,'calculateTime']);
+Route::get('/get-calculation-overtime/{id}',[ApiController::class,'calculateOvertime']);
 
 
 
@@ -123,8 +125,9 @@ Route::group(['prefix' => 'worker'], function () {
     Route::group(['middleware' => 'worker-auth'], function () {
         //profile
         Route::get('/profile', [WorkerProfileController::class, 'showUserProfile'])-> name('display.UserProfile');
-        // Route::get('/profile/change_password/{id}', [WorkerProfileController::class, 'getPassword'])-> name('get.password');
-        // Route::post('/profile/change_password/{id}', [WorkerProfileController::class, 'updatePassword'])-> name('update.password');
+        Route::post('/profile/change_password/{id}', [WorkerProfileController::class, 'updatePassword'])-> name('update.password');
+        Route::get('/profile/edit-profile/{id}', [WorkerProfileController::class, 'editProfile'])-> name('edit.profile');
+        Route::put('/profile/update-profile/{id}', [WorkerProfileController::class, 'updateProfile'])-> name('update.profile');
 
         //home page
         Route::get('/', [DashboardController::class, 'show'])->name('show.dashboard');
@@ -132,6 +135,8 @@ Route::group(['prefix' => 'worker'], function () {
 
         //production report
         Route::get('/production-reporting', [ReportingController::class, 'showReporting'])->name('show.reporting');
+        Route::get('/production-reporting/{id}/{demand_id}/{status}/{demandStatus}', [ReportingController::class, 'productionUpdate'])->name('productionUpdate');
+
 
 
         //products
@@ -142,6 +147,7 @@ Route::group(['prefix' => 'worker'], function () {
 
         //warehouse stock
         Route::get('/warehouse', [WorkerStockController::class, 'showStock'])->name('show.stock');
+        Route::get('/warehouse/{id}', [WorkerStockController::class, 'deliver'])->name('stock.deliver');
 
         //raw materials
         Route::get('/raw-materials', [WorkerRawMaterialsController::class, 'showMaterials'])->name('show.materials');

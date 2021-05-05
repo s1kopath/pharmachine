@@ -5,64 +5,44 @@
 <div class="container-fluid p-3 bg-primary rounded">
     <table class="table table-striped table-danger rounded">
         <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Number</th>
-            <th scope="col">Product</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Status</th>
-            <th scope="col">Delevery</th>
-            <th scope="col">Handle</th>
-          </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Number</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Delevery Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Delivered By</th>
+                <th scope="col">Delivered On</th>
+                <th scope="col">Handle</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Ws 0010</td>
-            <td>Ashwagandha</td>
-            <td>50 Bottles</td>
-            <td>Ready for shipment</td>
-            <td>02.12.21</td>
-
-            <td>
-                <a class="btn" href=""><span data-feather="truck">Deliver</span></a> ||
-                <a class="btn" href=""><span data-feather="eye">View</span></a> ||
-                <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">1</th>
-            <td>Ws 0013</td>
-            <td>Cumin</td>
-            <td>20 Boxes</td>
-            <td>Ready for shipment</td>
-            <td>06.09.21</td>
-
-            <td>
-                <a class="btn" href=""><span data-feather="truck">Deliver</span></a> ||
-                <a class="btn" href=""><span data-feather="eye">View</span></a> ||
-                <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
-            </td>
-          </tr>
 
 
-          <tr>
-            <th scope="row">1</th>
-            <td>Ws 0016</td>
-            <td>Licorice root</td>
-            <td>50 Boxes</td>
-            <td>Delivered</td>
-            <td>16.02.21</td>
 
-            <td>
-                <a class="btn" href=""><span data-feather="truck">Deliver</span></a> ||
-                <a class="btn" href=""><span data-feather="eye">View</span></a> ||
-                <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
-            </td>
-          </tr>
+
+        @foreach ($stock as $key=> $data)
+            <tr>
+                <th scope="row">{{ $key+1 }}</th>
+                <td>{{ $data->stockManufacturing->warehouse_number }}</td>
+                <td>{{ $data->stockManufacturing->manufacturingProduct->name }}</td>
+                <td>{{ $data->stockManufacturing->quantity }} Piece</td>
+                <td>{{ $data->stockManufacturing->delivery_date }}</td>
+                <td>{{ $data->stockManufacturing->status }}</td>
+                <td>{{ $data->user_name }}</td>
+                <td>{{ $data->delivered_on }}</td>
+                <td>
+                    <a class="btn" href=""><span data-feather="eye">View</span></a> ||
+                    <a class="btn" href=""><span data-feather="trash-2">Delete</span></a>
+                </td>
+
+
+            </tr>
+
+        @endforeach
         </tbody>
-      </table>
+    </table>
 </div>
 
 

@@ -1,6 +1,23 @@
 @extends('backend.adminHome')
 @section('content')
 
+    @if (session()->has('success'))
+        <div class="alert alert-info">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
+
     <!-- Button trigger modal -->
     <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
@@ -13,18 +30,18 @@
     {{-- tabs --}}
 
 
-      <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link  active" href="{{ route('product.listView') }}">List View</a>
+            <a class="nav-link  active" href="{{ route('product.listView') }}">List View</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('product.gridView') }}">Grid View</a>
+            <a class="nav-link" href="{{ route('product.gridView') }}">Grid View</a>
         </li>
-      </ul>
+    </ul>
 
 
 
-      @yield('productView')
+    @yield('productView')
 
 
     <!-- Modal -->
@@ -43,7 +60,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Enter Product Name:</label>
-                            <input type="text"  name="name" class="form-control" id="" placeholder="Name">
+                            <input type="text" name="name" class="form-control" id="" placeholder="Name">
                         </div>
                         <br>
                         <div class="form-group">
@@ -60,7 +77,7 @@
                             <select class="form-control" name="material_id" id="">
                                 <option value="none">Select</option>
                                 @foreach ($materials as $data)
-                                <option value="{{ $data-> id }}">{{ $data-> name }}</option>
+                                    <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
                             </select>
                         </div>

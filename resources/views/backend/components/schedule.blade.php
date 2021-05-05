@@ -57,7 +57,7 @@
                 <div class="card-body">
                     <h5><span data-feather="git-merge"></span>
                         <small>Active Workstations</small> </h5>
-                    <h1>0</h1>
+                    <h1>{{ $countActiveWorkstation }}</h1>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <h5><span data-feather="truck"></span>
                         <small>Product Ready for Shipment</small></h5>
-                    <h1>0 Unit</h1>
+                    <h1>{{ $countReadyShipment }} Unit</h1>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                 <div class="card-body">
                     <h5><span data-feather="users"></span>
                         <small>Number of Active Warkers in production </small> </h5>
-                    <h1>0</h1>
+                    <h1>{{ $countActiveWorker }}</h1>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
                 <div class="card-body">
                     <h5><span data-feather="alert-triangle"></span>
                         <small>Material Shortage</small> </h5>
-                    <h1>0 Units</h1>
+                    <h1>{{ $countMaterial }} Units</h1>
                 </div>
             </div>
         </div>

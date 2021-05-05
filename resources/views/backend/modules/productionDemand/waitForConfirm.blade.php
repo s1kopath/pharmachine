@@ -40,18 +40,27 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <p class=" fs-4 fw-bold">Material Need: {{ $material_need }} Kg {{ $products->productMaterial->name }} </p>
-                <p class=" fs-4">Available Quantity: {{ $products->productMaterial->available_quantity }} Kg {{ $products->productMaterial->name }} </p>
-               @if ($products->productMaterial->available_quantity >= $material_need)
-               <p class=" fs-4">Material Status: Available</p>
-               @else
-               <p class="text-white w-50 p-2 rounded bg-danger fs-4"> Material Status: Short</p>
+                <p class=" fs-4 fw-bold">Material Need: {{ $material_need }} Kg {{ $products->productMaterial->name }}
+                </p>
+                <p class=" fs-4">Available Quantity: {{ $products->productMaterial->available_quantity }} Kg
+                    {{ $products->productMaterial->name }} </p>
 
-               @endif
+                @if ($products->productMaterial->available_quantity >= $material_need)
+                    <p class=" fs-4">Material Status: Available</p>
+
+                @elseif ($products->productMaterial->status == 'Ordered')
+                    <p class="text-white w-50 p-2 rounded bg-warning fs-4"> Material Short: <small>Delivery on the
+                            way</small></p>
+
+                @else
+                    <p class="text-white w-50 p-2 rounded bg-danger fs-4"> Material Short</p>
+                    <a class="btn btn-outline-danger"
+                        href="{{ route('raw.updateOrder', $products->productMaterial->id) }}">
+                        Create Material Order </span></a>
+                @endif
 
 
-                <a class="btn btn-outline-danger" href="{{ route('raw.updateOrder', $products->productMaterial->id) }}">
-                   Create Material Order </span></a>
+
 
             </div>
         </div>
@@ -62,36 +71,55 @@
                     <h2>Availabe Workers</h2>
                     <ol class="list-group list-group-numbered">
 
-                    @foreach ($workers as $data)
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                          <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{ $data->workerUser->name }}</div>
-                            Cras justo odio
-                          </div>
-                          <span class="badge bg-primary rounded-pill">14</span>
-                        </li>
+                        @foreach ($workers as $person)
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{ $person->workerUser->name }}</div>
+                                    Labour per hour: {{ $person->labour_per_hour }} Tk
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{ $person->status }}</span>
+                            </li>
 
-                    @endforeach
-                </ol>
+                        @endforeach
+                    </ol>
 
                 </div>
             </div>
             <div class="col-md-6">
                 <div class=" p-5 bg-light border rounded-3 shadow ">
                     <h2>Available Workstations</h2>
-                    <ul class="list-group  mb-3">
-                        @foreach ($workstations as $key=> $data)
+                    @php
+                        $workstationStatus = 0;
+                    @endphp
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
-                          {{ $key+1 }}. {{ $data->name }}
-                          <span class="badge bg-primary rounded-pill">{{ $data->status }}</span>
-                        </li>
+
+                    <ul class="list-group  mb-3">
+                        @foreach ($workstations as $key => $machine)
+                            @if ($machine->status == 'available')
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
+                                    {{ $key + 1 }}. {{ $machine->name }}
+                                    <span class="badge bg-primary rounded-pill">{{ $machine->status }}</span>
+                                </li>
+                                @php
+                                    $workstationStatus = 1;
+                                @endphp
+                            @endif
 
                         @endforeach
 
                     </ul>
 
-                    <a class="btn btn-outline-dark" href="{{ route('ws.dashboard') }}" >Add Workstation</a>
+                    @if ($workstationStatus == 0)
+                        <p class="text-white w-100 p-2 rounded bg-warning fs-4"> No Available Workstation</small></p>
+                        <a class="btn btn-outline-dark" href="{{ route('ws.dashboard') }}">Add Workstation</a>
+                    @endif
+
+
+
+
+
+
                 </div>
             </div>
         </div>
@@ -100,12 +128,17 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="{{ route('pd.dashboard') }}" class="btn btn-danger w-100 text-center">
-                    Cancel Order </a>
+                    Go Back </a>
             </div>
+            {{-- @dd($machine=,$products->productMaterial->available_quantity >= $material_need); --}}
+            @if ($workstationStatus == 1 && $products->productMaterial->available_quantity >= $material_need)
                 <div class="col-md-6">
-                    <a href="{{ route('changeStatus', ['id' => $demands->id, 'status' => 'confirm']) }}" class="btn w-100 text-center " style="background-color: rgb(6, 13, 53); color: white">
+                    <a href="{{ route('changeStatus', ['id' => $demands->id, 'status' => 'confirm']) }}"
+                        class="btn w-100 text-center " style="background-color: rgb(6, 13, 53); color: white">
                         Confirm Demand Order </a>
                 </div>
+            @endif
+
 
         </div>
 

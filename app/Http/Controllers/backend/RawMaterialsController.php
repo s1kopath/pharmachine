@@ -25,7 +25,7 @@ class RawMaterialsController extends Controller
             'contact' => $request -> contact,
 
         ]);
-        return redirect() -> back();
+        return redirect() -> back()->with('success','Vendor added successfully.');
     }
 
     //create new order
@@ -36,13 +36,13 @@ class RawMaterialsController extends Controller
             'description' => $request -> description,
             'vendor_id' => $request -> vendor_id,
             'product_per_kg' => $request -> product_per_kg,
-            'total_quantity' => $request -> order_quantity,
+            'product_price_per_kg' => $request -> product_price_per_kg,
             'available_quantity' => $request -> order_quantity,
             'order_quantity' => $request -> order_quantity,
             'order_date' => $request -> order_date
 
         ]);
-        return redirect() -> back();
+        return redirect() -> back()->with('success','Material ordered successfully.');
     }
 
     //place order
@@ -78,6 +78,6 @@ class RawMaterialsController extends Controller
 
 
 
-        return redirect()->route('raw.dashboard');
+        return redirect()->route('raw.dashboard')->with('success','Order places successfully.');
     }
 }

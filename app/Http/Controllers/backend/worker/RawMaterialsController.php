@@ -12,10 +12,11 @@ class RawMaterialsController extends Controller
     {
         $title='Material Status';
         $materials=Material::all();
-        return view('backend.workerModules.rawMaterials.rawMaterials', compact('title','materials'));
+        return view('backend.workerModules.rawMaterials.rawMaterials', compact('title', 'materials'));
     }
 
-    public function receiveOrder($id){
+    public function receiveOrder($id)
+    {
         $order = Material::find($id);
 
         $quantity = $order->available_quantity + $order->order_quantity;
@@ -25,6 +26,6 @@ class RawMaterialsController extends Controller
             'order_quantity'=> 0,
             'status' => 'Available'
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success','Material order received successfully.');
     }
 }

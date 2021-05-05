@@ -24,6 +24,8 @@ class CreateWorkersTable extends Migration
             $table->string('joining_date')->nullable();
             $table->double('salary', 10, 2)->default('5000');
             $table->double('labour_per_hour', 10, 2);
+            $table->string('image')->nullable();
+            $table->string('status')->default('Available');
             $table->timestamps();
         });
     }

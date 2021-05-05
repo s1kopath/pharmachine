@@ -5,13 +5,30 @@
         body {
             color: #1a202c;
             text-align: left;
-            background-color: #e2e8f0;
+            background-color: #d1eede;
         }
 
     </style>
 
 
     {{-- @dd($users->userProfile); --}}
+
+    @if (session()->has('success'))
+        <div class="alert alert-info">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
 
     <div class="container">
         <div class="main-body">
@@ -22,7 +39,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                <img
+                                    @if (!$workers->image)
+                                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    @else
+                                        src="{{url('/files/worker/'.$workers->image)}}"
+                                    @endif
+                                alt="Admin"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ $users->name }}</h4>
@@ -36,11 +59,12 @@
 
                     <div class="bg-light mt-3 p-3 d-flex justify-content-center">
 
-                        <a class="btn btn-info m-1" href="#">Update Profile</a>
+                        <a class="btn btn-info m-1" href="{{ route('edit.profile', $users->id) }}">Update Profile</a>
 
                         <button class="btn btn-warning m-1" href="" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Change Password</button>
                     </div>
+
 
                     {{-- visiblity--->> hidden div --}}
 
@@ -254,15 +278,31 @@
 
 
     <!-- Change password Modal -->
-    {{-- <form method="post" action="{{ route('update.password',$workers['id']) }}">
+    <form method="post" action="{{ route('update.password', $workers['id']) }}">
         @csrf
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog  bg-danger">
                 <div class="modal-content">
+
+                    <h2 class="m-3">Change Password</h2>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Enter Current Password:</label>
+                            <input type="password" required name="current_password" class="form-control" placeholder="*********" id="">
+                        </div>
+                    </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Enter New Password:</label>
-                            <input type="password" required name="password" class="form-control" placeholder="*********" id="">
+                            <input type="password" required name="new_password" class="form-control" placeholder="*********"
+                                id="">
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Confirm Password:</label>
+                            <input type="password" required name="confirm_password" class="form-control" placeholder="*********" id="">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -272,7 +312,7 @@
                 </div>
             </div>
         </div>
-    </form> --}}
+    </form>
 
 
 @endsection

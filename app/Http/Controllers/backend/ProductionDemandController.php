@@ -18,7 +18,25 @@ class ProductionDemandController extends Controller
         $title = 'Product Demand';
         $products = Product::all();
         $demands = Demand::all();
-        return view('backend.modules.productionDemand.productionDemand', compact('title', 'products', 'demands'));
+        $received = $demands->where('status','pending')->count();
+        $waitingForConfirm = $demands->where('status','processing')->count();
+        $confirmed = $demands->where('status','confirm')->count();
+        $waitingForProduction = $demands->where('status','producing')->count();
+        $inProduction = $demands->where('status','produced')->count();
+        $readyForShipment = $demands->where('status','deliver')->count();
+        // dd($received);
+
+        return view('backend.modules.productionDemand.productionDemand', compact(
+            'title',
+            'products',
+            'demands',
+            'received',
+            'waitingForConfirm',
+            'confirmed',
+            'waitingForProduction',
+            'inProduction',
+            'readyForShipment'
+        ));
     }
 
     public function createDemand(Request $request)
@@ -37,10 +55,11 @@ class ProductionDemandController extends Controller
         $demands = Demand::find($id);
         $demands->update(['status' => $status]);
 
-        if ($status == 'confirm')
+        if ($status == 'confirm') {
             return redirect('/admin/productionDemand');
-        else
+        } else {
             return redirect()->back();
+        }
     }
 
     public function deleteStatus($id)
@@ -59,14 +78,15 @@ class ProductionDemandController extends Controller
         // for getting the first element in the Product table
         $products = Product::where('id', $demands->product_id)->first();
 
-        $workers = Worker::all();
+        $workers = Worker::where('status','Available')->get();
         $workstations = Workstation::where('status', 'available')->get();
+
 
         $material_need = $demands->product_quantity / $products->productMaterial->product_per_kg;
 
         return view(
             'backend.modules.productionDemand.waitForConfirm',
-            compact('title', 'demands', 'products', 'workers', 'workstations','material_need')
+            compact('title', 'demands', 'products', 'workers', 'workstations', 'material_need')
         );
     }
 }

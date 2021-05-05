@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,7 @@ class UserController extends Controller
                 return redirect()->route('sch.dashboard');
             }
             elseif(auth()->user()->role == 'worker'){
+
                 return redirect()->route('show.home');
             }
         }

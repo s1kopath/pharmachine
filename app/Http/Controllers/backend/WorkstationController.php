@@ -27,7 +27,7 @@ class WorkstationController extends Controller
             'status' => $request->status
 
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success','Workstation added successfully.');
     }
 
 
@@ -36,6 +36,6 @@ class WorkstationController extends Controller
         $workstations= Workstation::find($id);
         $workstations->update(['status'=>$status]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', $workstations->name .' is '. $status.'.');
     }
 }

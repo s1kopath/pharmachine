@@ -3,40 +3,46 @@
 
 
     <div class="container form-control text-light" style="background-image:     url('{{ asset('images/form5.jpg') }}'); background-repeat: no-repeat;
-        background-size: 100% 100%">
+                background-size: 100% 100%">
 
         <form class=" mt-5" method="post" action="{{ route('manufacturingOrder.create') }}">
             @csrf
             {{-- 1st row --}}
+            <input type="hidden" id="deman_id" name="demand_id" value="{{ $demand->id }}">
             <div class="row">
                 {{-- 1st col --}}
                 <div class="col-md-4">
                     <div class="form-group ">
                         <label>Manufacturing Number: </label>
-                        <input type="text" readonly value="MO 00{{ $demand->id }}"  name="manufacturing_number" class="form-control-sm bg-secondary text-light" id=""
-                            placeholder="">
+                        <input type="text" readonly value="MO 00{{ $demand->id }}" name="manufacturing_number"
+                            class="form-control-sm bg-secondary text-light" id="" placeholder="">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>Warehouse Lot Number: </label>
-                    <input type="text" readonly class="form-control-sm bg-secondary text-light" value="WL 01{{ $demand->id }}" name="warehouse_number" placeholder="">
+                        <input type="text" readonly class="form-control-sm bg-secondary text-light"
+                            value="WL 01{{ $demand->id }}" name="warehouse_number" placeholder="">
                     </div>
                 </div>
                 {{-- 2nd col --}}
                 <div class="col-md-4">
                     <div class="form-group ">
                         <label>Product Name: </label>
-                        <select class="form-control-sm bg-secondary text-light" name="product_id" id="" disabled="true">
+                        <input readonly value="{{ $demand->demandProduct->name }}" type="string"
+                            class="form-control-sm bg-secondary text-light" id="">
+                        <input type="hidden" name="product_id" value="{{ $demand->product_id }}">
+                        {{-- <select class="form-control-sm bg-secondary text-light" name="product_id" id="" disabled="true">
                             <option value="none">Seclect Product</option>
                             @foreach ($products as $data)
-                                <option @if($demand->product_id==$data->id) selected @endif value="{{ $data->id }}">{{ $data->name }}</option>
+                                <option @if ($demand->product_id == $data->id) selected @endif value="{{ $data->id }}">{{ $data->name }}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
                     </div>
                     <br>
                     <div class="form-group">
                         <label>Quantity: </label>
-                        <input name="quantity" readonly value="{{ $demand->product_quantity }}" type="string" class="form-control-sm bg-secondary text-light" id="" ><span>
+                        <input name="quantity" readonly value="{{ $demand->product_quantity }}" type="string"
+                            class="form-control-sm bg-secondary text-light" id=""><span>
                             Bottles/Pieces</span>
                     </div>
                 </div>
@@ -53,23 +59,11 @@
                             @endforeach
                         </select>
 
-
-                        {{-- @foreach ($materials as $data)
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                    value="{{ $data -> id }}">
-                                <label class="form-check-label" for="exampleRadios1">
-                                    {{ $data -> name }}
-                                </label>
-
-                            </div>
-                            <small class="text-end">{{ $data -> status }}</small>
-                        @endforeach --}}
                     </div>
                     <br>
                     <div class="form-group">
                         <label>Material Quantity: </label>
-                        <input name="material_quantity" type="string" class="form-control-sm" id="material_quantity" ><span>
+                        <input name="material_quantity" type="string" class="form-control-sm" id="material_quantity"><span>
                             Kg</span>
                     </div>
                 </div>
@@ -92,31 +86,40 @@
                     <br>
                     <div class="form-group">
                         <label>Select Workstation: </label>
-                        <select class="form-control-sm" name="workstation_id" id="">
+                        <select class="form-control-sm" name="workstation_id" id="workstation_id">
                             <option value="none">Select Workstation</option>
                             @foreach ($workstations as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-check" style="padding-left: 43%">
+                        <input class="form-check-input" type="checkbox" value="2" id="overtime">
+                        <label class="form-check-label" for="overtime">
+                            Work Overtime
+                        </label>
+                    </div>
+
                 </div>
                 {{-- 2nd col --}}
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Start Date: </label>
-                        <input type="date" class="form-control-sm" name="start_date" placeholder="">
+                        <input type="date" id="start_date" class="form-control-sm" name="start_date" placeholder="">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>Finishing Date: </label>
-                        <input type="date" class="form-control-sm" name="finishing_date" placeholder="">
+                        <input type="date" id="finishing_date" class="form-control-sm" name="finishing_date" placeholder="">
                     </div>
                 </div>
                 {{-- 3rd col --}}
                 <div class="col-4">
                     <div class="form-group">
                         <label>Estimated Delivery Date: </label>
-                        <input type="date" readonly value="{{ $demand->delivery_date }}" class="form-control-sm bg-secondary text-light" name="delivery_date" placeholder="">
+                        <input type="date" readonly value="{{ $demand->delivery_date }}"
+                            class="form-control-sm bg-secondary text-light" name="delivery_date" placeholder="">
                     </div>
                 </div>
             </div>
@@ -128,8 +131,9 @@
 
             <div class="form-group">
                 <label>Total Production Cost: </label>
-                <input type="string" class="form-control-lg" id="total_cost" name="total_cost" placeholder="00.00"><span> Tk</span>
-                {{-- @dd($data); --}}
+                <input type="string" class="form-control-lg" id="total_cost" name="total_cost" placeholder="00.00"><span>
+                    Tk</span>
+
                 {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'producing']) }}"
                     class="btn btn-sm btn-info" style="background-color: honeydew;">
                     Proceed to production ></a> --}}
@@ -154,50 +158,163 @@
 
 @push('custom_js')
 
-<script>
-    let material_id =document.querySelector('#material_id');
-    let worker_id = document.querySelector('#worker_id');
-    // let material_quantity = document.querySelector("#material_quantity");
-    // let total_cost = document.querySelector("#total_cost");
+    <script>
+        //marterial cost calculation
 
-    material_id.addEventListener('change',function(e){
+        let material_id = document.querySelector('#material_id');
 
-        var id = e.target.value;
+        material_id.addEventListener('change', function(e) {
 
-        var url = "{{ url("get-calculation-quantity") }}/"+id
+            var id = e.target.value;
 
-        fetch(url).then(res=>res.json())
-        .then(res=>{
+            var url = "{{ url('get-calculation-quantity') }}/" + id
 
-            material_quantity.value = res.data;
-            // total_cost.value =res.name;
-            // console.log(res);
+            fetch(url).then(res => res.json())
+                .then(res => {
+
+                    material_quantity.value = res.data;
+                    total_cost.value = res.cost;
+                    // m_cost =res.cost;
+                    // console.log(res);
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        });
+
+        //worker cost calculation
+
+        let worker_id = document.querySelector('#worker_id');
+        worker_id.addEventListener('change', function(e) {
+
+
+            var w_cost = total_cost.value;
+
+            var id = e.target.value;
+            // console.log(w_cost);
+
+
+            var url = "{{ url('get-calculation-total-cost') }}/" + id
+
+            fetch(url).then(res => res.json())
+                .then(res => {
+                    // console.log(res.id);
+                    employee_cost = res.id;
+                    total_cost.value = w_cost * employee_cost;
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+
+
+        });
+
+
+
+
+
+
+
+
+        //workstation run time calculation
+        const deman_id = document.querySelector("#deman_id")
+
+
+        let workstation_id = document.querySelector('#workstation_id');
+
+        function getDays() {
+
+
+            workstation_id.addEventListener('change', function(e) {
+                var id = e.target.value;
+                var _deman_id = deman_id.value;
+
+                var url = "{{ url('get-calculation-time') }}/" + id + "?demand_id=" + _deman_id;
+                fetch(url).then(res => res.json())
+                    .then(res => {
+                        days = res.id;
+                        daysDiff = days;
+
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
+            });
+        }
+        getDays();
+
+        var startDate = document.querySelector("#start_date");
+        var endDate = document.querySelector("#finishing_date");
+
+        startDate.addEventListener('change', function(e) {
+
+            var id = workstation_id.value;
+
+            var _deman_id = deman_id.value;
+
+
+            var _current_date = e.target.value;
+
+            var url = "{{ url('get-calculation-time') }}/" + id + "?demand_id=" + _deman_id;
+
+            fetch(url).then(res => res.json())
+                .then(res => {
+                    days = res.id;
+                    endDate.value = formatDate(addDays(_current_date, days));
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
 
         })
-        .catch(err => {
-            console.log(err);
-        })
 
-    });
-
-    worker_id.addEventListener('change', function(e){
-        var id = e.target.value;
-        var url = "{{ url("get-calculation-total-cost") }}/"+id
-
-        fetch(url).then(res=>res.json())
-        .then(res=>{
-            // console.log(res);
-            total_cost.value = res.data;
-
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
 
 
-    });
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
 
 
-</script>
+        //workstation overtime calculation
+
+        let overtime = document.querySelector('#overtime');
+        overtime.addEventListener('change', function(e) {
+
+            var _start_date = startDate.value;
+
+            var id = e.target.value;
+            var url = "{{ url('get-calculation-overtime') }}/" + id
+
+            fetch(url).then(res => res.json())
+                .then(res => {
+                    days = daysDiff / res;
+                    // console.log(res);
+                    endDate.value = formatDate(addDays(_start_date, days));
+                })
+        });
+
+
+
+    </script>
 
 @endpush
