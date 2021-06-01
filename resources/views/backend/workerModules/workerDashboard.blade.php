@@ -27,6 +27,7 @@
     <meta name="theme-color" content="#7952b3">
     <!-- style -->
     <link href="/css/sidebar.css" rel="stylesheet">
+    <link href="/css/worker-main.css" rel="stylesheet">
 
 
     <style>
@@ -97,7 +98,24 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js">
     </script>
-    <script src="https://getbootstrap.com/docs/5.0/examples/dashboard/dashboard.js"></script>>
+    <script src="https://getbootstrap.com/docs/5.0/examples/dashboard/dashboard.js"></script>
+
+
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+
+    </script>
+
+
 </body>
 
 </html>

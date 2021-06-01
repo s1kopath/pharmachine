@@ -13,13 +13,14 @@ use SebastianBergmann\Environment\Console;
 class ApiController extends Controller
 {
 
-    public function calculate($id){
+    public function calculate(Request $request, $id){
 
+        $demand_id = $request->query('demand_id');
 
-        $products = Product::where('material_id', $id)->first();
-        $demands = Demand::where('product_id',$products->id)->first();
+        $demands = Demand::find($demand_id);
+        $products = Product::find($demands->product_id);
 
-
+        $material = Material::find($id);
 
         $material_need = $demands->product_quantity / $products->productMaterial->product_per_kg;
         $material_cost = $products->productMaterial->product_price_per_kg * $material_need;
@@ -55,7 +56,7 @@ class ApiController extends Controller
         $demandQuantity = $demand -> product_quantity;
 
         $workstation = Workstation::find($id)->output;
-        $time = ceil(((1 / $workstation) * $demandQuantity) / 420) ;
+        $time = ceil(((1 / $workstation) * $demandQuantity) / 24) ;
 
 
         // return $id;

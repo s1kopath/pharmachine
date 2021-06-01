@@ -2,7 +2,6 @@
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 bg-light rounded" href="#"><img
             style="width: 60%; margin-left: 2em;" src="{{ url('images/logo2.png') }}" alt=""></a>
 
-        <button class="btn text-light" onclick="window.print()"><span data-feather="printer"></span></button>
     <ul class="navbar-nav px-3 ">
         <li class="nav-item ">
             @auth()
@@ -21,3 +20,4 @@
         </li>
     </ul>
 </header>
+

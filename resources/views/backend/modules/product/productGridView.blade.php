@@ -17,8 +17,8 @@
                             <p>{{ $data->description }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <a href="{{ route('product.update', $data['id']) }}" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                    <a type="button" href="{{ route('product.delete', $data['id']) }}" class="btn btn-sm btn-outline-secondary">Delete</a>
                                 </div>
                                 <small class="text-muted">{{ $data->product_type }}</small>
                             </div>

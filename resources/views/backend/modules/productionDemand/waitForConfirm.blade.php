@@ -2,35 +2,7 @@
 @section('content')
 
 
-    {{-- @dd($demands); --}}
-    {{-- <div class="container">
-
-        <div class="row">
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <h5>Product Name: {{ $demands->demandProduct->name }}</h5>
-                 <h6>Quantity: {{ $demands->product_quantity }}</h6>
-                <p>Delivery date: {{ $demands->delivery_date }}</p>
-            </div>
-            <div class="col-md-4">
-
-            </div>
-        </div>
-
-
-
-    </div> --}}
-
-
-
-
     <div class="container py-4">
-
-
-
-
         <div class="row p-2 mb-4 bg-light rounded-3 shadow-lg">
             <div class="col-md-6">
                 <div class="container-fluid ">
@@ -58,10 +30,6 @@
                         href="{{ route('raw.updateOrder', $products->productMaterial->id) }}">
                         Create Material Order </span></a>
                 @endif
-
-
-
-
             </div>
         </div>
 
@@ -74,10 +42,22 @@
                         @foreach ($workers as $person)
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold">{{ $person->workerUser->name }}</div>
+                                    <div class="fw-bold">{{ $person->workerUser->name }} </div>
+                                    @if ($person->status == 'Unavailable')
+                                        <div class="text-danger">
+                                            Available after: {{ $person->workerManufacturing->finishing_date }}
+                                        </div>
+                                    @endif
                                     Labour per hour: {{ $person->labour_per_hour }} Tk
                                 </div>
-                                <span class="badge bg-primary rounded-pill">{{ $person->status }}</span>
+
+                                <span class="badge
+                                @if ($person->status == 'Unavailable')
+                                    bg-danger
+                                @else
+                                    bg-primary
+                                @endif
+                                rounded-pill">{{ $person->status }}</span>
                             </li>
 
                         @endforeach
@@ -95,11 +75,24 @@
 
                     <ul class="list-group  mb-3">
                         @foreach ($workstations as $key => $machine)
-                            @if ($machine->status == 'available')
+                            @if ($machine)
                                 <li
                                     class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light">
                                     {{ $key + 1 }}. {{ $machine->name }}
-                                    <span class="badge bg-primary rounded-pill">{{ $machine->status }}</span>
+
+                                    @if ($machine->status == 'occupied' && $machine->workstationManufacturing)
+                                        <div class="text-danger">
+                                            Available after: {{ $machine->workstationManufacturing->finishing_date }}
+                                        </div>
+                                    @endif
+
+                                    <span class="badge
+                                    @if ($machine->status == 'occupied')
+                                        bg-danger
+                                    @else
+                                        bg-primary
+                                    @endif
+                                    rounded-pill">{{ $machine->status }}</span>
                                 </li>
                                 @php
                                     $workstationStatus = 1;
@@ -133,7 +126,7 @@
             {{-- @dd($machine=,$products->productMaterial->available_quantity >= $material_need); --}}
             @if ($workstationStatus == 1 && $products->productMaterial->available_quantity >= $material_need)
                 <div class="col-md-6">
-                    <a href="{{ route('changeStatus', ['id' => $demands->id, 'status' => 'confirm']) }}"
+                    <a onclick="return confirm('Are you sure, you want to confirm and proceed ????')" href="{{ route('changeStatus', ['id' => $demands->id, 'status' => 'confirm']) }}"
                         class="btn w-100 text-center " style="background-color: rgb(6, 13, 53); color: white">
                         Confirm Demand Order </a>
                 </div>

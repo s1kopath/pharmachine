@@ -14,4 +14,8 @@ class Demand extends Model
     {
         return $this->belongsTo(Product::class,'product_id','id');
     }
+    public function demandManufacturing()
+    {
+        return $this->hasOne(Manufacturing::class,'demand_id','id');
+    }
 }

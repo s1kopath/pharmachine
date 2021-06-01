@@ -11,7 +11,7 @@
 
     </style>
     <!-- Form -->
-    <form method="post" action="{{ route('worker.saveUpdate', $workers['id']) }}"
+    <form method="post" action="{{ route('worker.saveUpdate', $workers['id']) }}" enctype="multipart/form-data"
         class="container form-control text-light p-3 form-bg">
         @csrf
         @method('put')
@@ -63,12 +63,12 @@
             <input type="number" name="salary" class="form-control" value="{{ $workers['salary'] }}" id="">
         </div>
         <br>
-        {{-- <div class="form-group">
-            <label>Labour per hour:</label>
-            <input type="number" name="labour_per_hour" class="form-control" value="{{ $workers['labour_per_hour'] }}"
-                id="">
+        <div class="form-group">
+            <img style="width: 150px;" src="{{url('/files/worker/'.$workers->image)}}" alt=""><br>
+            <label>Image</label>
+            <input type="file" name="image" class="form-control">
         </div>
-        <br> --}}
+        <br>
 
         <div class="text-end">
             <a href="{{ route('worker.list') }}" class="btn btn-warning">Cancel</a>

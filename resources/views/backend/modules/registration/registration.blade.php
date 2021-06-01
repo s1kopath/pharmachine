@@ -31,14 +31,17 @@
             <h3>Register a New User</h3>
 
             @if (session()->has('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success d-flex justify-content-between">
                     {{ session()->get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
 
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">{{ $error }}</div>
+                    <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 @endforeach
             @endif
 

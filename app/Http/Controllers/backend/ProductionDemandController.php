@@ -76,10 +76,10 @@ class ProductionDemandController extends Controller
         $title = 'Wait for Confirmation';
         $demands = Demand::find($id);
         // for getting the first element in the Product table
-        $products = Product::where('id', $demands->product_id)->first();
+        $products = Product::find($demands->product_id);
 
-        $workers = Worker::where('status','Available')->get();
-        $workstations = Workstation::where('status', 'available')->get();
+        $workers = Worker::all();
+        $workstations = Workstation::all();
 
 
         $material_need = $demands->product_quantity / $products->productMaterial->product_per_kg;

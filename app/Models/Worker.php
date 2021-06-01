@@ -13,4 +13,9 @@ class Worker extends Model
     public function workerUser(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    //for getting the available date of worker
+    public function workerManufacturing(){
+        return $this->hasOne(Manufacturing::class, 'worker_id', 'id')->latest();
+    }
 }

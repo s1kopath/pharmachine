@@ -11,21 +11,25 @@
             <li class="nav-item">
                 <a class="nav-link text-white" aria-current="page" href="{{ route('pd.dashboard') }}">
                     <span data-feather="alert-triangle"></span>
-                    Production Demand
+                    Production Demand @if ($demand_count)
+                        <span class="badge bg-danger rounded-pill">{{ $demand_count }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link text-white" aria-current="page" href="{{ route('pp.dashboard') }}">
                     <span data-feather="edit"></span>
-                    Production Planning
+                    Production Planning @if ($count_order)
+                        <span class="badge bg-danger rounded-pill">{{ $count_order }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link  text-white" href="{{ route('rep.dashboard') }}">
                     <span data-feather="bar-chart-2"></span>
-                   Production Reports
+                    Production Reports
                 </a>
             </li>
 
@@ -43,24 +47,30 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link text-white" href="{{ route('ws.dashboard') }}">
                     <span data-feather="tool"></span>
-                    Workstation
+                    Workstation @if ($workstation)
+                        <span class="badge bg-danger rounded-pill">{{ $workstation }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('raw.dashboard') }}">
                     <span data-feather="truck"></span>
-                    Raw Materials
+                    Raw Herbs @if ($count_material)
+                        <span class="badge bg-danger rounded-pill">{{ $count_material }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link  text-white" aria-current="page" href="{{ route('sto.dashboard') }}">
                     <span data-feather="database"></span>
-                    Warehouse Stock
+                    Warehouse Stock @if ($count_shipment)
+                        <span class="badge bg-danger rounded-pill">{{ $count_shipment }}</span>
+                    @endif
                 </a>
             </li>
         </ul>

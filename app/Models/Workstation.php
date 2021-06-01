@@ -10,4 +10,12 @@ class Workstation extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function damageReport()
+    {
+        return $this->hasOne(WorkstationRepair::class,'workstation_id','id');
+    }
+    public function workstationManufacturing()
+    {
+        return $this->hasOne(Manufacturing::class,'workstation_id','id')->latest();
+    }
 }

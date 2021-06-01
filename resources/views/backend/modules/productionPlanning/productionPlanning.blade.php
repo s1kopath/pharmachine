@@ -2,26 +2,31 @@
 @section('content')
 
     @if (session()->has('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success d-flex justify-content-between">
             {{ session()->get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     @if (session()->has('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger d-flex justify-content-between">
             {{ session()->get('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">{{ $error }}</div>
+            <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endforeach
     @endif
 
 
 
-    <div class="container-fluid p-3">
-        <table class="table table-striped table-info">
+
+    <div class="container-fluid p-3 ">
+        <table class="table table-hover table-responsive shadow-lg">
             <thead class="text-center">
                 <tr>
                     <th scope="col">Sl</th>
@@ -57,14 +62,23 @@
                         <td>{{ $data->delivery_date }}</td>
                         <td>{{ $data->total_cost }} Tk</td>
                         <td>
-                            <a class="btn btn-success" href="">View</a> ||
-                            <a class="btn btn-warning" href="">Update</a> ||
-                            <a class="btn btn-danger" href="">Delete Record</a>
+                            @if ($data->status == 'Delivered')
+                                <a class="btn btn-info"
+                                    href="{{ route('checkProductionStatus.order', $data->id) }}">Check Record</a>
+                                <hr>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')" href="{{ route('productionStatus.delete', $data->id) }}">Delete Record</a>
+                            @else
+                                <a class="btn btn-sm btn-success"
+                                    href="{{ route('checkProductionStatus.order', $data->id) }}">Check Production
+                                    Update</a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+
+
 
 @endsection

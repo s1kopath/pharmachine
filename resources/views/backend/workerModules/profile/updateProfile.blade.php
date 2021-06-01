@@ -11,6 +11,13 @@
     </style>
 
 
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
+    @endif
     {{-- @dd($users->userProfile); --}}
 
     <div class="container">
@@ -22,14 +29,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img
-                                    @if (!$workers->image)
-                                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                <img @if (!$workers->image) src="https://bootdey.com/img/Content/avatar/avatar7.png"
                                     @else
-                                        src="{{url('/files/worker/'.$workers->image)}}"
-                                    @endif
-                                alt="Admin"
-                                    class="rounded-circle" width="150">
+                                            src="{{ url('/files/worker/' . $workers->image) }}" @endif alt="Admin" class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ $profile->name }}</h4>
                                     <p class="text-secondary mb-1">Production Worker</p>
@@ -149,8 +151,8 @@
                                         <h6 class="mb-0">Address</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" name="address" value="{{ $workers->address }}"
-                                            id="">
+                                        <input type="text" class="form-control" name="address"
+                                            value="{{ $workers->address }}" id="">
 
                                     </div>
                                 </div>

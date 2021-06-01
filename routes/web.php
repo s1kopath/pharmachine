@@ -60,9 +60,10 @@ Route::group(['prefix' => 'admin'], function () {
         //home page
         Route::get('/dashboard', [ScheduleController::class, 'sch'])->name('sch.dashboard');
 
+        //report
         Route::get('/reports', [ReportsController::class, 'rep'])->name('rep.dashboard');
+        Route::post('/reports', [ReportsController::class, 'generate'])->name('report.generate');
 
-        Route::get('/stock', [StockController::class, 'sto'])->name('sto.dashboard');
 
         //profile
         Route::get('/profile', [ProfileController::class, 'showAdminProfile'])-> name('display.adminProfile');
@@ -84,12 +85,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/productPlanning', [ProductionPlanningController::class, 'pp'])->name('pp.dashboard');
         Route::post('/manufacturingOrder/create', [ProductionPlanningController::class, 'createManufacturingOrder'])->name('manufacturingOrder.create');
         Route::get('/manufacturingOrder/{id}', [ProductionPlanningController::class, 'createForm'])->name('manufacturing.order');
+        Route::get('/productionPlanning/check/{id}', [ProductionPlanningController::class, 'checkProductionStatus'])->name('checkProductionStatus.order');
+        Route::get('/productionPlanning/delete/{id}', [ProductionPlanningController::class, 'deleteProductionStatus'])->name('productionStatus.delete');
 
 
 
         //workstation
         Route::get('/workstation', [WorkstationController::class, 'ws'])->name('ws.dashboard');
         Route::post('/workstation/create', [WorkstationController::class, 'createWorkstation'])->name('ws.createWorkstation');
+        Route::get('/workstation/check/{id}', [WorkstationController::class, 'requestRepair'])->name('ws.requestRepair');
+        Route::get('/workstation/delete/{id}', [WorkstationController::class, 'deleteWorkstation'])->name('delete.workstation');
 
         Route::get('/workstation/{id}/{status}', [WorkstationController::class, 'completedUpdate'])->name('completedUpdate');
 
@@ -105,16 +110,26 @@ Route::group(['prefix' => 'admin'], function () {
         //worker
         Route::get('/worker', [WorkerController::class, 'list'])->name('worker.list');
         Route::post('/worker', [WorkerController::class, 'create'])->name('worker.create');
+        Route::get('/worker/{id}', [WorkerController::class, 'workerProfile'])->name('worker.profile');
         Route::get('/worker/update/{id}', [WorkerController::class, 'update'])->name('worker.update');
         Route::put('/worker/saveUpdate/{id}', [WorkerController::class, 'saveUpdate'])->name('worker.saveUpdate');
         Route::get('/worker/delete/{id}', [WorkerController::class, 'delete'])->name('worker.delete');
+        Route::get('/worker/search/get', [WorkerController::class, 'searchWorker'])->name('worker.search');
 
         //raw materials
         Route::get('/raw-materials', [RawMaterialsController::class, 'raw'])->name('raw.dashboard');
         Route::post('/raw-materials/vendor', [RawMaterialsController::class, 'createVendor'])->name('raw.createVendor');
+        Route::get('/raw-materials/vendor/{id}', [RawMaterialsController::class, 'deleteVendor'])->name('vendor.delete');
         Route::post('/raw-materials', [RawMaterialsController::class, 'createOrder'])->name('raw.createOrder');
         Route::get('/raw-materials/update/{id}', [RawMaterialsController::class, 'updateOrder'])->name('raw.updateOrder');
         Route::put('/raw-materials/sendOrder/{id}', [RawMaterialsController::class, 'sendOrder'])->name('raw.sendOrder');
+        Route::get('/raw-materials/delete/{id}', [RawMaterialsController::class, 'materialDelete'])->name('material.delete');
+
+        //warehouse stock
+        Route::get('/stock', [StockController::class, 'sto'])->name('sto.dashboard');
+        Route::get('/stock/{id}', [StockController::class, 'checkStockRecord'])->name('check.stockRecord');
+        Route::get('/stock/delete/{id}', [StockController::class, 'deleteStock'])->name('stock.delete');
+
     });
 });
 
@@ -136,6 +151,8 @@ Route::group(['prefix' => 'worker'], function () {
         //production report
         Route::get('/production-reporting', [ReportingController::class, 'showReporting'])->name('show.reporting');
         Route::get('/production-reporting/{id}/{demand_id}/{status}/{demandStatus}', [ReportingController::class, 'productionUpdate'])->name('productionUpdate');
+        Route::post('/production-reporting/{id}', [ReportingController::class, 'damageReport'])->name('damageReport');
+
 
 
 
@@ -144,6 +161,7 @@ Route::group(['prefix' => 'worker'], function () {
 
         //workstation
         Route::get('/workstation', [WorkerWorkstationController::class, 'showWorkstation'])->name('show.workstation');
+        Route::get('/workstation/repair/{id}', [WorkerWorkstationController::class, 'repairWorkstation'])->name('repair.workstation');
 
         //warehouse stock
         Route::get('/warehouse', [WorkerStockController::class, 'showStock'])->name('show.stock');

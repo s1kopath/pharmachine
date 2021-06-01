@@ -1,0 +1,13 @@
+table {
+    border-radius: 3px;
+}
+
+thead {
+    background: #66d192;
+    text-align: center;
+    color: white;
+}
+
+.dash {
+    background: #66d192;
+}

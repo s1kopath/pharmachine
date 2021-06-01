@@ -16,18 +16,17 @@ class ProfileController extends Controller
         $title = 'User Profile';
         $users = auth()->user();
         $workers = $users->userProfile;
-        return view('backend.workerModules.profile.profile', compact('title','users','workers'));
+        return view('backend.workerModules.profile.profile', compact('title', 'users', 'workers'));
     }
 
 
 
 
-    public  function updatePassword(Request $request){
-
-
-    if(!Hash::check($request->input('current_password'), auth()->user()->password)){
-        return redirect()->back()->with('error', 'Current Password does not match.');
-    }
+    public function updatePassword(Request $request)
+    {
+        if (!Hash::check($request->input('current_password'), auth()->user()->password)) {
+            return redirect()->back()->with('error', 'Current Password does not match.');
+        }
 
 
         $request->validate([
@@ -38,8 +37,8 @@ class ProfileController extends Controller
         ]);
 
 
-        if(Hash::check($request->input('new_password'), auth()->user()->password)){
-            return redirect()->back()->with('error','New password should not match the old one.');
+        if (Hash::check($request->input('new_password'), auth()->user()->password)) {
+            return redirect()->back()->with('error', 'New password should not match the old one.');
         }
 
 
@@ -54,8 +53,7 @@ class ProfileController extends Controller
 
         // $users->password = $request->bcrypt($request->password);
         // $users->save();
-        return redirect()->back()->with('success','Password updated successfully.');
-
+        return redirect()->back()->with('success', 'Password updated successfully.');
     }
 
     public function editProfile($id)
@@ -65,12 +63,18 @@ class ProfileController extends Controller
         $workers = Worker::find($profile->userProfile->id);
         // dd($workers);
 
-        return view('backend.workerModules.profile.updateProfile',compact('title','profile','workers'));
+        return view('backend.workerModules.profile.updateProfile', compact('title', 'profile', 'workers'));
     }
     public function updateProfile(Request $request, $id)
     {
+        $request->validate([
+            'email'=>'email|unique:users',
+        ]);
+
         $profile = User::find($id);
         $workers = Worker::find($profile->userProfile->id);
+
+
 
         $profile -> update([
             'name' => $request->name,
@@ -87,6 +91,6 @@ class ProfileController extends Controller
             'age' => $years,
         ]);
 
-        return redirect()->route('display.UserProfile')->with('success','Profile updated successfully.');
+        return redirect()->route('display.UserProfile')->with('success', 'Profile updated successfully.');
     }
 }

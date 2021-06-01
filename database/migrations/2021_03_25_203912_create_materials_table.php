@@ -17,7 +17,7 @@ class CreateMaterialsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->integer('vendor_id');
+            $table->foreignId('vendor_id')->constrained()->restrictOnDelete();
             $table->integer('product_per_kg');
             $table->double('product_price_per_kg');
             $table->double('available_quantity',10 ,2)->default('0.0');

@@ -13,7 +13,7 @@ class StockController extends Controller
     public function showStock()
     {
         $title='Warehouse Stock Status';
-        $stock = Warehouse::all();
+        $stock = Warehouse::orderBy('status','desc')->get();
         return view('backend.workerModules.stock.stock', compact('title', 'stock'));
     }
     public function deliver($id)

@@ -11,7 +11,9 @@
             <li class="nav-item">
                 <a class="nav-link  text-dark worker-link" href="{{ route('show.reporting') }}">
                     <span class="text-dark" data-feather="alert-triangle"></span>
-                    Production Reporting
+                    Production Reporting @if ($countRequest)
+                        <span class="badge bg-danger rounded-pill">{{ $countRequest }}</span>
+                    @endif
                 </a>
             </li>
 
@@ -26,21 +28,27 @@
             <li class="nav-item">
                 <a class="nav-link  text-dark worker-link" href="{{ route('show.workstation') }}">
                     <span class="text-dark" data-feather="tool"></span>
-                    Workstation
+                    Workstation @if ($countMachineRepair)
+                        <span class="badge bg-danger rounded-pill">{{ $countMachineRepair }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link  text-dark worker-link" href="{{ route('show.materials') }}">
                     <span class="text-dark" data-feather="database"></span>
-                    Raw Materials
+                    Raw Herbs @if ($countMaterialOrder)
+                        <span class="badge bg-danger rounded-pill">{{ $countMaterialOrder }}</span>
+                    @endif
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link  text-dark worker-link" aria-current="page" href="{{ route('show.stock') }}">
                     <span class="text-dark" data-feather="truck"></span>
-                    Warehouse Stock
+                    Warehouse Stock @if ($countDelivery)
+                        <span class="badge bg-danger rounded-pill">{{ $countDelivery }}</span>
+                    @endif
                 </a>
             </li>
 
@@ -52,6 +60,3 @@
 
     </div>
 </nav>
-
-
-

@@ -2,19 +2,23 @@
 @section('content')
 
     @if (session()->has('success'))
-        <div class="alert alert-info">
+        <div class="alert alert-info d-flex justify-content-between">
             {{ session()->get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     @if (session()->has('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger d-flex justify-content-between">
             {{ session()->get('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">{{ $error }}</div>
+            <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
         @endforeach
     @endif
 
@@ -60,22 +64,22 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Enter Product Name:</label>
-                            <input type="text" name="name" class="form-control" id="" placeholder="Name">
+                            <input required type="text" name="name" class="form-control" id="" placeholder="Name">
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Select Product Type:</label>
                             <select class="form-control" name="product_type" id="">
-                                <option value="none">(none)</option>
+                                <option value="">Select Type</option>
                                 <option value="Tablet">Tablet</option>
                                 <option value="Syrup">Syrup</option>
                             </select>
                         </div>
                         <br>
                         <div class="form-group">
-                            <label>Select Raw Material:</label>
+                            <label>Select Raw Herbs:</label>
                             <select class="form-control" name="material_id" id="">
-                                <option value="none">Select</option>
+                                <option value="">Select Herb</option>
                                 @foreach ($materials as $data)
                                     <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach

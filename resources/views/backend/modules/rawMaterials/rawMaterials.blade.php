@@ -2,43 +2,53 @@
 @section('content')
 
     @if (session()->has('success'))
-        <div class="alert alert-info">
+        <div class="alert alert-info d-flex justify-content-between">
             {{ session()->get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     @if (session()->has('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger d-flex justify-content-between">
             {{ session()->get('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">{{ $error }}</div>
+            <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endforeach
     @endif
 
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createNewOrder">
-        Create New Order
-    </button>
-    <span style="color: white;">
-        ----------------------------------------------------------------------------------------------------------------------------------------------
-    </span>
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#vendorList">
-        Show Vendor List
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vendor">
-        Add Vendor
-    </button>
+
+    <div class="d-flex justify-content-between mt-2 container">
+        <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createNewOrder">
+                Create New Order
+            </button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#vendorList">
+                Show Vendor List
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#vendor">
+                Add Vendor
+            </button>
+        </div>
+    </div>
+
 
 
 
 
     {{-- Table --}}
-    <div class="container mt-3 form-control bg-warning rounded">
-        <table class="table table-secondary table-bordered">
+    <div class="container mt-3 ">
+        <table class="table table-hover table-responsive shadow-lg">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -72,7 +82,7 @@
                             <a href="{{ route('raw.updateOrder', $data['id']) }}">
                                 <span data-feather="mouse-pointer">Order</span></a> ||
                             <a href=""><span data-feather="eye">View</span></a> ||
-                            <a href=""><span data-feather="trash-2">Delete</span></a>
+                            <a onclick="return confirm('Are you sure you want to delete this herb?')" href="{{ route('material.delete', $data['id']) }}"><span data-feather="trash-2">Delete</span></a>
                         </td>
                     </tr>
                 @endforeach
@@ -94,23 +104,24 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Name:</label>
-                            <input type="text" name="name" class="form-control" id="" placeholder="Enter Vendor Name">
+                            <input required type="text" name="name" class="form-control" id=""
+                                placeholder="Enter Vendor Name">
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Decription:</label>
-                            <input type="text" name="description" class="form-control" id=""
+                            <input required type="text" name="description" class="form-control" id=""
                                 placeholder="Enter Description">
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Contact:</label>
-                            <input type="tel" name="contact" class="form-control" id="" placeholder="01*********">
+                            <input required type="tel" name="contact" class="form-control" id="" placeholder="01*********">
                         </div>
                         <br>
                         <div class="form-group">
                             <label>Email:</label>
-                            <input type="email" name="email" class="form-control" id="" placeholder="abc@xyz.com">
+                            <input required type="email" name="email" class="form-control" id="" placeholder="abc@xyz.com">
                         </div>
                         <br>
                     </div>
@@ -157,9 +168,7 @@
                                     <td>{{ $data->email }}</td>
                                     <td>{{ $data->contact }}</td>
                                     <td>
-                                        <a href=""><span data-feather="eye">View</span></a> ||
-                                        <a href=""><span data-feather="edit">Update</span></a> ||
-                                        <a href=""><span data-feather="trash-2">Delete</span></a>
+                                        <a onclick="return confirm('Are you sure you want to delete this vendor?')" href="{{ route('vendor.delete', $data['id']) }}"><span data-feather="trash-2">Delete</span></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -176,7 +185,7 @@
 
     <!--create new order Modal-->
     <div class="modal fade" id="createNewOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Place New order</h5>
@@ -188,18 +197,18 @@
 
                         <div class="form-group">
                             <label for="">Name</label>
-                            <input type="text" name="name" class="form-control" id="">
+                            <input required type="text" name="name" class="form-control" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="">Description</label>
-                            <input type="text" name="description" class="form-control" id="">
+                            <input required type="text" name="description" class="form-control" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="">Vendor</label>
                             <select name="vendor_id" id="" class="form-control">
-                                <option value="null">Select A Vendor</option>
+                                <option value="">Select A Vendor</option>
                                 @foreach ($vendors as $data)
                                     <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
@@ -208,41 +217,29 @@
                         <br>
                         <div class="form-group">
                             <label for="">Product Per Kg</label>
-                            <select name="product_per_kg" id="" class="form-control">
-                                <option value="null">Select amount</option>
-                                <option value="20">20 Piece</option>
-                                <option value="30">30 Piece</option>
-                                <option value="40">40 Piece</option>
-                                <option value="50">50 Piece</option>
-                                <option value="60">60 Piece</option>
-                                <option value="70">70 Piece</option>
-                                <option value="80">80 Piece</option>
-                                <option value="90">90 Piece</option>
-                                <option value="100">100 Piece</option>
-                                <option value="150">150 Piece</option>
-                                <option value="200">200 Piece</option>
-                            </select>
+                            <input required type="text" name="product_per_kg" class="form-control" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="">Product Price Per Kg</label>
-                            <input type="string" step=0.01 name="product_price_per_kg" class="form-control" id="">
+                            <input required type="string" step=0.01 name="product_price_per_kg" class="form-control" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="">Order Quantity(Kg)</label>
-                            <input type="number" step=0.01 name="order_quantity" class="form-control" id="">
+                            <input required type="number" step=0.01 name="order_quantity" class="form-control" id="">
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="">Date</label>
-                            <input type="date" name="order_date" class="form-control" id="">
+                            <input required type="date" name="order_date" class="form-control" id="">
                         </div>
                         <br>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Place Order</button>
+                        <button onclick="return confirm('Are you sure you want to place this order?')" type="submit"
+                            class="btn btn-primary">Place Order</button>
                     </div>
                 </form>
             </div>

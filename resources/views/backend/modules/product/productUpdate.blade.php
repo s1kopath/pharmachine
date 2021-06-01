@@ -2,7 +2,7 @@
 @section('content')
 
 
-    <form method="post" action="{{ route('product.saveUpdate', $products['id']) }}">
+    <form method="post" action="{{ route('product.saveUpdate', $products['id']) }}" enctype="multipart/form-data">
         @csrf
         @method('put')
 
@@ -30,6 +30,8 @@
             </div>
             <br>
             <div class="form-group">
+                <img style="width: 150px;" src="{{url('/files/product/'.$products->image)}}" alt="">
+                <hr>
                 <label>Image</label>
                 <input name="product_image" type="file" class="form-control" value="{{ $products['product_image'] }}" src="" id="">
             </div>

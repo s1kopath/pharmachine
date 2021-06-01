@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6 ">
             <a href="{{ route('show.product') }}" class="text-decoration-none">
-                <div class="card text-white shadow bg-primary" style="width: 20rm; height:10rem">
+                <div class="card text-white shadow dash" style="width: 20rm; height:10rem">
                     <div class="card-body">
                         <h5><span data-feather="package"></span>
                             <small>Total Product In Stack</small>

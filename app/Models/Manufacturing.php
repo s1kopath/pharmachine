@@ -25,5 +25,10 @@ class Manufacturing extends Model
     {
         return $this->belongsTo(Workstation::class,'workstation_id','id');
     }
+
+    public function deliveryName()
+    {
+        return $this->hasOne(Warehouse::class,'manufacturing_id','id');
+    }
 }
 

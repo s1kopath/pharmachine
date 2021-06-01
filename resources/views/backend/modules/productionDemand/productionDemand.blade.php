@@ -31,7 +31,9 @@
 
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">{{ $error }}</div>
+            <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endforeach
     @endif
 
@@ -61,7 +63,7 @@
                             <h6>Quantity: {{ $data->product_quantity }}</h6>
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
-                        <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'processing']) }}"
+                        <a onclick="return confirm('Are you sure you want receive this order ?')" href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'processing']) }}"
                             class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to confirm ></a>
                     </div>
                 @else
@@ -110,7 +112,7 @@
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
                         {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'produced']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Finish production ></a></div> --}}
-                        <a href="{{ route('pp.dashboard') }}" class="btn btn-sm btn-info"
+                        <a href="{{ route('checkProductionStatus.order', $data->demandManufacturing->id) }}" class="btn btn-sm btn-info"
                             style="background-color: honeydew;">Check Status</a>
                     </div>
                 @else
@@ -125,8 +127,9 @@
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
                         {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'deliver']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to shipment ></a></div> --}}
-                        <a href="{{ route('pp.dashboard') }}" class="btn btn-sm btn-info"
+                        <a href="{{ route('checkProductionStatus.order', $data->demandManufacturing->id) }}" class="btn btn-sm btn-info"
                             style="background-color: honeydew;">Check Status</a>
+
                     </div>
                 @else
                     <div class="col card act" data-feather="arrow-right">.</div>
@@ -140,7 +143,7 @@
                             <p>Delivery date: {{ $data->delivery_date }}</p>
                         </div>
                         {{-- <a href="{{ route('deleteStatus', $data['id']) }}" class="btn btn-sm btn-info" style="background-color: honeydew;">Proceed to delivery ></a></div> --}}
-                        <a href="{{ route('sto.dashboard') }}" class="btn btn-sm btn-info"
+                        <a href="{{ route('check.stockRecord', $data->demandManufacturing->deliveryName->id) }}" class="btn btn-sm btn-info"
                             style="background-color: honeydew;">Check Status</a>
                     </div>
                 @else
