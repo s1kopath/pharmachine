@@ -111,7 +111,7 @@
             </thead>
             <tbody>
                 @foreach ($workstations as $key => $data)
-                    <tr @if ($data->status == 'Workstation damaged') class="bg-danger" @endif>
+                    <tr @if ($data->status == 'Workstation damaged') class="bg-danger text-light" @endif>
                         <th scope="row">{{ $key + 1 }}</th>
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->description }}</td>
@@ -125,7 +125,7 @@
                                     <br>
                                     Reported by: {{ $data->damageReport->reportWorker->workerUser->name }}
                                     <br>
-                                    Reported on: {{ $data->damageReport->created_at }}
+                                    Reported on: {{ $data->damageReport->created_at->format('d-M-Y') }}
                                 </div>
                             </td>
                             @else

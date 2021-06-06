@@ -1,5 +1,5 @@
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block admin-sidebar sidebar collapse">
-    <div class="position-sticky pt-3 ">
+    <div class="position-sticky pt-3">
         <ul class="nav flex-column ">
             <li class="nav-item ">
                 <a class="nav-link text-white" aria-current="page" href="{{ route('sch.dashboard') }}">
@@ -73,9 +73,25 @@
                     @endif
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link  text-white" aria-current="page" href="{{ route('show.calendar') }}">
+                    <span data-feather="database"></span>
+                    Production Calendar @if ($count_shipment)
+                        <span class="badge bg-danger rounded-pill">{{ $count_shipment }}</span>
+                    @endif
+                </a>
+            </li>
         </ul>
     </div>
+    <div class="mt-5">
+        <h1>Today is,</h1>
+        <h4 id="myDateDisplay" class="date text-light d-flex justify-content-end m-2" onload="today()"></h4>
+    </div>
+    <div class="p-2 d-flex justify-content-between">
+        <h2>Time: </h2>
+        <h3 id="myClockDisplay" class="clock text-light " onload="showTime()"></h3>
+    </div>
+
+
 </nav>
-
-
-

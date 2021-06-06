@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\backend\CalendarContorller;
+use App\Http\Controllers\backend\CalendarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\ProductionDemandController;
 use App\Http\Controllers\backend\ProductionPlanningController;
@@ -48,6 +50,13 @@ Route::get('/registration', [UserController::class, 'showRegistrationForm'])->na
 Route::post('/registration/create', [UserController::class, 'registration'])->name('registration');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+//forget password
+Route::get('/forget-password', [UserController::class, 'forgetPasswordForm'])->name('forgetPassword.form');
+Route::post('/forget-password/submit', [UserController::class, 'forgetFormSubmit'])->name('forgetForm.submit');
+Route::get('/reset-link/{token}/{email}', [UserController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset/submit', [UserController::class, 'submitPassword'])->name('password.submit');
+
 
 
 
@@ -129,6 +138,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/stock', [StockController::class, 'sto'])->name('sto.dashboard');
         Route::get('/stock/{id}', [StockController::class, 'checkStockRecord'])->name('check.stockRecord');
         Route::get('/stock/delete/{id}', [StockController::class, 'deleteStock'])->name('stock.delete');
+
+
 
     });
 });

@@ -14,3 +14,23 @@
     button {
         background-color: #e27b7b;
     } */
+    
+    .btn-confirm {
+        background-color: #e27b7b;
+        color: white;
+    }
+    
+    .btn-confirm:hover {
+        background-color: #7be283;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow: inset 0 0 10px #beb3ee;
+    }
+    
+    .btn-cancel {
+        background-color: rgb(234, 181, 247);
+    }
+    
+    .btn-cancel:hover {
+        background-color: rgb(182, 181, 247);
+    }

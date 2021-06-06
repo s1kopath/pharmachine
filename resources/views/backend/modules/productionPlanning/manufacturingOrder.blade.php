@@ -8,9 +8,9 @@
         </div>
     @endif
 
-    <div class="container form-control text-light" style="background-image: url('{{ asset('images/form5.jpg') }}'); background-repeat: no-repeat;
-                background-size: 100% 100%">
-
+    {{-- <div class="container form-control text-light" style="background-image: url('{{ asset('images/form5.jpg') }}'); background-repeat: no-repeat;
+                background-size: 100% 100%"> --}}
+<div class="container  text-dark">
         <form class=" mt-5" method="post" action="{{ route('manufacturingOrder.create') }}">
             @csrf
             {{-- 1st row --}}
@@ -154,8 +154,8 @@
             <br>
 
             <div class="text-end">
-                <a href="{{ route('pd.dashboard') }}" class="btn btn-lg btn-secondary">Back </a>
-                <button onclick="return confirm('Are you sure, you want to create this manufacturing order ?')" type="submit" class="btn btn-lg btn-info">Confirm</button>
+                <a href="{{ route('pd.dashboard') }}" class="btn btn-lg btn-cancel">Back </a>
+                <button onclick="return confirm('Are you sure, you want to create this manufacturing order ?')" type="submit" class="btn btn-lg  btn-confirm">Confirm</button>
             </div>
             <br>
         </form>

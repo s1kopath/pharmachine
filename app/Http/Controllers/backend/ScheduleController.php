@@ -24,7 +24,7 @@ class ScheduleController extends Controller
         $countWorkstation = Workstation::all()->count();
         $countActiveWorkstation = Workstation::where('status','occupied')->count();
         $countMaterial = Material::where('available_quantity','<',20)->count();
-        $countReadyShipment = Manufacturing::where('status','Ready for shipment')->count();
+        $countReadyShipment = Manufacturing::all()->sum('total_cost');
         // dd($countMaterial);
         return view('backend.components.schedule',compact(
             'title',

@@ -59,9 +59,11 @@
 
 <body class="text-center login-bg">
 
+
     <main class="form-signin rounded" style="background: url('images/login-bg2.jpg');">
+
         @if (session()->has('success'))
-            <div class="alert alert-success d-flex justify-content-between">
+            <div class="alert alert-info d-flex justify-content-between">
                 {{ session()->get('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -80,38 +82,29 @@
                 </div>
             @endforeach
         @endif
-
-
-
-        <form action="{{ route('login') }}" method="post">
+        <h1 class="text-muted">Find Your Account</h1>
+        <p class="text-start">Please enter your email address to search for your account.</p>
+        <form action="{{ route('forgetForm.submit') }}" method="post">
             @csrf
-            <img class="mb-4 bg-light" src="{{ url('images/logo2.png') }}" alt="" width="" height="57">
 
-            <div class="form-floating">
+
+            <div class="form-floating mb-4">
                 <input required name="email" type="email" class="form-control" id="floatingInput"
                     placeholder="name@example.com">
                 <label for="floatingInput">Email</label>
             </div>
-            <div class="form-floating">
-                <input required name="password" type="password" class="form-control" id="floatingPassword"
-                    placeholder="Password">
-                <label for="floatingPassword">Password</label>
-                <a class="d-flex justify-content-first text-decoration-none mb-2"
-                    href="{{ route('forgetPassword.form') }}">Forgetten password?</a>
-            </div>
-            <button class="w-100 btn btn-lg btn-danger" type="submit">Login</button>
+
+            <button type="submit" class="w-100 btn  btn-info">Search</button>
+
         </form>
 
+        <p>--- OR ---</p>
 
-        <a href="{{ route('registration.form') }}" class=" btn mt-5 text-muted">Register</a>
-        <p class=" mb-3 text-muted">&copy; 2017–2021</p>
-        <p class=" mb-3 text-muted">admin@gmail.com</p>
+        <a href="{{ route('login.form') }}" class="w-100 btn btn-danger">Login</a>
+
     </main>
 
-
-
     <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
-z
 
 
 </body>

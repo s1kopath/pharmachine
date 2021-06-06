@@ -61,36 +61,53 @@ class ProfileController extends Controller
         $title = 'Edit Profile';
         $profile = User::find($id);
         $workers = Worker::find($profile->userProfile->id);
+        $ageLimit = Carbon::today()->subYears(18)->format('Y-m-d');
+
         // dd($workers);
 
-        return view('backend.workerModules.profile.updateProfile', compact('title', 'profile', 'workers'));
+        return view('backend.workerModules.profile.updateProfile', compact('title', 'profile', 'workers','ageLimit'));
     }
     public function updateProfile(Request $request, $id)
     {
-        $request->validate([
-            'email'=>'email|unique:users',
-        ]);
 
         $profile = User::find($id);
         $workers = Worker::find($profile->userProfile->id);
 
+        if ($profile->email  == $request->email) {
+            $profile -> update([
+                'name' => $request->name,
+            ]);
 
+            $dateOfBirth = $request->date_of_birth;
+            $years = Carbon::parse($dateOfBirth)->age;
 
-        $profile -> update([
-            'name' => $request->name,
-            'email' => $request->email
-        ]);
+            $workers -> update([
+                'contact' => $request->contact,
+                'address' => $request->address,
+                'date_of_birth' => $request->date_of_birth,
+                'age' => $years,
+            ]);
 
-        $dateOfBirth = $request->date_of_birth;
-        $years = Carbon::parse($dateOfBirth)->age;
+        }else{
+            $request->validate([
+                'email'=>'email|unique:users',
+            ]);
 
-        $workers -> update([
-            'contact' => $request->contact,
-            'address' => $request->address,
-            'date_of_birth' => $request->date_of_birth,
-            'age' => $years,
-        ]);
+            $profile -> update([
+                'name' => $request->name,
+                'email' => $request->email
+            ]);
 
+            $dateOfBirth = $request->date_of_birth;
+            $years = Carbon::parse($dateOfBirth)->age;
+
+            $workers -> update([
+                'contact' => $request->contact,
+                'address' => $request->address,
+                'date_of_birth' => $request->date_of_birth,
+                'age' => $years,
+            ]);
+        }
         return redirect()->route('display.UserProfile')->with('success', 'Profile updated successfully.');
     }
 }

@@ -305,13 +305,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Confirm Password:</label>
+                            <label>Re-enter Password:</label>
                             <input type="password" required name="confirm_password" class="form-control" placeholder="*********" id="">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <button type="submit" onclick="return confirm('Are you sure you want to change your password?')" class="btn btn-primary">Confirm</button>
                     </div>
                 </div>
             </div>

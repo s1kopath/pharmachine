@@ -153,7 +153,6 @@
                                     <div class="col-sm-9 text-secondary">
                                         <input type="text" class="form-control" name="address"
                                             value="{{ $workers->address }}" id="">
-
                                     </div>
                                 </div>
                                 <hr>
@@ -162,9 +161,8 @@
                                         <h6 class="mb-0">Date of birth</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="date" class="form-control" name="date_of_birth"
+                                        <input type="date" max="{{ $ageLimit }}" class="form-control" name="date_of_birth"
                                             value="{{ $workers->date_of_birth }}" id="">
-
                                     </div>
                                 </div>
                                 <hr>

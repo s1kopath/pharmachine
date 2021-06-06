@@ -43,69 +43,72 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $key => $data)
-                            <tr>
-                                <th scope="row">{{ $key + 1 }}</th>
-                                <td>{{ $data->manufacturing_number }}</td>
-                                <td>{{ $data->manufacturingProduct->name }}</td>
-                                <td>{{ $data->quantity }}</td>
-                                <td>{{ $data->manufacturingMaterial->name }} ({{ $data->material_quantity }} Kg)</td>
-                                <td>{{ $data->manufacturingWorkstation->name }}</td>
-                                <td>{{ $data->start_date }}</td>
-                                <td>{{ $data->finishing_date }}</td>
-                                <td>{{ $data->warehouse_number }}</td>
-                                <td>{{ $data->delivery_date }}</td>
-                                <td>{{ $data->status }}</td>
-                                <td>
-                                    @if ($data->status == 'Waiting for production')
-                                        <a class="btn btn-info"
-                                            onclick="return confirm('Are you sure you want to start production?')"
-                                            href="{{ route('productionUpdate', ['id' => $data->id, 'demand_id' => $data->demand_id, 'status' => 'In Production', 'demandStatus' => 'produced']) }}">Start
-                                            Production</a>
-                                    @elseif ($data->status == 'In Production')
-                                        <a class="btn btn-warning"
-                                            onclick="return confirm('Are you sure you want to finish production?')"
-                                            href="{{ route('productionUpdate', ['id' => $data->id, 'demand_id' => $data->demand_id, 'status' => 'Ready for shipment', 'demandStatus' => 'deliver']) }}">Finish
-                                            Production</a>
-                                        <hr>
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            class="btn btn-sm btn-outline-danger">Report Workstation Damage</button>
+                            @foreach ($orders as $key => $data)
+                                <tr>
+                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <td>{{ $data->manufacturing_number }}</td>
+                                    <td>{{ $data->manufacturingProduct->name }}</td>
+                                    <td>{{ $data->quantity }}</td>
+                                    <td>{{ $data->manufacturingMaterial->name }} ({{ $data->material_quantity }} Kg)
+                                    </td>
+                                    <td>{{ $data->manufacturingWorkstation->name }}</td>
+                                    <td>{{ $data->start_date }}</td>
+                                    <td>{{ $data->finishing_date }}</td>
+                                    <td>{{ $data->warehouse_number }}</td>
+                                    <td>{{ $data->delivery_date }}</td>
+                                    <td>{{ $data->status }}</td>
+                                    <td>
+                                        @if ($data->status == 'Waiting for production')
+                                            <a class="btn btn-info"
+                                                onclick="return confirm('Are you sure you want to start production?')"
+                                                href="{{ route('productionUpdate', ['id' => $data->id, 'demand_id' => $data->demand_id, 'status' => 'In Production', 'demandStatus' => 'produced']) }}">Start
+                                                Production</a>
+                                        @elseif ($data->status == 'In Production')
+                                            <a class="btn btn-warning"
+                                                onclick="return confirm('Are you sure you want to finish production?')"
+                                                href="{{ route('productionUpdate', ['id' => $data->id, 'demand_id' => $data->demand_id, 'status' => 'Ready for shipment', 'demandStatus' => 'deliver']) }}">Finish
+                                                Production</a>
+                                            <hr>
+                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                class="btn btn-sm btn-outline-danger">Report Workstation Damage</button>
                                             <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                </div>
-                                                <form action="{{ route('damageReport', $data->id) }}" method="post">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputEmail1" class="form-label">Repair
-                                                                Note:</label>
-                                                            <textarea required type="string" required name="note"
-                                                                class="form-control"></textarea>
-                                                            <div id="emailHelp" class="form-text">Expain in datails.
-                                                            </div>
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
                                                         </div>
+                                                        <form action="{{ route('damageReport', $data->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label for="exampleInputEmail1"
+                                                                        class="form-label">Repair
+                                                                        Note:</label>
+                                                                    <textarea required type="string" required name="note"
+                                                                        class="form-control"></textarea>
+                                                                    <div id="emailHelp" class="form-text">Expain in datails.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Back</button>
+                                                                <button
+                                                                    onclick="return confirm('Are you sure you want to report a damage?')"
+                                                                    type="submit" class="btn btn-success">Send</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Back</button>
-                                                        <button
-                                                            onclick="return confirm('Are you sure you want to report a damage?')"
-                                                            type="submit" class="btn btn-success">Send</button>
-                                                    </div>
-                                                </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    @else
-                                        <a class="btn btn-outline-secondary">Production Finished</a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+                                        @else
+                                            <a class="btn btn-outline-secondary">Production Finished</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                     </tbody>
                 </table>
             </div>
@@ -117,7 +120,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,7 +144,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 @endsection

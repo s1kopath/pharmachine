@@ -59,4 +59,13 @@
         </ul>
 
     </div>
+
+    <div class="mt-5 ">
+        <h1 class="text-secondary">Today is,</h1>
+        <h4 id="myDateDisplay" class="date text-light d-flex justify-content-end m-2" onload="today()"></h4>
+    </div>
+    <div class="p-2 d-flex justify-content-between">
+        <h2 class="text-secondary">Time: </h2>
+        <h3 id="myClockDisplay" class="clock text-light " onload="showTime()"></h3>
+    </div>
 </nav>

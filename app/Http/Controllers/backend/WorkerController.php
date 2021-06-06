@@ -83,28 +83,6 @@ class WorkerController extends Controller
 
     public function saveUpdate(Request $request, $id)
     {
-        // $workers = Worker::find($request->id);
-        // $users = User::find($workers->user_id);
-
-        // $dateOfBirth = $request->date_of_birth;
-        // $years = Carbon::parse($dateOfBirth)->age;
-
-
-        // $users->name = $request->name;
-        // $users->email = $request->email;
-
-        // $workers->address = $request->address;
-        // $workers->contact = $request->contact;
-        // $workers->gender = $request->gender;
-        // $workers->date_of_birth = $request->date_of_birth;
-        // $workers->age = $years;
-        // $workers->joining_date = $request->joining_date;
-        // $workers->salary = $request->salary;
-        // $workers -> labour_per_hour = $request->salary / 720;
-
-        // $workers->save();
-        // $users->save();
-
         $request->validate([
             'email'=>'email|unique:users',
         ]);
@@ -124,9 +102,11 @@ class WorkerController extends Controller
                 $file_name = date('Ymdhms').'.'.$file -> getClientOriginalExtension();
                 $file -> storeAs('worker', $file_name);
             }
+
             $workers->update([
                 'image' => $file_name
             ]);
+
         }
 
         $workers->update([
