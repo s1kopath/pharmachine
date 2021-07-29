@@ -73,13 +73,13 @@ class ProfileController extends Controller
         $profile = User::find($id);
         $workers = Worker::find($profile->userProfile->id);
 
+        $dateOfBirth = $request->date_of_birth;
+        $years = Carbon::parse($dateOfBirth)->age;
+
         if ($profile->email  == $request->email) {
             $profile -> update([
                 'name' => $request->name,
             ]);
-
-            $dateOfBirth = $request->date_of_birth;
-            $years = Carbon::parse($dateOfBirth)->age;
 
             $workers -> update([
                 'contact' => $request->contact,
@@ -98,8 +98,6 @@ class ProfileController extends Controller
                 'email' => $request->email
             ]);
 
-            $dateOfBirth = $request->date_of_birth;
-            $years = Carbon::parse($dateOfBirth)->age;
 
             $workers -> update([
                 'contact' => $request->contact,

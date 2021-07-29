@@ -74,14 +74,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link  text-white" aria-current="page" href="{{ route('show.calendar') }}">
-                    <span data-feather="database"></span>
-                    Production Calendar @if ($count_shipment)
-                        <span class="badge bg-danger rounded-pill">{{ $count_shipment }}</span>
-                    @endif
-                </a>
-            </li>
+
         </ul>
     </div>
     <div class="mt-5">

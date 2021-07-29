@@ -27,7 +27,7 @@ class ProductionPlanningController extends Controller
     {
         $demand = Demand::find($id);
         $products = Product::all();
-        $workstations = Workstation::all();
+        $workstations = Workstation::where('status','!=','Workstation damaged')->get();
         $materials = Material::where('id', $demand->demandProduct->productMaterial->id)->get();
         $workers = Worker::all();
         $title = 'Manufacturing Order';
@@ -40,10 +40,15 @@ class ProductionPlanningController extends Controller
 
     public function createManufacturingOrder(Request $request)
     {
+        $request->validate([
+            'material_quantity' => 'required|gt:0',
+            'total_cost' => 'required|gt:0',
+        ]);
+
         $productionWorker = Manufacturing::where('worker_id',$request->worker_id)
             ->whereIn('status',['In production', 'Waiting for production'])->get();
             foreach($productionWorker as $worker){
-                if ($worker->start_date >= $request->start_date && $worker->start_date <= $request->finishing_date) {
+                if ($request->start_date >= $worker->start_date && $request->start_date <= $worker->finishing_date) {
                     return redirect()->back()->with('error', $worker->manufacturingWorker->workerUser->name.' is not available on that date !!');
                 }
             }
@@ -51,7 +56,7 @@ class ProductionPlanningController extends Controller
         $productionWorkstation = Manufacturing::where('workstation_id',$request->workstation_id)
             ->whereIn('status',['In production', 'Waiting for production'])->get();
             foreach($productionWorkstation as $workstation){
-                if ($workstation->start_date >= $request->start_date && $workstation->start_date <= $request->finishing_date) {
+                if ($request->start_date >= $workstation->start_date && $request->start_date <= $workstation->finishing_date) {
                     return redirect()->back()->with('error', $workstation->manufacturingWorkstation->name.' is not available on that date !!');
                 }
             }

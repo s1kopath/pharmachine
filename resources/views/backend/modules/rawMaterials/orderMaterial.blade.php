@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         <label for="">Date</label>
-                        <input required type="date" name="order_date" class="form-control" id="">
+                        <input required type="date" min="{{date('Y-m-d')}}" value="{{date('Y-m-d')}}" name="order_date" class="form-control" id="">
                     </div>
                 </div>
 

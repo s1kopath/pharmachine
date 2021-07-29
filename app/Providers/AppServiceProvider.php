@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $countDemand = Demand::where('status', 'pending')->count();
         $countOrder = Manufacturing::where('status', '!=', 'Delivered')->count();
         $countWorkstation = Workstation::whereIn('status', ['Waiting for repair','Workstation damaged'])->count();
-        $countMaterial = Material::where('available_quantity', '<', 20)->count();
+        $countMaterial = Material::where('available_quantity', '<=', 10)->count();
         $countReadyShipment = Manufacturing::where('status', 'Ready for shipment')->count();
 
 

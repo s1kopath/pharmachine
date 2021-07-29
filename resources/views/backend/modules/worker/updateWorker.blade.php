@@ -10,6 +10,29 @@
         }
 
     </style>
+
+
+    @if (session()->has('success'))
+        <div class="alert alert-info d-flex justify-content-between">
+            {{ session()->get('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger d-flex justify-content-between">
+            {{ session()->get('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
+    @endif
+
     <!-- Form -->
     <form method="post" action="{{ route('worker.saveUpdate', $workers['id']) }}" enctype="multipart/form-data"
         class="container form-control text-light p-3 form-bg">
@@ -54,8 +77,7 @@
         <br>
         <div class="form-group">
             <label>Enter Joining Date:</label>
-            <input type="date" name="joining_date" class="form-control" value="{{ $workers['joining_date'] }}"
-                id="">
+            <input type="date" name="joining_date" class="form-control" value="{{ $workers['joining_date'] }}" id="">
         </div>
         <br>
         <div class="form-group">
@@ -64,7 +86,7 @@
         </div>
         <br>
         <div class="form-group">
-            <img style="width: 150px;" src="{{url('/files/worker/'.$workers->image)}}" alt=""><br>
+            <img style="width: 150px;" src="{{ url('/files/worker/' . $workers->image) }}" alt=""><br>
             <label>Image</label>
             <input type="file" name="image" class="form-control">
         </div>

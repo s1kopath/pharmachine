@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\NotifyTechnician;
+use App\Models\Manufacturing;
 use Illuminate\Http\Request;
 use App\Models\Workstation;
 use App\Models\WorkstationRepair;
@@ -25,7 +26,6 @@ class WorkstationController extends Controller
         $request->validate([
             'name'=>'required',
             'manufacturer'=>'required',
-            'status'=>'required',
             'output'=>'required|gt:0',
         ]);
         Workstation::create([
@@ -33,7 +33,7 @@ class WorkstationController extends Controller
             'description' => $request->description,
             'manufacturer' => $request->manufacturer,
             'output' => $request->output,
-            'status' => $request->status
+            'status' => 'available'
 
         ]);
         return redirect()->back()->with('success','Workstation added successfully.');
@@ -42,6 +42,10 @@ class WorkstationController extends Controller
 
     public function completedUpdate( $id, $status)
     {
+        $production_order = Manufacturing::where('workstation_id', $id)->whereIn('status',['in production','Waiting for production'])->first();
+        if ($production_order) {
+            return redirect()->back()->with('error', 'Workstation in Production');
+        }
         $workstations= Workstation::find($id);
         $workstations->update(['status'=>$status]);
 
@@ -76,5 +80,19 @@ class WorkstationController extends Controller
         Mail::to('technician@gmail.com')->send(new NotifyTechnician($ws,$ws_issue));
 
         return redirect()->back()->with('success','Workstation is put on repair, the technician will soon be notified.');
+    }
+    public function searchWorkstation(Request $request)
+    {
+        // dd($request->all());
+        $search = $request->input('search');
+        $title = 'Available Workstation';
+        $problem = WorkstationRepair::all();
+        if($request->has('search')){
+            $workstations = Workstation::where('name','like',"%{$search}%")->get();
+        }else{
+            $workstations = Workstation::all();
+        }
+
+        return view('backend.modules.workstation.workstation', compact('title', 'workstations','problem'));
     }
 }

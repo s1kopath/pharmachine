@@ -69,7 +69,7 @@ class RawMaterialsController extends Controller
             'product_per_kg' => $request -> product_per_kg,
             'product_price_per_kg' => $request -> product_price_per_kg,
             'available_quantity' => $request -> order_quantity,
-            'order_quantity' => $request -> order_quantity,
+            'order_quantity' => 0,
             'order_date' => $request -> order_date
 
         ]);

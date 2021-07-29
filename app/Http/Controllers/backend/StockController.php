@@ -12,7 +12,7 @@ class StockController extends Controller
 {
     public function sto(){
         $title = 'Warehouse Stock';
-        $stock = Warehouse::all();
+        $stock = Warehouse::orderBy('id', 'DESC')->get();
         return view('backend.modules.stock.stock', compact('title','stock'));
     }
     public function checkStockRecord($id)
@@ -28,5 +28,23 @@ class StockController extends Controller
     {
         Warehouse::find($id)->delete();
         return redirect()->back()->with('error', 'Workstation removed successfully.');
+    }
+
+    public function searchStock(Request $request)
+    {
+        $search = $request->input('search');
+        $title = 'Warehouse Stock';
+        if ($request->search == null) {
+            $stock = Warehouse::orderBy('id', 'DESC')->get();
+            return view('backend.modules.stock.stock', compact('title','stock'));
+        }
+        else{
+            $stock = Warehouse::whereHas('stockManufacturing',function($query) use($search){
+
+                $query->where('warehouse_number','like',"%{$search}%");
+
+            })->get();
+            return view('backend.modules.stock.stock', compact('title','stock'));
+        }
     }
 }

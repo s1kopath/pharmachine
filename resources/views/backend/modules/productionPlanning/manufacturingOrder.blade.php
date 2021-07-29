@@ -46,7 +46,8 @@
                     </div>
                     <br>
                     <div class="form-group d-flex justify-content-between">
-                        <label>Quantity(units): </label>
+                        <label>Quantity
+                            (units): </label>
                         <input name="quantity" readonly value="{{ $demand->product_quantity }}" type="string"
                             class="form-control " id="">
                     </div>
@@ -67,7 +68,7 @@
                     <br>
                     <div class="form-group d-flex justify-content-between">
                         <label>Material Quantity(Kg): </label>
-                        <input name="material_quantity" type="string" class="form-control" id="material_quantity">
+                        <input name="material_quantity" readonly type="string" class="form-control" id="material_quantity">
                     </div>
                 </div>
             </div>
@@ -122,7 +123,7 @@
                     <br>
                     <div class="form-group d-flex justify-content-between">
                         <label>Finishing Date: </label>
-                        <input min="{{date('Y-m-d')}}" type="date" id="finishing_date" class="form-control" name="finishing_date" placeholder="">
+                        <input min="{{date('Y-m-d')}}" type="date" readonly id="finishing_date" class="form-control" name="finishing_date" placeholder="">
                     </div>
                 </div>
                 {{-- 3rd col --}}
@@ -141,7 +142,7 @@
 
             <div class="form-group ">
                 <label>Total Production Cost: </label>
-                <input type="string" class="form-control-lg" id="total_cost" name="total_cost" placeholder="00.00"><span>
+                <input type="string" readonly class="form-control-lg" id="total_cost" name="total_cost" placeholder="00.00"><span>
                     Tk</span>
 
                 {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'producing']) }}"

@@ -41,11 +41,17 @@ class ProductionDemandController extends Controller
 
     public function createDemand(Request $request)
     {
+        $request->validate([
+            'product_id' => 'required',
+            'product_quantity' => 'required|gt:0',
+            'delivery_date' => 'required',
+        ]);
+
         Demand::create([
             'product_id' => $request->product_id,
             'product_quantity' => $request->product_quantity,
             'delivery_date' => $request->delivery_date,
-            'status' => $request->status
+            'status' => 'pending'
         ]);
         return redirect()->back();
     }

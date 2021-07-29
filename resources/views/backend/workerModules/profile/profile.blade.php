@@ -287,9 +287,7 @@
         <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog  bg-danger">
                 <div class="modal-content">
-
                     <h2 class="m-3">Change Password</h2>
-
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Enter Current Password:</label>

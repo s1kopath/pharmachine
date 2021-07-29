@@ -127,14 +127,8 @@
                     onclick="window.print()"><span data-feather="printer"></span></button>
             </div>
             @endif
-
         </div>
-
-
-
         <br>
-
-
     </div>
 
 

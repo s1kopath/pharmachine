@@ -7,19 +7,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-
-    <div class="d-flex justify-content-between mt-2 container row p-3">
-
-
-        <div class="col">
-            <input class="form-control" type="text" value="">
+    <form action="{{ route('stock.search') }}" method="GET">
+        <div class="d-flex justify-content-between mt-2 container row p-3">
+            <div class="col">
+                <input class="form-control" name="search" placeholder="WL 000" type="text" value="">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-info">Search</button>
+            </div>
         </div>
-        <div class="col">
-            <button type="button" class="btn btn-info">Search</button>
-        </div>
-
-    </div>
-
+    </form>
 
     <div class="container p-3">
         <table class="table table-hover table-responsive shadow-lg">
@@ -52,10 +49,12 @@
                         <td>{{ $data->user_name }}</td>
                         <td>{{ $data->delivered_on }}</td>
                         <td>
-                            <a class="btn" href="{{ route('check.stockRecord', $data->id) }}"><span data-feather="eye">View</span></a>
+                            <a class="btn" href="{{ route('check.stockRecord', $data->id) }}"><span
+                                    data-feather="eye">View</span></a>
                             @if ($data->status == 'Delivered')
-                            || <a class="btn" onclick="return confirm('Are you sure you want to delete this record?')"
-                                href="{{ route('stock.delete', $data->id) }}"><span data-feather="trash-2">Delete</span></a>
+                                || <a class="btn" onclick="return confirm('Are you sure you want to delete this record?')"
+                                    href="{{ route('stock.delete', $data->id) }}"><span
+                                        data-feather="trash-2">Delete</span></a>
                             @endif
 
                         </td>

@@ -73,6 +73,8 @@
                                 <option value="">Select Type</option>
                                 <option value="Tablet">Tablet</option>
                                 <option value="Syrup">Syrup</option>
+                                <option value="Capsule">Capsule</option>
+                                <option value="Powder">Powder</option>
                             </select>
                         </div>
                         <br>

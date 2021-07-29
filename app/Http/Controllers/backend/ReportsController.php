@@ -21,6 +21,9 @@ class ReportsController extends Controller
         $toDate= $request->to_date;
         $time = date('d-M-Y', strtotime( Carbon::now()));
 
+        if ($fromDate > $toDate){
+            return redirect()->back()->with('error','Invalid date selection.');
+        }
         if ($fromDate && $toDate) {
             $search = Manufacturing::where('finishing_date','>=',$fromDate)
             ->where('finishing_date','<=',$toDate)->orderBy('finishing_date')

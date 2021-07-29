@@ -81,7 +81,6 @@
                         <td>
                             <a href="{{ route('raw.updateOrder', $data['id']) }}">
                                 <span data-feather="mouse-pointer">Order</span></a> ||
-                            <a href=""><span data-feather="eye">View</span></a> ||
                             <a onclick="return confirm('Are you sure you want to delete this herb?')" href="{{ route('material.delete', $data['id']) }}"><span data-feather="trash-2">Delete</span></a>
                         </td>
                     </tr>
@@ -232,7 +231,7 @@
                         <br>
                         <div class="form-group">
                             <label for="">Date</label>
-                            <input required type="date" name="order_date" class="form-control" id="">
+                            <input required type="date" value="{{date('Y-m-d')}}" min="{{date('Y-m-d')}}" name="order_date" class="form-control" id="">
                         </div>
                         <br>
                     </div>

@@ -37,10 +37,10 @@ use App\Http\Controllers\backend\WorkstationController;
 
 
 // fetch api controller
-Route::get('/get-calculation-quantity/{id}',[ApiController::class,'calculate']);
-Route::get('/get-calculation-total-cost/{id}',[ApiController::class,'calculateCost']);
-Route::get('/get-calculation-time/{id}',[ApiController::class,'calculateTime']);
-Route::get('/get-calculation-overtime/{id}',[ApiController::class,'calculateOvertime']);
+Route::get('/get-calculation-quantity/{id}', [ApiController::class,'calculate']);
+Route::get('/get-calculation-total-cost/{id}', [ApiController::class,'calculateCost']);
+Route::get('/get-calculation-time/{id}', [ApiController::class,'calculateTime']);
+Route::get('/get-calculation-overtime/{id}', [ApiController::class,'calculateOvertime']);
 
 
 
@@ -64,7 +64,6 @@ Route::post('/reset/submit', [UserController::class, 'submitPassword'])->name('p
 
 // -----admin routes-----
 Route::group(['prefix' => 'admin'], function () {
-
     Route::group(['middleware' => 'admin-auth'], function () {
         //home page
         Route::get('/dashboard', [ScheduleController::class, 'sch'])->name('sch.dashboard');
@@ -106,6 +105,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/workstation/delete/{id}', [WorkstationController::class, 'deleteWorkstation'])->name('delete.workstation');
 
         Route::get('/workstation/{id}/{status}', [WorkstationController::class, 'completedUpdate'])->name('completedUpdate');
+        Route::get('/workstation/search', [WorkstationController::class, 'searchWorkstation'])->name('workstation.search');
+
 
         //product
         Route::get('/product', [ProductController::class, 'product'])->name('product.list');
@@ -138,16 +139,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/stock', [StockController::class, 'sto'])->name('sto.dashboard');
         Route::get('/stock/{id}', [StockController::class, 'checkStockRecord'])->name('check.stockRecord');
         Route::get('/stock/delete/{id}', [StockController::class, 'deleteStock'])->name('stock.delete');
-
-
-
+        Route::get('/stock/search/get', [StockController::class, 'searchStock'])->name('stock.search');
     });
 });
 
 
 // -----worker routes-----
 Route::group(['prefix' => 'worker'], function () {
-
     Route::group(['middleware' => 'worker-auth'], function () {
         //profile
         Route::get('/profile', [WorkerProfileController::class, 'showUserProfile'])-> name('display.UserProfile');
@@ -183,6 +181,3 @@ Route::group(['prefix' => 'worker'], function () {
         Route::get('/raw-materials/{id}', [WorkerRawMaterialsController::class, 'receiveOrder'])->name('materials.receiveOrder');
     });
 });
-
-
-

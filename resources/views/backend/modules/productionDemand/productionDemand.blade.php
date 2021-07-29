@@ -187,9 +187,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Delivery Date:</label>
-                                <input type="date" class="form-control-sm m-1" name="delivery_date">
+                                <input min="{{date('Y-m-d')}}" type="date" class="form-control-sm m-1" name="delivery_date">
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Status: </label>
                                 <select name="status" class="form-control-lg">
                                     <option value="pending">Pending</option>
@@ -199,7 +199,7 @@
                                     <option value="produced">Produced</option>
                                     <option value="deliver">Deliver</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="modal-footer bg-dark">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-info">Create</button>

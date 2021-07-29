@@ -83,13 +83,45 @@ class WorkerController extends Controller
 
     public function saveUpdate(Request $request, $id)
     {
-        $request->validate([
-            'email'=>'email|unique:users',
-        ]);
+        $workers = Worker::find($id);
+        $user = User::find($workers->user_id);
 
         $dateOfBirth = $request->date_of_birth;
         $years = Carbon::parse($dateOfBirth)->age;
-        $workers = Worker::find($id);
+
+        if ($user->email  == $request->email) {
+            $workers->update([
+                'address'=> $request->address,
+                'contact'=>$request->contact,
+                'gender'=>$request->gender,
+                'date_of_birth'=> $request->date_of_birth,
+                'age' => $years,
+                'joining_date'=>$request->joining_date,
+                'salary'=> $request->salary,
+                'labour_per_hour' => $request->salary / 720
+            ]);
+            $user->update([
+                'name' => $request->name,
+            ]);
+        }else{
+            $request->validate([
+                'email'=>'email|unique:users',
+            ]);
+            $workers->update([
+                'address'=> $request->address,
+                'contact'=>$request->contact,
+                'gender'=>$request->gender,
+                'date_of_birth'=> $request->date_of_birth,
+                'age' => $years,
+                'joining_date'=>$request->joining_date,
+                'salary'=> $request->salary,
+                'labour_per_hour' => $request->salary / 720
+            ]);
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email
+            ]);
+        }
 
         if ($request->hasFile('image')) {
             $image_path = public_path().'/files/worker/'.$workers->image;
@@ -106,23 +138,7 @@ class WorkerController extends Controller
             $workers->update([
                 'image' => $file_name
             ]);
-
         }
-
-        $workers->update([
-            'address'=> $request->address,
-            'contact'=>$request->contact,
-            'gender'=>$request->gender,
-            'date_of_birth'=> $request->date_of_birth,
-            'age' => $years,
-            'joining_date'=>$request->joining_date,
-            'salary'=> $request->salary,
-            'labour_per_hour' => $request->salary / 720
-        ]);
-        User::find($workers->user_id)->update([
-            'name' => $request->name,
-            'email' => $request->email
-        ]);
 
         return redirect()->route('worker.list')->with('success', 'Worker info updated successfully.');
     }
@@ -168,7 +184,7 @@ class WorkerController extends Controller
 
                 $query->where('name','like',"%{$search}%");
 
-            })->paginate(10);
+            })->get();
         }else{
             $workers = Worker::all();
         }

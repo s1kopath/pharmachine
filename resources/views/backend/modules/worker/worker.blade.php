@@ -26,7 +26,6 @@
 
     <div class="d-flex justify-content-between mt-2 container">
         <form action="{{ route('worker.search') }}" method="GET">
-            @csrf
             <div class="row">
                 <div class="col-md-8">
                     <input class="form-control" name="search" placeholder="Search" type="text" value="">
@@ -151,7 +150,7 @@
                         <br>
                         <div class="form-group">
                             <label>Enter Joining Date:</label>
-                            <input required type="date" name="joining_date" class="form-control" placeholder="Joining Date"
+                            <input required min="{{date('Y-m-d')}}" type="date" name="joining_date" class="form-control" placeholder="Joining Date"
                                 id="">
                         </div>
                         <br>

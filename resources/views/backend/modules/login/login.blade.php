@@ -103,9 +103,9 @@
         </form>
 
 
-        <a href="{{ route('registration.form') }}" class=" btn mt-5 text-muted">Register</a>
-        <p class=" mb-3 text-muted">&copy; 2017–2021</p>
-        <p class=" mb-3 text-muted">admin@gmail.com</p>
+        {{-- <a href="{{ route('registration.form') }}" class=" btn mt-5 text-muted">Register</a> --}}
+        <p class=" mb-3 mt-5 text-muted">&copy; 2017–2021</p>
+        {{-- <p class=" mb-3 text-muted">admin@gmail.com</p> --}}
     </main>
 
 

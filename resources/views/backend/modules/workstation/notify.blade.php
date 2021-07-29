@@ -19,7 +19,7 @@
 <p>Machine name: {{ $notifyMsg->name }}</p>
 <p>Details: {{ $notifyMsg->description }}</p>
 <p>Manufacturer: {{ $notifyMsg->manufacturer }}</p>
-<p>MAchine output: {{ $notifyMsg->output }} per min</p>
+<p>Machine output: {{ $notifyMsg->output }} per min</p>
 <p>Reported by: {{ $issueMsg->reportWorker->workerUser->name }}</p>
 <p>Issue: {{ $issueMsg->note }}</p>
 <br>
