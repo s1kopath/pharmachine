@@ -28,7 +28,6 @@ class DashboardController extends Controller
             ->count();
         $m_order = Material::where('status','Ordered')
             ->count();
-        // dd($m_order);
         return view('backend.workerComponents.dashHome',compact('title','mo_count','wh_stock','pending_delivery','m_order'));
     }
 }
