@@ -13,7 +13,7 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\RawMaterialsController;
 use App\Http\Controllers\backend\UserController;
-use App\Http\Controllers\Backend\Worker\DashboardController;
+use App\Http\Controllers\backend\worker\DashController;
 use App\Http\Controllers\backend\worker\ProductController as WorkerProductController;
 use App\Http\Controllers\backend\worker\ProfileController as WorkerProfileController;
 use App\Http\Controllers\backend\worker\RawMaterialsController as WorkerRawMaterialsController;
@@ -154,8 +154,8 @@ Route::group(['prefix' => 'worker'], function () {
         Route::put('/profile/update-profile/{id}', [WorkerProfileController::class, 'updateProfile'])-> name('update.profile');
 
         //home page
-        Route::get('/', [DashboardController::class, 'show'])->name('show.dashboard');
-        Route::get('/dashboard', [DashboardController::class, 'home'])->name('show.home');
+        Route::get('/', [DashController::class, 'show'])->name('show.dashboard');
+        Route::get('/dashboard', [DashController::class, 'home'])->name('show.home');
 
         //production report
         Route::get('/production-reporting', [ReportingController::class, 'showReporting'])->name('show.reporting');

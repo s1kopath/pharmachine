@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Worker;
+namespace App\Http\Controllers\backend\worker;
 
 use App\Http\Controllers\Controller;
 use App\Models\Manufacturing;
 use App\Models\Material;
 use App\Models\Product;
-use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class DashController extends Controller
 {
     public function show()
     {
