@@ -78,7 +78,7 @@ class ProductionPlanningController extends Controller
                 'start_date' => $request->start_date,
                 'finishing_date' => $request->finishing_date,
                 'delivery_date' => $request->delivery_date,
-                'total_cost' => $request->total_cost
+                'total_cost' => round($request->total_cost, 2)
             ]);
             Warehouse::create([
                 'manufacturing_id' => $mo->id
