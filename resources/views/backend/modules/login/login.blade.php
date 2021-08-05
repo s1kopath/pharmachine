@@ -102,16 +102,39 @@
             <button class="w-100 btn btn-lg btn-danger" type="submit">Login</button>
         </form>
 
-
+        <div class="mt-3">
+            <!-- Button trigger modal -->
+        <a href="" class=" text-decoration-none text-muted" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Login Help
+        </a>
+        </div>
         {{-- <a href="{{ route('registration.form') }}" class=" btn mt-5 text-muted">Register</a> --}}
-        <p class=" mb-3 mt-5 text-muted">&copy; 2017–2021</p>
+        <p class=" mb-3 mt-2 text-muted">&copy; 2017–2021</p>
         {{-- <p class=" mb-3 text-muted">admin@gmail.com</p> --}}
+        
+        
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                    <div class="modal-body">
+                        <p>Admin Email: admin@gmail.com</p>
+                        <p>Admin Password: admin@gmail.com</p>
+                        <p>==================================</p>
+                        <p>Workers <strong>DEFAULT</strong> Password: <strong>123456</strong></p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
     </main>
 
 
 
     <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
-z
+    z
 
 
 </body>
