@@ -59,7 +59,7 @@
                             @if ($data->stockManufacturing->status == 'Ready for shipment')
                                 <a class="btn btn-danger" onclick="return confirm('Are you sure you want to deliver this order?')"
                                     href="{{ route('stock.deliver', $data->id) }}">Deliver Order</span></a>
-                            @elseif($data->stockManufacturing-> status == 'Waiting for production' || $data->stockManufacturing-> status == 'In Production')
+                            @elseif($data->stockManufacturing-> status == 'Waiting for production' || $data->stockManufacturing-> status == 'In Production' || $data->stockManufacturing->status == 'Production paused')
                                 <a class="btn btn-outline-dark" >Order in production</span></a>
                             @else
                                 <a class="btn btn-outline-info" >Delivered</span></a>
