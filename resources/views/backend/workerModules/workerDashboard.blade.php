@@ -55,7 +55,7 @@
 <body>
 
 
-    @include('backend.WorkerComponents.header')
+    @include('backend.workerComponents.header')
 
 
 
@@ -64,7 +64,7 @@
         <div class="row ">
 
 
-            @include('backend.WorkerComponents.sidebar')
+            @include('backend.workerComponents.sidebar')
 
             <main class="col-md-9 ms-sm-auto col-lg-10 pt-3 px-md-4 ">
                 <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center  border-bottom">
@@ -81,7 +81,7 @@
 
         </div>
     </div>
-    @include('backend.WorkerComponents.footer')
+    @include('backend.workerComponents.footer')
 
 
 
