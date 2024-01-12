@@ -50,7 +50,7 @@ class WorkerController extends Controller
         $users = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt('123456')
+                'password' => bcrypt('12345678')
             ]);
 
         Worker::create([

@@ -43,6 +43,9 @@ Route::get('/get-calculation-overtime/{id}', [ApiController::class,'calculateOve
 
 
 //login and registration
+/**
+ * @description Show the home page of the site
+ */
 Route::get('/', [UserController::class, 'showLoginForm'])->name('login.form');
 Route::get('/registration', [UserController::class, 'showRegistrationForm'])->name('registration.form');
 Route::post('/registration/create', [UserController::class, 'registration'])->name('registration');
