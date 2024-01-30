@@ -1,122 +1,96 @@
-<?php
+# Raw Materials
 
-namespace App\Http\Controllers\backend;
+## `raw()`
 
-use App\Http\Controllers\Controller;
-use App\Models\Material;
-use App\Models\Vendor;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Throwable;
+### Method Description
+This method retrieves raw materials and vendors information and renders the raw materials view.
 
-class RawMaterialsController extends Controller
-{
-    public function raw(){
-        $title = 'Raw Herbs';
-        $vendors = Vendor::all();
-        $materials = Material::orderBy('available_quantity')->get();
-        return view('backend.modules.rawMaterials.rawMaterials', compact('vendors','title','materials'));
-    }
+### Parameters
+None
 
-    //create vendor
-    public function createVendor(Request $request){
-        $request->validate([
-            'name'=>'required',
-            'email'=>'email|required|unique:vendors',
-            'contact'=>'required|unique:vendors',
-        ]);
-        Vendor::create([
-            'name' => $request -> name,
-            'description' => $request -> description,
-            'email' => $request -> email,
-            'contact' => $request -> contact,
+### Returns
+View
 
-        ]);
-        return redirect() -> back()->with('success','Vendor added successfully.');
-    }
-    //delete vendor
-    public function deleteVendor($id)
-    {
-        $vendor = Vendor::find($id);
+---
 
-        try {
-            $vendor->delete();
-            return redirect()->back()->with('error', 'Vendor deleted successfully.');
+## `createVendor(Request $request)`
 
-        } catch (\Throwable $e) {
-            if($e->getCode() == "23000"){
-                return redirect()->back()->with('error', 'You can not delete this record, because other tables depends on it.');
-            }
-            return back();
-        }
-    }
+### Method Description
+This method creates a new vendor based on the submitted form data.
 
-    //create new order
-    public function createOrder(Request $request)
-    {
-        $request->validate([
-            'name'=>'required',
-            'description'=>'required',
-            'vendor_id'=>'required',
-            'product_per_kg'=>'required|gt:0',
-            'product_price_per_kg'=>'required|gt:0',
-            'order_date'=>'required'
-        ]);
-        Material::create([
-            'name' => $request -> name,
-            'description' => $request -> description,
-            'vendor_id' => $request -> vendor_id,
-            'product_per_kg' => $request -> product_per_kg,
-            'product_price_per_kg' => $request -> product_price_per_kg,
-            'available_quantity' => $request -> order_quantity,
-            'order_quantity' => 0,
-            'order_date' => $request -> order_date
+### Parameters
+- `$request` (Request): The HTTP request object containing form data.
 
-        ]);
-        return redirect() -> back()->with('success','Material ordered successfully.');
-    }
+### Returns
+- Redirect: Redirects back to the previous page with a success message upon successful vendor creation.
+- Redirect with Error Message: Redirects back to the previous page with an error message if validation fails or vendor already exists.
 
-    //place order
-    public function updateOrder($id){
-        $title='Place Order';
-        $placeMaterialOrders = Material::find($id);
-        $vendors = Vendor::all();
-        return view('backend.modules.rawMaterials.orderMaterial', compact('placeMaterialOrders','vendors','title'));
+---
 
-    }
-    //send order
-    public function sendOrder(Request $request, $id){
-        $request->validate([
-            'vendor_id'=>'required',
-            'order_quantity'=>'required|gt:0',
-            'order_date'=>'required'
-        ]);
+## `deleteVendor($id)`
 
-        Material::find($id)->update([
-            'vendor_id' => $request -> vendor_id,
-            'order_quantity' => $request -> order_quantity,
-            'order_date' => $request -> order_date,
-            'status'=>'Ordered'
-        ]);
-        return redirect()->route('raw.dashboard')->with('success','Order places successfully.');
-    }
-    public function materialDelete($id)
-    {
-        $material = Material::find($id);
-        if ($material->status == 'Ordered') {
-            return redirect()->back()->with('error', 'Ordered record can not be deleted.');
-        }
+### Method Description
+This method deletes a vendor.
 
-        try {
-            $material->delete();
-            return redirect()->back()->with('error', 'Herb record deleted successfully.');
+### Parameters
+- `$id` (integer): The ID of the vendor to be deleted.
 
-        } catch (\Throwable $e) {
-            if($e->getCode() == "23000"){
-                return redirect()->back()->with('error', 'You can not delete the product, because other tables depends on it.');
-            }
-            return back();
-        }
-    }
+### Returns
+- Redirect: Redirects back to the previous page with a success message upon successful deletion.
+- Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies.
 
-}
+---
+
+## `createOrder(Request $request)`
+
+### Method Description
+This method creates a new material order based on the submitted form data.
+
+### Parameters
+- `$request` (Request): The HTTP request object containing form data.
+
+### Returns
+- Redirect: Redirects back to the previous page with a success message upon successful order creation.
+- Redirect with Error Message: Redirects back to the previous page with an error message if validation fails.
+
+---
+
+## `updateOrder($id)`
+
+### Method Description
+This method prepares to place an order for a specific material.
+
+### Parameters
+- `$id` (integer): The ID of the material for which an order is being placed.
+
+### Returns
+View
+
+---
+
+## `sendOrder(Request $request, $id)`
+
+### Method Description
+This method sends the order for a specific material.
+
+### Parameters
+- `$request` (Request): The HTTP request object containing form data.
+- `$id` (integer): The ID of the material for which an order is being sent.
+
+### Returns
+- Redirect: Redirects to the raw materials dashboard with a success message upon successful order placement.
+
+---
+
+## `materialDelete($id)`
+
+### Method Description
+This method deletes a material.
+
+### Parameters
+- `$id` (integer): The ID of the material to be deleted.
+
+### Returns
+- Redirect: Redirects back to the previous page with a success message upon successful deletion.
+- Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies or material status.
+
