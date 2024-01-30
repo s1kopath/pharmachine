@@ -1,15 +1,15 @@
-<?php
+# Profile
 
-namespace App\Http\Controllers\backend;
+## `showAdminProfile()`
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+### Method Description
+This method retrieves and displays the user profile page for the admin.
 
-class ProfileController extends Controller
-{
-    public function showAdminProfile()
-    {
-        $title = 'User Profile';
-        return view('backend.modules.profile.profile', compact('title'));
-    }
-}
+### Parameters
+None
+
+### Returns
+View
+
+---
+
