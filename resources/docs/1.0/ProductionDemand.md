@@ -19,7 +19,8 @@ None
 Creates a new demand record based on the provided request data.
 
 **Parameters:**
-- `$request` (`Illuminate\Http\Request`): HTTP request containing demand data.
+
+-   `$request` (`Illuminate\Http\Request`): HTTP request containing demand data.
 
 **Return Type:**
 `Illuminate\Http\RedirectResponse`
@@ -30,8 +31,9 @@ Creates a new demand record based on the provided request data.
 Changes the status of a demand record identified by its ID.
 
 **Parameters:**
-- `$id` (`int`): ID of the demand record.
-- `$status` (`string`): New status for the demand record.
+
+-   `$id` (`int`): ID of the demand record.
+-   `$status` (`string`): New status for the demand record.
 
 **Return Type:**
 `Illuminate\Http\RedirectResponse`
@@ -42,7 +44,8 @@ Changes the status of a demand record identified by its ID.
 Deletes a demand record identified by its ID.
 
 **Parameters:**
-- `$id` (`int`): ID of the demand record to delete.
+
+-   `$id` (`int`): ID of the demand record to delete.
 
 **Return Type:**
 `Illuminate\Http\RedirectResponse`
@@ -53,8 +56,8 @@ Deletes a demand record identified by its ID.
 Displays the details of a demand record and related data while waiting for confirmation.
 
 **Parameters:**
-- `$id` (`int`): ID of the demand record.
+
+-   `$id` (`int`): ID of the demand record.
 
 **Return Type:**
 `Illuminate\Contracts\View\View`
-

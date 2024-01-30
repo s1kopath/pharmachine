@@ -1,98 +1,101 @@
-<?php
+# Workstation Functions Documentation
 
-namespace App\Http\Controllers\backend;
+This document outlines the functions available in the `WorkstationController` class.
 
-use App\Http\Controllers\Controller;
-use App\Mail\NotifyTechnician;
-use App\Models\Manufacturing;
-use Illuminate\Http\Request;
-use App\Models\Workstation;
-use App\Models\WorkstationRepair;
-use Illuminate\Support\Facades\Mail;
+## 1. `ws()`
 
-class WorkstationController extends Controller
-{
-    public function ws()
-    {
-        $title = 'Available Workstation';
-        $workstations = Workstation::all();
-        $problem = WorkstationRepair::all();
-        return view('backend.modules.workstation.workstation', compact('title', 'workstations','problem'));
-    }
+**Method Description\*\***
 
+This method retrieves available workstations and associated repair problems, then renders the workstation view.
 
-    public function createWorkstation(Request $request)
-    {
-        $request->validate([
-            'name'=>'required',
-            'manufacturer'=>'required',
-            'output'=>'required|gt:0',
-        ]);
-        Workstation::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'manufacturer' => $request->manufacturer,
-            'output' => $request->output,
-            'status' => 'available'
+**Parameters**
 
-        ]);
-        return redirect()->back()->with('success','Workstation added successfully.');
-    }
+None
 
+**Returns\*\***
 
-    public function completedUpdate( $id, $status)
-    {
-        $production_order = Manufacturing::where('workstation_id', $id)->whereIn('status',['in production','Waiting for production'])->first();
-        if ($production_order) {
-            return redirect()->back()->with('error', 'Workstation in Production');
-        }
-        $workstations= Workstation::find($id);
-        $workstations->update(['status'=>$status]);
+View
 
-        return redirect()->back()->with('success', $workstations->name .' is '. $status.'.');
-    }
+---
 
-    public function deleteWorkstation($id)
-    {
-        $workstation = Workstation::find($id);
-        try {
+## 2. `createWorkstation(Request $request)`
 
-            $workstation->delete();
-            return redirect()->back()->with('error', 'Workstation removed successfully.');
+**Method Description\*\***
 
-        } catch (\Throwable $e) {
-            if($e->getCode() == "23000"){
-                return redirect()->back()->with('error', 'You can not delete the workstation, because other tables depends on it.');
-            }
-            return back();
-        }
-    }
+This method handles the creation of a new workstation based on the submitted form data.
 
-    public function requestRepair($id)
-    {
-        $ws_u = Workstation::find($id)->update([
-            'status'=> 'Waiting for repair'
-        ]);
-        $ws = Workstation::find($id);
-        $ws_issue = WorkstationRepair::where('workstation_id',$id)->first();
+**Parameters**
 
+-   `$request` (Request): The HTTP request object containing form data.
 
-        Mail::to('technician@gmail.com')->send(new NotifyTechnician($ws,$ws_issue));
+**Returns**
 
-        return redirect()->back()->with('success','Workstation is put on repair, the technician will soon be notified.');
-    }
-    public function searchWorkstation(Request $request)
-    {
-        // dd($request->all());
-        $search = $request->input('search');
-        $title = 'Available Workstation';
-        $problem = WorkstationRepair::all();
-        if($request->has('search')){
-            $workstations = Workstation::where('name','like',"%{$search}%")->get();
-        }else{
-            $workstations = Workstation::all();
-        }
+-   Redirect: Redirects back to the previous page with a success message upon successful workstation creation.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if validation fails.
 
-        return view('backend.modules.workstation.workstation', compact('title', 'workstations','problem'));
-    }
-}
+---
+
+## 3. `completedUpdate($id, $status)`
+
+**Method Description**
+
+This method updates the status of a workstation to indicate completion or readiness for production.
+
+**Parameters**
+
+-   `$id` (integer): The ID of the workstation to be updated.
+-   `$status` (string): The status to be updated.
+
+**Returns**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful update.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if the workstation is in production.
+
+---
+
+## 4. `deleteWorkstation($id)`
+
+**Method Description**
+
+This method deletes a workstation.
+
+**Parameters**
+
+-   `$id` (integer): The ID of the workstation to be deleted.
+
+**Returns**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful deletion.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies.
+
+---
+
+## 5. `requestRepair($id)`
+
+**Method Description**
+
+This method requests repair for a malfunctioning workstation and notifies the technician via email.
+
+**Parameters**
+
+-   `$id` (integer): The ID of the workstation to be repaired.
+
+**Returns**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful request for repair.
+
+---
+
+## 6. `searchWorkstation(Request $request)`
+
+**Method Description**
+
+This method handles the search functionality to filter workstations by name.
+
+**Parameters**
+
+-   `$request` (Request): The HTTP request object containing search parameters.
+
+**Returns**
+
+View

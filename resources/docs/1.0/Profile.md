@@ -1,15 +1,16 @@
-# Profile
+# Profile Functions Documentation
 
-## `showAdminProfile()`
+This document outlines the functions available in the `ProfileController` class.
 
-### Method Description
+## 1. `showAdminProfile()`
+
+**Method Description:**
 This method retrieves and displays the user profile page for the admin.
 
-### Parameters
+**Parameters:**
 None
 
-### Returns
+**Returns:**
 View
 
 ---
-

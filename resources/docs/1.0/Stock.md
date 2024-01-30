@@ -1,50 +1,66 @@
-<?php
+# Stock Functions Documentation
 
-namespace App\Http\Controllers\backend;
+This document outlines the functions available in the `StockController` class.
 
-use App\Http\Controllers\Controller;
-use App\Models\Manufacturing;
-use App\Models\Warehouse;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+## 1. `sto()`
 
-class StockController extends Controller
-{
-    public function sto(){
-        $title = 'Warehouse Stock';
-        $stock = Warehouse::orderBy('id', 'DESC')->get();
-        return view('backend.modules.stock.stock', compact('title','stock'));
-    }
-    public function checkStockRecord($id)
-    {
-        $stock = Warehouse::find($id);
-        $menu_order = Manufacturing::find($stock->manufacturing_id);
-        $title = $menu_order->status;
-        $time = date('d-M-Y', strtotime( Carbon::now()));
-        // dd($menu_order);
-        return view('backend.modules.stock.stockStatus', compact('title','time','stock','menu_order'));
-    }
-    public function deleteStock($id)
-    {
-        Warehouse::find($id)->delete();
-        return redirect()->back()->with('error', 'Workstation removed successfully.');
-    }
+**Method Description**
 
-    public function searchStock(Request $request)
-    {
-        $search = $request->input('search');
-        $title = 'Warehouse Stock';
-        if ($request->search == null) {
-            $stock = Warehouse::orderBy('id', 'DESC')->get();
-            return view('backend.modules.stock.stock', compact('title','stock'));
-        }
-        else{
-            $stock = Warehouse::whereHas('stockManufacturing',function($query) use($search){
+This method retrieves warehouse stock data and renders the stock view.
 
-                $query->where('warehouse_number','like',"%{$search}%");
+**Parameters**
 
-            })->get();
-            return view('backend.modules.stock.stock', compact('title','stock'));
-        }
-    }
-}
+None
+
+**Returns**
+
+View
+
+---
+
+## 2. `checkStockRecord($id)`
+
+**Method Description**
+
+This method checks the status of a specific stock record and retrieves related information.
+
+**Parameters**
+
+-   `$id` (integer): The ID of the stock record.
+
+**Returns**
+
+View
+
+---
+
+## 3. `deleteStock($id)`
+
+**Method Description**
+
+This method deletes a stock record from the warehouse.
+
+**Parameters**
+
+-   `$id` (integer): The ID of the stock record to be deleted.
+
+**Return**
+
+Redirect: Redirects back to the previous page with a success message upon successful deletion.
+
+---
+
+## 4. `searchStock(Request $request)`
+
+**Method Description**
+
+This method searches for warehouse stock records based on the provided search query.
+
+\*\*Parameters
+
+-   `$request` (Request): The HTTP request object containing the search query.
+
+**Returns**
+
+-   View: Renders the stock view with the filtered stock data if search query is provided.
+-   View: Renders the stock view with all stock data if search query is null.

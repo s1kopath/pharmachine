@@ -1,127 +1,149 @@
-<?php
+# User Functions Documentation
 
-namespace App\Http\Controllers\backend;
+This document outlines the functions available in the `UserController` class.
 
-use App\Http\Controllers\Controller;
-use App\Mail\ResetPassword;
-use App\Models\PasswordReset;
-use App\Models\User;
-use App\Models\Worker;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+## 1. `showLoginForm()`
 
-class UserController extends Controller
-{
-    public function showLoginForm()
-    {
-        return view('backend.modules.login.login');
-    }
-    public function showRegistrationForm()
-    {
-        return view('backend.modules.registration.registration');
-    }
-    public function forgetPasswordForm()
-    {
-        return view('backend.workerModules.forgetPassword.forget-password');
-    }
+### Method Description
 
+This method renders the login form view.
 
-    public function forgetFormSubmit(Request $request)
-    {
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            Password::sendResetLink(
-                $request->only('email')
-            );
-            return redirect()->back()->with('success', 'An email have been sent to your address.');
-        } else {
-            return redirect()->back()->with('error', 'Invalid email.');
-        }
-    }
+### Parameters
 
-    public function showResetForm($p_token, $p_email)
-    {
-        // dd(Carbon::now()->subMinutes(2));
-        $check = PasswordReset::where('email', $p_email)->where('created_at','>=',Carbon::now()->subMinutes(2))->first();
-        if ($check) {
-            $token = $p_token;
-            $email = $p_email;
-            return view('backend.workerModules.forgetPassword.reset-password', compact('token', 'email'));
-        } else {
-            return redirect()->route('login.form')->with('error', 'Link expired');
-        }
-    }
+None
 
-    public function submitPassword(Request $request)
-    {
-        $request->validate([
-            'token'=>'required',
-            'email'=>'email|required',
-            'password' => 'required|min:6|confirmed'
-        ]);
+### Returns
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => bcrypt($password)
-                ])->setRememberToken(Str::random(60));
-                $user->save();
-            }
-        );
-        return redirect()->route('login.form')->with('success', 'Password updated successfully.');
-    }
+View
 
-    public function registration(Request $request)
-    {
-        $request->validate([
-            'name'=>'required',
-            'email'=>'email|required|unique:users',
-            'password'=>'required|min:6'
+---
 
-        ]);
+## 2. `showRegistrationForm()`
 
-        User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>bcrypt($request->password)
-        ]);
-        return redirect()->route('login.form')->with('success', 'User Registration Successful.');
-    }
+### Method Description
 
-    public function login(Request $request)
-    {
-        //validate input
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:6'
-        ]);
+This method renders the registration form view.
 
-        //authenticate
-        $credentials = $request->only('email', 'password');
-        // dd($credentials);
-        if (Auth::attempt($credentials)) {
-            $request -> session() -> regenerate();
+### Parameters
 
-            if (auth()->user()->role == 'admin') {
-                return redirect()->route('sch.dashboard');
-            } elseif (auth()->user()->role == 'worker') {
-                return redirect()->route('show.home');
-            }
-        }
-        return back()->withErrors([
-            'email' => 'Invalid Credentials.',
-        ]);
-    }
-    public function logout()
-    {
-        Auth::logout();
+None
 
-        return redirect()->route('login.form')->with('success', 'Logout Successful.');
-    }
-}
+### Returns
+
+View
+
+---
+
+## 3. `forgetPasswordForm()`
+
+### Method Description
+
+This method renders the forget password form view.
+
+### Parameters
+
+None
+
+### Returns
+
+View
+
+---
+
+## 4. `forgetFormSubmit(Request $request)`
+
+### Method Description
+
+This method handles the submission of forget password form data and sends reset password link to the user's email.
+
+### Parameters
+
+-   `$request` (Request): The HTTP request object containing form data.
+
+### Returns
+
+-   Redirect: Redirects back to the previous page with a success message if email is found.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if email is not found.
+
+---
+
+## 5. `showResetForm($p_token, $p_email)`
+
+### Method Description
+
+This method renders the reset password form view if the reset password link is valid and not expired.
+
+### Parameters
+
+-   `$p_token` (string): The token for resetting the password.
+-   `$p_email` (string): The email address associated with the user account.
+
+### Returns
+
+-   View: Renders the reset password form view if the link is valid and not expired.
+-   Redirect with Error Message: Redirects to the login form with an error message if the link is expired.
+
+---
+
+## 6. `submitPassword(Request $request)`
+
+### Method Description
+
+This method handles the submission of the reset password form and updates the user's password.
+
+### Parameters
+
+-   `$request` (Request): The HTTP request object containing form data.
+
+### Returns
+
+-   Redirect: Redirects to the login form with a success message upon successful password update.
+
+---
+
+## 7. `registration(Request $request)`
+
+### Method Description
+
+This method handles the submission of the registration form and creates a new user account.
+
+### Parameters
+
+-   `$request` (Request): The HTTP request object containing form data.
+
+### Returns
+
+-   Redirect: Redirects to the login form with a success message upon successful user registration.
+
+---
+
+## 8. `login(Request $request)`
+
+### Method Description
+
+This method handles user authentication and login.
+
+### Parameters
+
+-   `$request` (Request): The HTTP request object containing form data.
+
+### Returns
+
+-   Redirect: Redirects to the appropriate dashboard upon successful login based on the user's role.
+-   Redirect with Error Message: Redirects back to the login form with an error message if the credentials are invalid.
+
+---
+
+## 9. `logout()`
+
+### Method Description
+
+This method logs out the authenticated user.
+
+### Parameters
+
+None
+
+### Returns
+
+Redirect: Redirects to the login form with a success message upon successful logout.

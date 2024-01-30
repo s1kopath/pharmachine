@@ -41,7 +41,8 @@ None
 Creates a new product based on the provided request data and stores it in the database.
 
 **Parameters:**
-- `$request` (`Illuminate\Http\Request`): HTTP request containing product data.
+
+-   `$request` (`Illuminate\Http\Request`): HTTP request containing product data.
 
 **Return Type:**
 `Illuminate\Http\RedirectResponse`
@@ -52,7 +53,8 @@ Creates a new product based on the provided request data and stores it in the da
 Deletes a product with the specified ID from the database, including its associated image file if exists.
 
 **Parameters:**
-- `$id` (`int`): ID of the product to delete.
+
+-   `$id` (`int`): ID of the product to delete.
 
 **Return Type:**
 `Illuminate\Http\RedirectResponse`
@@ -63,7 +65,8 @@ Deletes a product with the specified ID from the database, including its associa
 Retrieves a product with the specified ID for updating and renders a view to update its details.
 
 **Parameters:**
-- `$id` (`int`): ID of the product to update.
+
+-   `$id` (`int`): ID of the product to update.
 
 **Return Type:**
 `Illuminate\Contracts\View\View`
@@ -74,7 +77,8 @@ Retrieves a product with the specified ID for updating and renders a view to upd
 Updates an existing product based on the provided request data, including handling of product image updates.
 
 **Parameters:**
-- `$request` (`Illuminate\Http\Request`): HTTP request containing updated product data.
+
+-   `$request` (`Illuminate\Http\Request`): HTTP request containing updated product data.
 
 **Return Type:**
 `Illuminate\Http\RedirectResponse`

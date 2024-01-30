@@ -1,96 +1,108 @@
-# Raw Materials
+# `Raw Materials`Functions Documentation
 
-## `raw()`
+This document outlines the functions available in the `RawMaterialsController` class.
 
-### Method Description
+## 1. `raw()`
+
+**Method Description:**
 This method retrieves raw materials and vendors information and renders the raw materials view.
 
-### Parameters
+**Parameters:**
 None
 
-### Returns
+**Returns:**
 View
 
 ---
 
-## `createVendor(Request $request)`
+## 2. `createVendor(Request $request)`
 
-### Method Description
+**Method Description:**
 This method creates a new vendor based on the submitted form data.
 
-### Parameters
-- `$request` (Request): The HTTP request object containing form data.
+**Parameters:**
 
-### Returns
-- Redirect: Redirects back to the previous page with a success message upon successful vendor creation.
-- Redirect with Error Message: Redirects back to the previous page with an error message if validation fails or vendor already exists.
+-   `$request` (Request): The HTTP request object containing form data.
+
+**Returns:**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful vendor creation.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if validation fails or vendor already exists.
 
 ---
 
-## `deleteVendor($id)`
+## 3. `deleteVendor($id)`
 
-### Method Description
+**Method Description:**
 This method deletes a vendor.
 
-### Parameters
-- `$id` (integer): The ID of the vendor to be deleted.
+**Parameters:**
 
-### Returns
-- Redirect: Redirects back to the previous page with a success message upon successful deletion.
-- Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies.
+-   `$id` (integer): The ID of the vendor to be deleted.
+
+**Returns:**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful deletion.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies.
 
 ---
 
-## `createOrder(Request $request)`
+## 4. `createOrder(Request $request)`
 
-### Method Description
+**Method Description:**
 This method creates a new material order based on the submitted form data.
 
-### Parameters
-- `$request` (Request): The HTTP request object containing form data.
+**Parameters:**
 
-### Returns
-- Redirect: Redirects back to the previous page with a success message upon successful order creation.
-- Redirect with Error Message: Redirects back to the previous page with an error message if validation fails.
+-   `$request` (Request): The HTTP request object containing form data.
+
+**Returns:**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful order creation.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if validation fails.
 
 ---
 
-## `updateOrder($id)`
+## 5. `updateOrder($id)`
 
-### Method Description
+**Method Description:**
 This method prepares to place an order for a specific material.
 
-### Parameters
-- `$id` (integer): The ID of the material for which an order is being placed.
+**Parameters:**
 
-### Returns
+-   `$id` (integer): The ID of the material for which an order is being placed.
+
+**Returns:**
 View
 
 ---
 
-## `sendOrder(Request $request, $id)`
+## 6. `sendOrder(Request $request, $id)`
 
-### Method Description
+**Method Description:**
 This method sends the order for a specific material.
 
-### Parameters
-- `$request` (Request): The HTTP request object containing form data.
-- `$id` (integer): The ID of the material for which an order is being sent.
+**Parameters:**
 
-### Returns
-- Redirect: Redirects to the raw materials dashboard with a success message upon successful order placement.
+-   `$request` (Request): The HTTP request object containing form data.
+-   `$id` (integer): The ID of the material for which an order is being sent.
+
+**Returns:**
+
+-   Redirect: Redirects to the raw materials dashboard with a success message upon successful order placement.
 
 ---
 
-## `materialDelete($id)`
+## 7. `materialDelete($id)`
 
-### Method Description
+**Method Description:**
 This method deletes a material.
 
-### Parameters
-- `$id` (integer): The ID of the material to be deleted.
+**Parameters:**
 
-### Returns
-- Redirect: Redirects back to the previous page with a success message upon successful deletion.
-- Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies or material status.
+-   `$id` (integer): The ID of the material to be deleted.
 
+**Returns:**
+
+-   Redirect: Redirects back to the previous page with a success message upon successful deletion.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies or material status.

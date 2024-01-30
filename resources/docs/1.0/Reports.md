@@ -1,37 +1,34 @@
-<?php
+# Reports Functions Documentation
 
-namespace App\Http\Controllers\backend;
+This document outlines the functions available in the `ReportsController` class.
 
-use App\Http\Controllers\Controller;
-use App\Models\Manufacturing;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+## 1. `rep()`
 
-class ReportsController extends Controller
-{
-    public function rep(){
-        $title = 'Reports';
-        $search = [];
-        return view('backend.modules.reports.reports', compact('title','search'));
-    }
-    public function generate(Request $request){
+**Method Description**
 
-        $title = 'Reports';
-        $fromDate= $request->from_date;
-        $toDate= $request->to_date;
-        $time = date('d-M-Y', strtotime( Carbon::now()));
+This method initializes the reports view with the title and search parameters.
 
-        if ($fromDate > $toDate){
-            return redirect()->back()->with('error','Invalid date selection.');
-        }
-        if ($fromDate && $toDate) {
-            $search = Manufacturing::where('finishing_date','>=',$fromDate)
-            ->where('finishing_date','<=',$toDate)->orderBy('finishing_date')
-            ->get();
+**Parameters**
 
-            return view('backend.modules.reports.reports', compact('title','search','fromDate','toDate','time'));
-        }else{
-            return redirect()->back()->with('error','Please Select start/end date to generate report.');
-        }
-    }
-}
+None
+
+**Returns**
+
+View
+
+---
+
+## 2. `generate(Request $request)`
+
+**Method Description**
+
+This method generates reports based on the specified date range.
+
+**Parameters**
+
+-   `$request` (Request): The HTTP request object containing the start and end dates.
+
+**Returns**
+
+-   View: Renders the reports view with the generated data if valid date range is provided.
+-   Redirect with Error Message: Redirects back to the previous page with an error message if invalid date range is provided or start/end date is not selected.
