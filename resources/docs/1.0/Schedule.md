@@ -4,14 +4,11 @@ This document outlines the functions available in the `ScheduleController` class
 
 ## 1. `sch()`
 
-**Method Description**
-
+**Method Description:**
 This method retrieves dashboard statistics related to demand, products, orders, workers, workstations, materials, and ready shipments.
 
-**Parameters**
-
+**Parameters:**
 None
 
-**Returns**
-
-View
+**Returns:**
+`Illuminate\Contracts\View\View`

@@ -1,27 +1,23 @@
-# Workstation Functions Documentation
+# Admin Workstation Functions Documentation
 
-This document outlines the functions available in the `WorkstationController` class.
+This document outlines the functions available in the `Admin/WorkstationController` class.
 
 ## 1. `ws()`
 
-**Method Description\*\***
-
+**Method Description**
 This method retrieves available workstations and associated repair problems, then renders the workstation view.
 
 **Parameters**
-
 None
 
-**Returns\*\***
-
-View
+**Returns**
+`Illuminate\Contracts\View\View`
 
 ---
 
 ## 2. `createWorkstation(Request $request)`
 
-**Method Description\*\***
-
+**Method Description**
 This method handles the creation of a new workstation based on the submitted form data.
 
 **Parameters**
@@ -38,7 +34,6 @@ This method handles the creation of a new workstation based on the submitted for
 ## 3. `completedUpdate($id, $status)`
 
 **Method Description**
-
 This method updates the status of a workstation to indicate completion or readiness for production.
 
 **Parameters**
@@ -56,7 +51,6 @@ This method updates the status of a workstation to indicate completion or readin
 ## 4. `deleteWorkstation($id)`
 
 **Method Description**
-
 This method deletes a workstation.
 
 **Parameters**
@@ -73,7 +67,6 @@ This method deletes a workstation.
 ## 5. `requestRepair($id)`
 
 **Method Description**
-
 This method requests repair for a malfunctioning workstation and notifies the technician via email.
 
 **Parameters**
@@ -89,7 +82,6 @@ This method requests repair for a malfunctioning workstation and notifies the te
 ## 6. `searchWorkstation(Request $request)`
 
 **Method Description**
-
 This method handles the search functionality to filter workstations by name.
 
 **Parameters**
@@ -97,5 +89,35 @@ This method handles the search functionality to filter workstations by name.
 -   `$request` (Request): The HTTP request object containing search parameters.
 
 **Returns**
+`Illuminate\Contracts\View\View`
 
-View
+---
+
+# Worker Workstation Functions Documentation
+
+This document outlines the functions available in the `Worker/WorkstationController` class.
+
+## 1. `showWorkstation()`
+
+**Method Description:**
+This method retrieves and displays the workstation status page.
+
+**Parameters:**
+None
+
+**Returns:**
+`Illuminate\Contracts\View\View`
+
+---
+
+## 2. `repairWorkstation($id)`
+
+**Method Description:**
+This method updates the status of a workstation to "Occupied" and resumes production for the associated manufacturing order if it was previously paused due to workstation repair.
+
+**Parameters:**
+
+-   `$id` (integer): The ID of the workstation.
+
+**Returns:**
+Redirect: Redirects back to the workstation status page with a success message indicating that the workstation is reported successfully repaired by the technician.

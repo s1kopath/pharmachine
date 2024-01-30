@@ -1,46 +1,41 @@
-# Stock Functions Documentation
+# Admin Stock Functions Documentation
 
-This document outlines the functions available in the `StockController` class.
+This document outlines the functions available in the `Admin/StockController` class.
 
 ## 1. `sto()`
 
-**Method Description**
-
+**Method Description:**
 This method retrieves warehouse stock data and renders the stock view.
 
-**Parameters**
-
+**Parameters:**
 None
 
-**Returns**
-
-View
+**Returns:**
+`Illuminate\Contracts\View\View`
 
 ---
 
 ## 2. `checkStockRecord($id)`
 
-**Method Description**
-
+**Method Description:**
 This method checks the status of a specific stock record and retrieves related information.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the stock record.
 
-**Returns**
-
-View
+**Returns:**
+`Illuminate\Contracts\View\View`
 
 ---
 
 ## 3. `deleteStock($id)`
 
-**Method Description**
+**Method Description:**
 
 This method deletes a stock record from the warehouse.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the stock record to be deleted.
 
@@ -52,15 +47,46 @@ Redirect: Redirects back to the previous page with a success message upon succes
 
 ## 4. `searchStock(Request $request)`
 
-**Method Description**
+**Method Description:**
 
 This method searches for warehouse stock records based on the provided search query.
 
-\*\*Parameters
+**Parameters:**
 
 -   `$request` (Request): The HTTP request object containing the search query.
 
-**Returns**
+**Returns:**
 
 -   View: Renders the stock view with the filtered stock data if search query is provided.
 -   View: Renders the stock view with all stock data if search query is null.
+
+---
+
+# Worker Stock Functions Documentation
+
+This document outlines the functions available in the `Worker/StockController` class.
+
+## 1. `showStock()`
+
+**Method Description:**
+This method retrieves and displays the warehouse stock status page.
+
+**Parameters:**
+None
+
+**Returns:**
+`Illuminate\Contracts\View\View`
+
+---
+
+## 2. `deliver($id)`
+
+**Method Description:**
+This method updates the status of a warehouse item to "Delivered" and handles the associated manufacturing and demand records.
+
+**Parameters:**
+
+-   `$id` (integer): The ID of the warehouse item.
+
+**Returns:**
+Redirect: Redirects back to the warehouse stock status page with a success message indicating the order is delivered successfully.

@@ -11,3 +11,4 @@
     -   [User](/{{route}}/{{version}}/User)
     -   [Worker](/{{route}}/{{version}}/Worker)
     -   [Workstation](/{{route}}/{{version}}/Workstation)
+    -   [WorkerDashboard](/{{route}}/{{version}}/WorkerDashboard)

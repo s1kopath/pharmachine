@@ -11,7 +11,7 @@ This method retrieves manufacturing orders and renders the production planning v
 None
 
 **Returns:**
-View
+`Illuminate\Contracts\View\View`
 
 ---
 
@@ -25,7 +25,7 @@ This method retrieves information necessary for creating a manufacturing order f
 -   `$id` (integer): The ID of the demand for which a manufacturing order is being created.
 
 **Returns:**
-View
+`Illuminate\Contracts\View\View`
 
 ---
 
@@ -55,7 +55,7 @@ This method retrieves and displays the status of a specific manufacturing order.
 -   `$id` (integer): The ID of the manufacturing order.
 
 **Returns:**
-View
+`Illuminate\Contracts\View\View`
 
 ---
 

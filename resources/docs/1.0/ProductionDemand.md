@@ -10,7 +10,7 @@ Retrieves product demand data and related statistics for display.
 **Parameters:**
 None
 
-**Return Type:**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ## 2. `createDemand(Request $request)`
@@ -22,7 +22,7 @@ Creates a new demand record based on the provided request data.
 
 -   `$request` (`Illuminate\Http\Request`): HTTP request containing demand data.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Http\RedirectResponse`
 
 ## 3. `changeStatus($id, $status)`
@@ -35,7 +35,7 @@ Changes the status of a demand record identified by its ID.
 -   `$id` (`int`): ID of the demand record.
 -   `$status` (`string`): New status for the demand record.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Http\RedirectResponse`
 
 ## 4. `deleteStatus($id)`
@@ -47,7 +47,7 @@ Deletes a demand record identified by its ID.
 
 -   `$id` (`int`): ID of the demand record to delete.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Http\RedirectResponse`
 
 ## 5. `waitForConfirm($id)`
@@ -59,5 +59,5 @@ Displays the details of a demand record and related data while waiting for confi
 
 -   `$id` (`int`): ID of the demand record.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Contracts\View\View`

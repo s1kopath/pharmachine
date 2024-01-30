@@ -8,10 +8,10 @@ This document outlines the functions available in the `RawMaterialsController` c
 This method retrieves raw materials and vendors information and renders the raw materials view.
 
 **Parameters:**
-None
+none
 
 **Returns:**
-View
+`Illuminate\Contracts\View\View`
 
 ---
 
@@ -72,8 +72,7 @@ This method prepares to place an order for a specific material.
 
 -   `$id` (integer): The ID of the material for which an order is being placed.
 
-**Returns:**
-View
+**Returns:**View
 
 ---
 

@@ -10,7 +10,7 @@ Retrieves all products and materials and renders a view to display them.
 **Parameters:**
 None
 
-**Return Type:**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ## 2. `listView()`
@@ -21,7 +21,7 @@ Retrieves paginated products and materials for a list view.
 **Parameters:**
 None
 
-**Return Type:**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ## 3. `gridView()`
@@ -32,7 +32,7 @@ Retrieves all products and materials for a grid view.
 **Parameters:**
 None
 
-**Return Type:**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ## 4. `create(Request $request)`
@@ -44,7 +44,7 @@ Creates a new product based on the provided request data and stores it in the da
 
 -   `$request` (`Illuminate\Http\Request`): HTTP request containing product data.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Http\RedirectResponse`
 
 ## 5. `delete($id)`
@@ -56,7 +56,7 @@ Deletes a product with the specified ID from the database, including its associa
 
 -   `$id` (`int`): ID of the product to delete.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Http\RedirectResponse`
 
 ## 6. `update($id)`
@@ -68,7 +68,7 @@ Retrieves a product with the specified ID for updating and renders a view to upd
 
 -   `$id` (`int`): ID of the product to update.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ## 7. `saveUpdate(Request $request)`
@@ -80,5 +80,5 @@ Updates an existing product based on the provided request data, including handli
 
 -   `$request` (`Illuminate\Http\Request`): HTTP request containing updated product data.
 
-**Return Type:**
+**Returns:**
 `Illuminate\Http\RedirectResponse`
