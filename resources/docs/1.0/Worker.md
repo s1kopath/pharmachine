@@ -4,27 +4,27 @@ This document outlines the functions available in the `WorkerController` class.
 
 ## 1. `list()`
 
-**Method Description**
+**Method Description:**
 This method retrieves a list of all workers and renders the worker view.
 
-**Parameters**
+**Parameters:**
 None
 
-**Returns**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ---
 
 ## 2. `create(Request $request)`
 
-**Method Description**
+**Method Description:**
 This method handles the creation of a new worker and user account based on the submitted form data.
 
-**Parameters**
+**Parameters:**
 
 -   `$request` (Request): The HTTP request object containing form data.
 
-**Returns**
+**Returns:**
 
 -   Redirect: Redirects back to the previous page with a success message upon successful worker creation.
 -   Redirect with Error Message: Redirects back to the previous page with an error message if validation fails or email already exists.
@@ -33,43 +33,43 @@ This method handles the creation of a new worker and user account based on the s
 
 ## 3. `update($id)`
 
-**Method Description**
+**Method Description:**
 This method renders the update worker form view.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the worker to be updated.
 
-**Returns**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ---
 
 ## 4. `saveUpdate(Request $request, $id)`
 
-**Method Description**
+**Method Description:**
 This method handles the submission of the update worker form and updates the worker information.
 
-**Parameters**
+**Parameters:**
 
 -   `$request` (Request): The HTTP request object containing form data.
 -   `$id` (integer): The ID of the worker to be updated.
 
-**Returns**
+**Returns:**
 Redirect: Redirects to the worker list page with a success message upon successful update.
 
 ---
 
 ## 5. `delete($id)`
 
-**Method Description**
+**Method Description:**
 This method deletes a worker and its associated user account.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the worker to be deleted.
 
-**Returns**
+**Returns:**
 
 -   Redirect: Redirects back to the previous page with a success message upon successful deletion.
 -   Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies.
@@ -78,26 +78,26 @@ This method deletes a worker and its associated user account.
 
 ## 6. `workerProfile($id)`
 
-**Method Description**
+**Method Description:**
 This method retrieves and renders the worker profile view.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the worker.
 
-**Returns**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ---
 
 ## 7. `searchWorker(Request $request)`
 
-**Method Description**
+**Method Description:**
 This method handles the search functionality to filter workers by name.
 
-**Parameters**
+**Parameters:**
 
 -   `$request` (Request): The HTTP request object containing search parameters.
 
-**Returns**
+**Returns:**
 `Illuminate\Contracts\View\View`

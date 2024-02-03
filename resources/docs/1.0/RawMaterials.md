@@ -1,4 +1,4 @@
-# `Raw Materials`Functions Documentation
+# Raw Materials Functions Documentation
 
 This document outlines the functions available in the `RawMaterialsController` class.
 

@@ -4,27 +4,27 @@ This document outlines the functions available in the `Admin/WorkstationControll
 
 ## 1. `ws()`
 
-**Method Description**
+**Method Description:**
 This method retrieves available workstations and associated repair problems, then renders the workstation view.
 
-**Parameters**
+**Parameters:**
 None
 
-**Returns**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ---
 
 ## 2. `createWorkstation(Request $request)`
 
-**Method Description**
+**Method Description:**
 This method handles the creation of a new workstation based on the submitted form data.
 
-**Parameters**
+**Parameters:**
 
 -   `$request` (Request): The HTTP request object containing form data.
 
-**Returns**
+**Returns:**
 
 -   Redirect: Redirects back to the previous page with a success message upon successful workstation creation.
 -   Redirect with Error Message: Redirects back to the previous page with an error message if validation fails.
@@ -33,15 +33,15 @@ This method handles the creation of a new workstation based on the submitted for
 
 ## 3. `completedUpdate($id, $status)`
 
-**Method Description**
+**Method Description:**
 This method updates the status of a workstation to indicate completion or readiness for production.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the workstation to be updated.
 -   `$status` (string): The status to be updated.
 
-**Returns**
+**Returns:**
 
 -   Redirect: Redirects back to the previous page with a success message upon successful update.
 -   Redirect with Error Message: Redirects back to the previous page with an error message if the workstation is in production.
@@ -50,14 +50,14 @@ This method updates the status of a workstation to indicate completion or readin
 
 ## 4. `deleteWorkstation($id)`
 
-**Method Description**
+**Method Description:**
 This method deletes a workstation.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the workstation to be deleted.
 
-**Returns**
+**Returns:**
 
 -   Redirect: Redirects back to the previous page with a success message upon successful deletion.
 -   Redirect with Error Message: Redirects back to the previous page with an error message if deletion fails due to dependencies.
@@ -66,14 +66,14 @@ This method deletes a workstation.
 
 ## 5. `requestRepair($id)`
 
-**Method Description**
+**Method Description:**
 This method requests repair for a malfunctioning workstation and notifies the technician via email.
 
-**Parameters**
+**Parameters:**
 
 -   `$id` (integer): The ID of the workstation to be repaired.
 
-**Returns**
+**Returns:**
 
 -   Redirect: Redirects back to the previous page with a success message upon successful request for repair.
 
@@ -81,14 +81,14 @@ This method requests repair for a malfunctioning workstation and notifies the te
 
 ## 6. `searchWorkstation(Request $request)`
 
-**Method Description**
+**Method Description:**
 This method handles the search functionality to filter workstations by name.
 
-**Parameters**
+**Parameters:**
 
 -   `$request` (Request): The HTTP request object containing search parameters.
 
-**Returns**
+**Returns:**
 `Illuminate\Contracts\View\View`
 
 ---

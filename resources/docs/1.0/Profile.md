@@ -6,15 +6,15 @@ This document outlines the functions available in the `Admin/ProfileController` 
 
 **Method Description:**This method retrieves and displays the user profile page for the admin.
 
-**Parameters:\*\***
+**Parameters:**
 None
 
-**Returns:**:\*\*
+**Returns:**
 View
 
 ---
 
-# Worker Profile Functions Decumentation
+# Worker Profile Functions Documentation
 
 This document outlines the functions available in the `Worker/ProfileController` class.
 
