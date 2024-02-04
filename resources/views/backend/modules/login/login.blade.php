@@ -109,7 +109,7 @@
         </a>
         </div>
         {{-- <a href="{{ route('registration.form') }}" class=" btn mt-5 text-muted">Register</a> --}}
-        <p class=" mb-3 mt-2 text-muted">&copy; 2017–2021</p>
+        <p class="mb-3 mt-2 text-muted">&copy; 2017–{{ date('Y') }}</p>
         {{-- <p class=" mb-3 text-muted">admin@gmail.com</p> --}}
         
         
@@ -121,9 +121,9 @@
                     
                     <div class="modal-body">
                         <p>Admin Email: admin@gmail.com</p>
-                        <p>Admin Password: admin@gmail.com</p>
+                        <p>Admin Password: 12345678</p>
                         <p>==================================</p>
-                        <p>Workers <strong>DEFAULT</strong> Password: <strong>123456</strong></p>
+                        <p>Workers <strong>DEFAULT</strong> Password: <strong>12345678</strong></p>
                     </div>
                     
                 </div>
