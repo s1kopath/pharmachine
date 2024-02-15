@@ -43,7 +43,7 @@ php artisan migrate --seed
 ```bash
 php artisan serve
 ```
-3. **Access the Application:** Open your web browser and navigate to `http://localhost8000` to access Pharmachine.
+5. **Access the Application:** Open your web browser and navigate to `http://localhost8000` to access Pharmachine.
 
 ## Contributing 🤝
 
