@@ -16,7 +16,6 @@ Pharmachine is a production management system designed to streamline the product
 To get started with Pharmachine, follow these steps:
 
 1. **Installation:** Clone the repository from GitHub to your local machine.
-
 ```bash
 git clone https://github.com/s1kopath/pharmachine.git
 ```
@@ -26,7 +25,6 @@ cd pharmachine
 ```bash
 composer install
 ```
-
 2. **Configuration:** Set up the necessary configurations according to your production environment.
 
 ```bash
@@ -36,10 +34,12 @@ cp .env.example .env
 php artisan key:generate
 ```
 ```bash
-php artisan migrate --seed
+php artisan migrate
 ```
-4. **Run Application:**
-
+```bash
+php artisan db:seed
+```
+4. **Run Application:** Run the command in terminal.
 ```bash
 php artisan serve
 ```
