@@ -91,7 +91,7 @@
 
         <div class="mt-3">
             <!-- Button trigger modal -->
-        <a href="" class=" text-decoration-none text-muted" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <a href="" class="text-decoration-none text-muted" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Login Help
         </a>
         </div>
