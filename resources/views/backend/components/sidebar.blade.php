@@ -1,15 +1,19 @@
+@php
+    $route = request()->route()->getName();
+@endphp
+
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block admin-sidebar sidebar collapse">
     <div class="position-sticky pt-3">
         <ul class="nav flex-column ">
             <li class="nav-item ">
-                <a class="nav-link text-white" aria-current="page" href="{{ route('sch.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'sch.dashboard' ? 'active' : '' }}" aria-current="page" href="{{ route('sch.dashboard') }}">
                     <span data-feather="home"></span>
                     Dashboard
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="{{ route('pd.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'pd.dashboard' ? 'active' : '' }}" aria-current="page" href="{{ route('pd.dashboard') }}">
                     <span data-feather="alert-triangle"></span>
                     Production Demand @if ($demand_count)
                         <span class="badge bg-danger rounded-pill">{{ $demand_count }}</span>
@@ -18,7 +22,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="{{ route('pp.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'pp.dashboard' ? 'active' : '' }}" aria-current="page" href="{{ route('pp.dashboard') }}">
                     <span data-feather="edit"></span>
                     Production Planning @if ($count_order)
                         <span class="badge bg-danger rounded-pill">{{ $count_order }}</span>
@@ -27,28 +31,28 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  text-white" href="{{ route('rep.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'rep.dashboard' ? 'active' : '' }}" href="{{ route('rep.dashboard') }}">
                     <span data-feather="bar-chart-2"></span>
                     Production Reports
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  text-white" href="{{ route('product.listView') }}">
+                <a class="nav-link text-white {{ $route == 'product.listView' ? 'active' : '' }}" href="{{ route('product.listView') }}">
                     <span data-feather="square"></span>
                     Product
                 </a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link text-white" href="{{ route('worker.list') }}">
+                <a class="nav-link text-white {{ $route == 'worker.list' ? 'active' : '' }}" href="{{ route('worker.list') }}">
                     <span data-feather="users"></span>
                     Worker
                 </a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link text-white" href="{{ route('ws.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'ws.dashboard' ? 'active' : '' }}" href="{{ route('ws.dashboard') }}">
                     <span data-feather="tool"></span>
                     Workstation @if ($workstation)
                         <span class="badge bg-danger rounded-pill">{{ $workstation }}</span>
@@ -57,7 +61,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('raw.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'raw.dashboard' ? 'active' : '' }}" href="{{ route('raw.dashboard') }}">
                     <span data-feather="truck"></span>
                     Raw Herbs @if ($count_material)
                         <span class="badge bg-danger rounded-pill">{{ $count_material }}</span>
@@ -66,15 +70,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  text-white" aria-current="page" href="{{ route('sto.dashboard') }}">
+                <a class="nav-link text-white {{ $route == 'sto.dashboard' ? 'active' : '' }}" aria-current="page" href="{{ route('sto.dashboard') }}">
                     <span data-feather="database"></span>
                     Warehouse Stock @if ($count_shipment)
                         <span class="badge bg-danger rounded-pill">{{ $count_shipment }}</span>
                     @endif
                 </a>
             </li>
-
-
         </ul>
     </div>
     <div class="mt-5">
@@ -85,6 +87,4 @@
         <h2>Time: </h2>
         <h3 id="myClockDisplay" class="clock text-light " onload="showTime()"></h3>
     </div>
-
-
 </nav>

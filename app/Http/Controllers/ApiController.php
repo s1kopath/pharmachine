@@ -13,28 +13,21 @@ use SebastianBergmann\Environment\Console;
 class ApiController extends Controller
 {
 
-    public function calculate(Request $request, $id){
+    public function calculate(Request $request, $id)
+    {
 
         $demand_id = $request->query('demand_id');
 
         $demands = Demand::find($demand_id);
         $products = Product::find($demands->product_id);
 
-        $material = Material::find($id);
 
-        $material_need = $demands->product_quantity / $products->productMaterial->product_per_kg;
-        $material_cost = $products->productMaterial->product_price_per_kg * $material_need;
-
-
-
-        // return [
-        //     'id'=>$material_need,
-        //     'name' => 'Jon doe',
-        // ];
+        $material_need = round($demands->product_quantity / $products->productMaterial->product_per_kg, 2);
+        $material_cost = round($products->productMaterial->product_price_per_kg * $material_need, 2);
 
         return response()->json([
-            'data'=>$material_need,
-            'cost'=>$material_cost
+            'data' => $material_need,
+            'cost' => $material_cost
         ]);
     }
 
@@ -44,19 +37,19 @@ class ApiController extends Controller
 
         // return $id;
         return response()->json([
-            'id'=> $worker
+            'id' => $worker
         ]);
     }
 
 
-    public function calculateTime(Request $request ,$id)
+    public function calculateTime(Request $request, $id)
     {
         $demand_id = $request->query('demand_id');
-        $demand = Demand::where('id',$demand_id)->first();
-        $demandQuantity = $demand -> product_quantity;
-
+        $demand = Demand::where('id', $demand_id)->first();
+        $demandQuantity = $demand->product_quantity;
+        
         $workstation = Workstation::find($id)->output;
-        $time = ceil(((1 / $workstation) * $demandQuantity) / 24) ;
+        $time = ceil(((1 / $workstation) * $demandQuantity) / 24);
 
 
         // return $id;
@@ -64,12 +57,13 @@ class ApiController extends Controller
 
         return response()->json([
             // 'data'=> $time,
-            'id'=>$time
+            'id' => $time
         ]);
     }
 
 
-    public function calculateOvertime($id){
+    public function calculateOvertime($id)
+    {
         return $id;
     }
 }

@@ -4,28 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.82.0">
     <title>Pharmachine</title>
     <link rel="icon" href="{!! asset('images/icon3.ico') !!}" />
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
-
-
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#7952b3">
-
 
     <style>
         .bd-placeholder-img {
@@ -111,30 +98,41 @@
         {{-- <a href="{{ route('registration.form') }}" class=" btn mt-5 text-muted">Register</a> --}}
         <p class="mb-3 mt-2 text-muted">&copy; 2017–{{ date('Y') }}</p>
         {{-- <p class=" mb-3 text-muted">admin@gmail.com</p> --}}
-        
-        
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    
                     <div class="modal-body">
                         <p>Admin Email: admin@gmail.com</p>
                         <p>Admin Password: 12345678</p>
                         <p>==================================</p>
-                        <p>Workers <strong>DEFAULT</strong> Password: <strong>12345678</strong></p>
+                        <p>Workers <strong>DEFAULT</strong> Password: <strong>[Their email]</strong></p>
+                        <p>
+                            <ol>
+                                @foreach ($workers as $worker)
+                                    <li>
+                                        {{ $worker->name . " - " . $worker->email }}
+                                        <button type="button" class="btn" onclick="putMeIn('{{ $worker->email }}')" data-bs-dismiss="modal">
+                                            +
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </p>
                     </div>
-                    
                 </div>
             </div>
         </div>
     </main>
 
-
-
     <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
-    z
+    <script>
+        function putMeIn(email) {
+            document.getElementById("floatingInput").value = email;
+            document.getElementById("floatingPassword").value = email;
+        }
+    </script>
 
 
 </body>

@@ -156,7 +156,7 @@
                         <br>
                         <div class="form-group">
                             <label>Enter Salary (Monthly):</label>
-                            <input required type="string" name="salary" class="form-control" placeholder="Monthly Salary"
+                            <input required type="number" name="salary" class="form-control" placeholder="Monthly Salary"
                                 id="">
                         </div>
                         <br>

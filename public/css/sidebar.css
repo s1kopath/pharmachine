@@ -3,22 +3,33 @@
     background: #e2807b;
     text-align: center;
 }
-.worker-link:hover{
 
+.nav-link.active {
+    padding: 10px;
+    background: #e2807b;
+    text-align: center;
+}
+
+.worker-link:hover {
     padding: 10px;
     background: #099158a9;
     text-align: center;
+}
+
+.worker-link.active {
+    padding: 10px;
+    background: #099158a9;
+    text-align: center;
+}
+
+.admin-sidebar {
+    background-image: url("../images/sidebar2.jpg");
 
 }
 
-.admin-sidebar{
-    background-image: url("../images/sidebar2.jpg") ;
-
-}
-.worker-sidebar{
+.worker-sidebar {
     background: url("../images/form4.jpg");
     background-repeat: no-repeat;
     background-size: 70em 70em;
 
 }
-

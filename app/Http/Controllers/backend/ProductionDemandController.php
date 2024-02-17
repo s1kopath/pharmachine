@@ -88,7 +88,7 @@ class ProductionDemandController extends Controller
         $workstations = Workstation::all();
 
 
-        $material_need = $demands->product_quantity / $products->productMaterial->product_per_kg;
+        $material_need = round($demands->product_quantity / $products->productMaterial->product_per_kg, 2);
 
         return view(
             'backend.modules.productionDemand.waitForConfirm',

@@ -1,6 +1,5 @@
 @extends('backend.adminHome')
 @section('content')
-
     @if (session()->has('error'))
         <div class="alert alert-danger d-flex justify-content-between">
             {{ session()->get('error') }}
@@ -10,7 +9,7 @@
 
     {{-- <div class="container form-control text-light" style="background-image: url('{{ asset('images/form5.jpg') }}'); background-repeat: no-repeat;
                 background-size: 100% 100%"> --}}
-<div class="container  text-dark">
+    <div class="container  text-dark">
         <form class=" mt-5" method="post" action="{{ route('manufacturingOrder.create') }}">
             @csrf
             {{-- 1st row --}}
@@ -26,16 +25,16 @@
                     <br>
                     <div class="form-group d-flex justify-content-between">
                         <label>Warehouse Lot Number: </label>
-                        <input type="text" readonly class="form-control "
-                            value="WL 01{{ $demand->id }}" name="warehouse_number" placeholder="">
+                        <input type="text" readonly class="form-control " value="WL 01{{ $demand->id }}"
+                            name="warehouse_number" placeholder="">
                     </div>
                 </div>
                 {{-- 2nd col --}}
                 <div class="col-md-4">
                     <div class="form-group d-flex justify-content-between">
                         <label>Product Name: </label>
-                        <input readonly value="{{ $demand->demandProduct->name }}" type="string"
-                            class="form-control " id="">
+                        <input readonly value="{{ $demand->demandProduct->name }}" type="string" class="form-control "
+                            id="">
                         <input type="hidden" name="product_id" value="{{ $demand->product_id }}">
                         {{-- <select class="form-control bg-secondary text-light" name="product_id" id="" disabled="true">
                             <option value="none">Seclect Product</option>
@@ -55,12 +54,16 @@
                 {{-- 3rd col --}}
                 <div class="col-md-4">
                     <div class="form-group d-flex justify-content-between">
-                        <label>Raw Materials: </label>
+                        <label>
+                            <span class="badge bg-success rounded-pill">1</span>
+                            Raw Materials:
+                        </label>
                         <select class="form-control" name="material_id" id="material_id">
                             <option value="none">Seclect Raw Materials</option>
                             @foreach ($materials as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}
-                                    (<small>{{ $data->available_quantity }}</small>) Kg
+                                    (<small>{{ $data->available_quantity }}</small>)
+                                    Kg
                                 </option>
                             @endforeach
                         </select>
@@ -77,9 +80,12 @@
             {{-- 2nd row --}}
             <div class="row">
                 {{-- 1st col --}}
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group d-flex justify-content-between">
-                        <label>Select Worker: </label>
+                        <label>
+                            <span class="badge bg-primary rounded-pill">2</span>
+                            Select Worker:
+                        </label>
                         <select class="form-control" name="worker_id" id="worker_id">
                             <option value="none">Select Worker</option>
                             @foreach ($workers as $data)
@@ -91,16 +97,21 @@
                             @endforeach
                         </select>
                     </div>
-                    <br>
+                </div>
+                {{-- 2nd col --}}
+                <div class="col-6">
                     <div class="form-group d-flex justify-content-between">
-                        <label>Select Workstation: </label>
+                        <label>
+                            <span class="badge bg-warning rounded-pill">3</span>
+                            Select Workstation:
+                        </label>
                         <select class="form-control" name="workstation_id" id="workstation_id">
                             <option value="none">Select Workstation</option>
                             @foreach ($workstations as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}
-                                @if ($data->status == 'occupied' && $data->workstationManufacturing)
-                                    ({{ $data->workstationManufacturing->finishing_date }})
-                                @endif
+                                    @if ($data->status == 'occupied' && $data->workstationManufacturing)
+                                        ({{ $data->workstationManufacturing->finishing_date }})
+                                    @endif
                                 </option>
                             @endforeach
                         </select>
@@ -112,37 +123,42 @@
                             Work Overtime
                         </label>
                     </div>
-
                 </div>
-                {{-- 2nd col --}}
-                <div class="col-md-4">
+            </div>
+            <div class="row mt-2">
+                <div class="col-4">
                     <div class="form-group d-flex justify-content-between">
-                        <label>Start Date: </label>
-                        <input min="{{date('Y-m-d')}}" type="date" id="start_date" class="form-control" name="start_date" placeholder="">
+                        <label>
+                            <span class="badge bg-danger rounded-pill">4</span>
+                            Start Date:
+                        </label>
+                        <input min="{{ date('Y-m-d') }}" type="date" id="start_date" class="form-control"
+                            name="start_date" placeholder="">
                     </div>
-                    <br>
+                </div>
+                <div class="col-4">
                     <div class="form-group d-flex justify-content-between">
                         <label>Finishing Date: </label>
-                        <input min="{{date('Y-m-d')}}" type="date" readonly id="finishing_date" class="form-control" name="finishing_date" placeholder="">
+                        <input min="{{ date('Y-m-d') }}" type="date" readonly id="finishing_date" class="form-control"
+                            name="finishing_date" placeholder="">
                     </div>
                 </div>
-                {{-- 3rd col --}}
                 <div class="col-4">
                     <div class="form-group d-flex justify-content-between">
                         <label>Estimated Delivery Date: </label>
-                        <input type="date" readonly value="{{ $demand->delivery_date }}"
-                            class="form-control" name="delivery_date" placeholder="">
+                        <input type="date" readonly value="{{ $demand->delivery_date }}" class="form-control"
+                            name="delivery_date" placeholder="">
                     </div>
                 </div>
             </div>
-
             <br>
             <br>
 
 
             <div class="form-group ">
                 <label>Total Production Cost: </label>
-                <input type="string" readonly class="form-control-lg" id="total_cost" name="total_cost" placeholder="00.00"><span>
+                <input type="string" readonly class="form-control-lg" id="total_cost" name="total_cost"
+                    placeholder="00.00"><span>
                     Tk</span>
 
                 {{-- <a href="{{ route('changeStatus', ['id' => $data->id, 'status' => 'producing']) }}"
@@ -156,20 +172,17 @@
 
             <div class="text-end">
                 <a href="{{ route('pd.dashboard') }}" class="btn btn-lg btn-cancel">Back </a>
-                <button onclick="return confirm('Are you sure, you want to create this manufacturing order ?')" type="submit" class="btn btn-lg  btn-confirm">Confirm</button>
+                <button onclick="return confirm('Are you sure, you want to create this manufacturing order ?')"
+                    type="submit" class="btn btn-lg  btn-confirm">Confirm</button>
             </div>
             <br>
         </form>
     </div>
-
-
-
 @endsection
 
 {{-- script codes --}}
 
 @push('custom_js')
-
     <script>
         //marterial cost calculation
 
@@ -208,13 +221,13 @@
             // console.log(w_cost);
 
 
-            var url = "{{ url('get-calculation-total-cost') }}/" + id ;
+            var url = "{{ url('get-calculation-total-cost') }}/" + id;
 
             fetch(url).then(res => res.json())
                 .then(res => {
                     // console.log(res.id);
                     employee_cost = res.id;
-                    total_cost.value = w_cost * employee_cost;
+                    total_cost.value = (w_cost * employee_cost).toFixed(2);
                 })
                 .catch(err => {
                     console.log(err);
@@ -246,7 +259,6 @@
                     .then(res => {
                         days = res.id;
                         daysDiff = days;
-
                     })
                     .catch(err => {
                         console.log(err);
@@ -322,9 +334,5 @@
                     endDate.value = formatDate(addDays(_start_date, days));
                 })
         });
-
-
-
     </script>
-
 @endpush

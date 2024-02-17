@@ -19,17 +19,20 @@ class UserController extends Controller
 {
     public function showLoginForm()
     {
-        return view('backend.modules.login.login');
+        $workers = User::where('role', 'worker')->get();
+
+        return view('backend.modules.login.login', compact('workers'));
     }
+    
     public function showRegistrationForm()
     {
         return view('backend.modules.registration.registration');
     }
+
     public function forgetPasswordForm()
     {
         return view('backend.workerModules.forgetPassword.forget-password');
     }
-
 
     public function forgetFormSubmit(Request $request)
     {
