@@ -15,9 +15,12 @@ class CreateWorkstationRepairsTable extends Migration
     {
         Schema::create('workstation_repairs', function (Blueprint $table) {
             $table->id();
-            $table->integer('manufacturing_id');
-            $table->integer('worker_id');
-            $table->integer('workstation_id');
+            $table->foreignId('manufacturing_id');
+            $table->foreign('manufacturing_id')->references('id')->on('manufacturings')->onDelete('restrict');
+            $table->foreignId('worker_id');
+            $table->foreign('worker_id')->references('id')->on('workers')->onDelete('restrict');
+            $table->foreignId('workstation_id');
+            $table->foreign('workstation_id')->references('id')->on('workstations')->onDelete('restrict');
             $table->string('note');
             $table->timestamps();
         });

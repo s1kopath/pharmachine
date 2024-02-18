@@ -15,7 +15,8 @@ class CreateWarehousesTable extends Migration
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->integer('manufacturing_id');
+            $table->foreignId('manufacturing_id');
+            $table->foreign('manufacturing_id')->references('id')->on('manufacturings')->onDelete('cascade');
             $table->string('user_name')->nullable();
             $table->string('status')->default('Waiting for production');
             $table->string('delivered_on')->nullable();

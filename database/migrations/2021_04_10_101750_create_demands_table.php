@@ -15,7 +15,8 @@ class CreateDemandsTable extends Migration
     {
         Schema::create('demands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->restrictOnDelete();
+            $table->foreignId('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');
             $table->integer('product_quantity');
             $table->date('delivery_date');
             $table->string('status');

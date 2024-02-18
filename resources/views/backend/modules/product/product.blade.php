@@ -18,7 +18,6 @@
             <div class="alert alert-danger d-flex justify-content-between">{{ $error }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-
         @endforeach
     @endif
 
@@ -29,24 +28,25 @@
         </button>
     </div>
 
-
+    @php
+        $route = request()->route()->getName();
+    @endphp
 
     {{-- tabs --}}
-
-
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link  active" href="{{ route('product.listView') }}">List View</a>
+            <a class="nav-link {{ $route == 'product.listView' ? 'active' : '' }}" href="{{ route('product.listView') }}">
+                List View
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('product.gridView') }}">Grid View</a>
+            <a class="nav-link {{ $route == 'product.gridView' ? 'active' : '' }}" href="{{ route('product.gridView') }}">
+                Grid View
+            </a>
         </li>
     </ul>
 
-
-
     @yield('productView')
-
 
     <!-- Modal -->
     <form method="post" action="{{ route('product.create') }}" enctype="multipart/form-data">
@@ -64,7 +64,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Enter Product Name:</label>
-                            <input required type="text" name="name" class="form-control" id="" placeholder="Name">
+                            <input required type="text" name="name" class="form-control" id=""
+                                placeholder="Name">
                         </div>
                         <br>
                         <div class="form-group">
@@ -90,7 +91,8 @@
                         <br>
                         <div class="form-group">
                             <label>Enter Description:</label>
-                            <input name="description" type="text" class="form-control" id="" placeholder="Description">
+                            <input name="description" type="text" class="form-control" id=""
+                                placeholder="Description">
                         </div>
 
                         <br>

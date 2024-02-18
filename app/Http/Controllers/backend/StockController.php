@@ -10,23 +10,28 @@ use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
-    public function sto(){
+    public function sto()
+    {
         $title = 'Warehouse Stock';
         $stock = Warehouse::orderBy('id', 'DESC')->get();
-        return view('backend.modules.stock.stock', compact('title','stock'));
+
+        return view('backend.modules.stock.stock', compact('title', 'stock'));
     }
+
     public function checkStockRecord($id)
     {
         $stock = Warehouse::find($id);
         $menu_order = Manufacturing::find($stock->manufacturing_id);
         $title = $menu_order->status;
-        $time = date('d-M-Y', strtotime( Carbon::now()));
-        // dd($menu_order);
-        return view('backend.modules.stock.stockStatus', compact('title','time','stock','menu_order'));
+        $time = date('d-M-Y', strtotime(Carbon::now()));
+
+        return view('backend.modules.stock.stockStatus', compact('title', 'time', 'stock', 'menu_order'));
     }
+
     public function deleteStock($id)
     {
         Warehouse::find($id)->delete();
+
         return redirect()->back()->with('error', 'Workstation removed successfully.');
     }
 
@@ -36,15 +41,14 @@ class StockController extends Controller
         $title = 'Warehouse Stock';
         if ($request->search == null) {
             $stock = Warehouse::orderBy('id', 'DESC')->get();
-            return view('backend.modules.stock.stock', compact('title','stock'));
-        }
-        else{
-            $stock = Warehouse::whereHas('stockManufacturing',function($query) use($search){
 
-                $query->where('warehouse_number','like',"%{$search}%");
-
+            return view('backend.modules.stock.stock', compact('title', 'stock'));
+        } else {
+            $stock = Warehouse::whereHas('stockManufacturing', function ($query) use ($search) {
+                $query->where('warehouse_number', 'like', "%{$search}%");
             })->get();
-            return view('backend.modules.stock.stock', compact('title','stock'));
+
+            return view('backend.modules.stock.stock', compact('title', 'stock'));
         }
     }
 }

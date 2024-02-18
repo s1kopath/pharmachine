@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ResetPassword;
 use App\Models\PasswordReset;
 use App\Models\User;
-use App\Models\Worker;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
@@ -23,7 +19,7 @@ class UserController extends Controller
 
         return view('backend.modules.login.login', compact('workers'));
     }
-    
+
     public function showRegistrationForm()
     {
         return view('backend.modules.registration.registration');
@@ -49,8 +45,7 @@ class UserController extends Controller
 
     public function showResetForm($p_token, $p_email)
     {
-        // dd(Carbon::now()->subMinutes(2));
-        $check = PasswordReset::where('email', $p_email)->where('created_at','>=',Carbon::now()->subMinutes(2))->first();
+        $check = PasswordReset::where('email', $p_email)->where('created_at', '>=', Carbon::now()->subMinutes(2))->first();
         if ($check) {
             $token = $p_token;
             $email = $p_email;
@@ -63,12 +58,12 @@ class UserController extends Controller
     public function submitPassword(Request $request)
     {
         $request->validate([
-            'token'=>'required',
-            'email'=>'email|required',
+            'token' => 'required',
+            'email' => 'email|required',
             'password' => 'required|min:6|confirmed'
         ]);
 
-        $status = Password::reset(
+        Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
                 $user->forceFill([
@@ -83,16 +78,16 @@ class UserController extends Controller
     public function registration(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'email|required|unique:users',
-            'password'=>'required|min:6'
+            'name' => 'required',
+            'email' => 'email|required|unique:users',
+            'password' => 'required|min:6'
 
         ]);
 
         User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>bcrypt($request->password)
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
         ]);
         return redirect()->route('login.form')->with('success', 'User Registration Successful.');
     }
@@ -101,15 +96,14 @@ class UserController extends Controller
     {
         //validate input
         $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:6'
+            'email' => 'required|email',
+            'password' => 'required|min:6'
         ]);
 
         //authenticate
         $credentials = $request->only('email', 'password');
-        // dd($credentials);
         if (Auth::attempt($credentials)) {
-            $request -> session() -> regenerate();
+            $request->session()->regenerate();
 
             if (auth()->user()->role == 'admin') {
                 return redirect()->route('sch.dashboard');
@@ -121,6 +115,7 @@ class UserController extends Controller
             'email' => 'Invalid Credentials.',
         ]);
     }
+
     public function logout()
     {
         Auth::logout();

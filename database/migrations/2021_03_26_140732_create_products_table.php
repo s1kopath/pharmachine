@@ -18,7 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name', 100);
             $table->string('product_type')->default('none');
             $table->text('description')->nullable();
-            $table->foreignId('material_id')->constrained()->restrictOnDelete();
+            $table->foreignId('material_id');
+            $table->foreign('material_id')->references('id')->on('materials')->onDelete('restrict');
             $table->string('image')->nullable();
             $table->timestamps();
         });

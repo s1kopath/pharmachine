@@ -137,7 +137,6 @@
                         @endif
 
                         <td>
-
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -161,12 +160,12 @@
                                             <a class="btn" href="">None</a>
                                         @endif
                                     </li>
-                                    {{-- <li class="bg-danger">
+                                    <li class="bg-danger">
                                         <a onclick="return confirm('Are you sure you want to remove this workstation?')"
                                             class="btn text-light" href="{{ route('delete.workstation', $data['id']) }}">
                                             Remove machine
                                         </a>
-                                    </li> --}}
+                                    </li>
                                 </ul>
                             </div>
 
