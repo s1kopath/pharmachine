@@ -1,15 +1,23 @@
 @extends('backend.workerModules.workerDashboard')
 @section('content')
-
-
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <style>
+                    .fit-image {
+                        max-width: 200px;
+                        max-height: 200px;
+                        width: auto;
+                        height: auto;
+                        object-fit: contain;
+                        display: block;
+                        margin: auto;
+                    }
+                </style>
                 @foreach ($products as $data)
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img style="width: 100%; height: 200px" src="{{ url('/files/product/' . $data->image) }}"
-                                alt="">
+                            <img class="img-fluid fit-image" src="{{ url('/files/product/' . $data->image) }}" alt="">
                             <div class="card-body">
                                 <h3>{{ $data->name }}</h3>
                                 <p>{{ $data->description }}</p>
@@ -27,8 +35,4 @@
             </div>
         </div>
     </div>
-
-
-
-
 @endsection

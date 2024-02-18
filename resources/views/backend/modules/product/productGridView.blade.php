@@ -3,20 +3,19 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
+                <style>
+                    .fit-image {
+                        max-width: 200px;
+                        max-height: 200px;
+                        width: auto;
+                        height: auto;
+                        object-fit: contain;
+                        display: block;
+                        margin: auto;
+                    }
+                </style>
                 @foreach ($products as $data)
                     <div class="col">
-                        <style>
-                            .fit-image {
-                                max-width: 200px;
-                                max-height: 200px;
-                                width: auto;
-                                height: auto;
-                                object-fit: contain;
-                                display: block;
-                                margin: auto;
-                            }
-                        </style>
                         <div class="card shadow-sm">
                             <img class="img-fluid fit-image" style="max-height: 200px; weight: auto;"
                                 src="{{ url('/files/product/' . $data->image) }}" alt="product">
