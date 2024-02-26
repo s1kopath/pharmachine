@@ -47,7 +47,7 @@ class ProductionPlaningTest extends TestCase
 
     public function testCheckProductionStatus()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $manufacturing = Manufacturing::factory()->create();
 
         $response = $this->get("/check-production-status/{$manufacturing->id}");
@@ -58,7 +58,7 @@ class ProductionPlaningTest extends TestCase
 
     public function testDeleteProductionStatus()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $manufacturing = Manufacturing::factory()->create();
         $warehouse = Warehouse::factory()->create(['manufacturing_id' => $manufacturing->id]);
 

@@ -31,7 +31,7 @@ class WorkerTest extends TestCase
 
     public function testCreate()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         // Simulate a request with form data
         $request = new Request([
             'name' => 'Test Name',

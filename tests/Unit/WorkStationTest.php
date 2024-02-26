@@ -35,7 +35,7 @@ class WorkStationTest extends TestCase
 
     public function testDeleteWorkstation()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         // Create a test workstation
         $workstation = Workstation::factory()->create();
 

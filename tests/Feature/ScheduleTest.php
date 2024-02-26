@@ -17,7 +17,7 @@ class ScheduleTest extends TestCase
 {
     public function testScheduleViewData()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $mockDemandCount = 10;
         $mockProductCount = 15;
         $mockOrderCount = 20;

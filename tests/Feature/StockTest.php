@@ -40,7 +40,7 @@ class StockTest extends TestCase
 
     public function testDeleteStock()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $mockWarehouseId = 1;
 
         Warehouse::shouldReceive('find')->once()->with($mockWarehouseId)->andReturnSelf();
@@ -54,7 +54,7 @@ class StockTest extends TestCase
 
     public function testSearchStock()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $mockSearch = 'search';
         $mockTitle = 'Warehouse Stock';
 

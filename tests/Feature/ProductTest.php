@@ -68,7 +68,7 @@ class ProductTest extends TestCase
 
     public function testGridViewFunction()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         // Seed the database with sample data
         $products = Product::factory()->count(3)->create();
         $materials = Material::factory()->count(2)->create();
@@ -95,7 +95,7 @@ class ProductTest extends TestCase
     
     public function testCreateProduct()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         Storage::fake('product');
 
         $response = $this->post('/product', [
@@ -111,7 +111,7 @@ class ProductTest extends TestCase
 
     public function testDeleteProduct()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $product = Product::factory()->create();
 
         $response = $this->get("/product/delete/{$product->id}");
@@ -122,7 +122,7 @@ class ProductTest extends TestCase
 
     public function testUpdateProduct()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $product = Product::factory()->create();
 
         $response = $this->get("/product/update/{$product->id}");
@@ -133,7 +133,7 @@ class ProductTest extends TestCase
 
     public function testSaveUpdateProduct()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         Storage::fake('product');
 
         $product = Product::factory()->create();

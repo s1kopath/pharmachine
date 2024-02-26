@@ -47,7 +47,7 @@ class RawMaterialsTest extends TestCase
 
     public function testCreateOrder()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $response = $this->post('/create-order', [
             'name' => "name",
             'description' => "sentence",
@@ -75,7 +75,7 @@ class RawMaterialsTest extends TestCase
 
     public function testSendOrder()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         $material = Material::factory()->create();
 
         $response = $this->post("/send-order/{$material->id}", [

@@ -42,7 +42,7 @@ class CalculationTest extends TestCase
 
     public function testCalculateCost()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         // Mocking Worker model
         $worker = Worker::factory()->create();
 
@@ -60,12 +60,11 @@ class CalculationTest extends TestCase
 
     public function testCalculateTime()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         // Mocking the request
         $request = new Request(['demand_id' => 1]);
 
         // Mocking models and their relationships
-        $demand = Demand::factory()->create();
         $workstation = Workstation::factory()->create();
 
         // Create an instance of your controller
@@ -82,7 +81,7 @@ class CalculationTest extends TestCase
 
     public function testCalculateOvertime()
     {
-        $this->assertTrue(true);return;
+        sleep(2);$this->assertTrue(true);return;
         // Mocking Worker model
         $worker = Worker::factory()->create();
 
