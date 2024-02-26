@@ -12,8 +12,6 @@
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <meta name="theme-color" content="#7952b3">
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -42,6 +40,7 @@
 
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/5.0/examples/sign-in/signin.css" rel="stylesheet">
+    @laravelPWA
 </head>
 
 <body class="text-center login-bg">

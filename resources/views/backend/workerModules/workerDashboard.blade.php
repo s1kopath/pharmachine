@@ -10,10 +10,9 @@
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <meta name="theme-color" content="#7952b3">
     <!-- style -->
-    <link href="/css/sidebar.css" rel="stylesheet">
-    <link href="/css/worker-main.css" rel="stylesheet">
+    <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/worker-main.css') }}" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -33,6 +32,7 @@
 
     <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/5.0/examples/dashboard/dashboard.css" rel="stylesheet">
+    @laravelPWA
 </head>
 
 <body>
@@ -51,33 +51,20 @@
 
                 @yield('content')
 
-                {{-- @yield('dafuq') --}}
-
-
-
             </main>
 
         </div>
     </div>
     @include('backend.workerComponents.footer')
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
-    </script>
-    <script src="https://getbootstrap.com/docs/5.0/dist/js/bootstrap.bundle.min.js">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="https://getbootstrap.com/docs/5.0/examples/dashboard/dashboard.js"></script>
-
 
     <script>
         function printDiv(divName) {
@@ -90,7 +77,6 @@
 
             document.body.innerHTML = originalContents;
         }
-
     </script>
 
     <script>
@@ -141,11 +127,7 @@
         today = dd + '-' + mm + '-' + yyyy;
 
         document.getElementById("myDateDisplay").innerHTML = today;
-
     </script>
-
-
-
 </body>
 
 </html>
