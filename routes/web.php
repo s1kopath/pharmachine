@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backend\ProductionDemandController;
-use App\Http\Controllers\backend\ProductionPlanningController;
-use App\Http\Controllers\backend\ReportsController;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\ArtisanController;
+use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\StockController;
-use App\Http\Controllers\backend\ScheduleController;
+use App\Http\Controllers\backend\WorkerController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProfileController;
-use App\Http\Controllers\backend\RawMaterialsController;
-use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\ReportsController;
+use App\Http\Controllers\backend\ScheduleController;
 use App\Http\Controllers\backend\worker\DashController;
+use App\Http\Controllers\backend\WorkstationController;
+use App\Http\Controllers\backend\RawMaterialsController;
+use App\Http\Controllers\backend\ProductionDemandController;
+use App\Http\Controllers\backend\worker\ReportingController;
+use App\Http\Controllers\backend\ProductionPlanningController;
+use App\Http\Controllers\backend\worker\StockController as WorkerStockController;
 use App\Http\Controllers\backend\worker\ProductController as WorkerProductController;
 use App\Http\Controllers\backend\worker\ProfileController as WorkerProfileController;
-use App\Http\Controllers\backend\worker\RawMaterialsController as WorkerRawMaterialsController;
-use App\Http\Controllers\backend\worker\ReportingController;
-use App\Http\Controllers\backend\worker\StockController as WorkerStockController;
 use App\Http\Controllers\backend\worker\WorkstationController as WorkerWorkstationController;
-use App\Http\Controllers\backend\WorkerController;
-use App\Http\Controllers\backend\WorkstationController;
+use App\Http\Controllers\backend\worker\RawMaterialsController as WorkerRawMaterialsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,8 @@ use App\Http\Controllers\backend\WorkstationController;
 |
 */
 
-
+Route::get('artisan-terminal', [ArtisanController::class, 'showTerminal'])->name('artisan.terminal');
+Route::post('artisan-terminal/execute', [ArtisanController::class, 'executeCommand']);
 
 // fetch api controller
 Route::get('/get-calculation-quantity/{id}', [ApiController::class,'calculate']);
